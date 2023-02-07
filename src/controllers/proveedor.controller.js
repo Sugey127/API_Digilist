@@ -22,7 +22,7 @@ export const post = async (req, res) => {
 export const put = async (req, res) => {
     const { nombreProveedor, idTipoProveedor, nombreProveedorNuevo } = req.body;
     try {
-        const actualizarProveedor = await Proveedor.findOne( { where: { [Op.or]: [{idTipoProveedor}, {nombreProveedor} ] } })
+        const actualizarProveedor = await Proveedor.findOne( { where: { [Op.and]: [{idTipoProveedor}, {nombreProveedor} ] } })
         actualizarProveedor.nombreProveedor = nombreProveedorNuevo;
         await actualizarProveedor.save();
         res.status(201).json(actualizarProveedor);

@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { validateRole } from '../validators/validateRole.js'
 import dotenv from 'dotenv';
-import { Usuario } from "../models/usuario.js";
-import { validateUsuario } from '../validators/validateUsuario.js';
+
 dotenv.config({ path: './.env' });
 
 //autentificacion de los usuariso
@@ -34,7 +33,7 @@ export const authentification = (req, res, next) => {
         //console.log("+++")
 
         console.log(user, 'fdkjufh laedfiadjslofjadsifjñasdfijñfjds');
-        validateUsuario(user.email, user.password, "No estas regsitrado");
+        validateRole(token, 'administrador', "role", "no eres admin");
         next();
     } catch (err) {
         res.status(500).json(err.message); 

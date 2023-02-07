@@ -20,14 +20,13 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { description, stock, precio, Imagen, idAutopartes, idEntradas} = req.body;
+    const { description, stock, precio, Imagen, idAutopartes} = req.body;
     try {
         const actualizarAutoparte = await Autopartes.findOne( { where:  {idAutopartes} })
         actualizarAutoparte.description = description;
         actualizarAutoparte.stock = stock;
         actualizarAutoparte.precio = precio;
         actualizarAutoparte.Imagen = Imagen;
-        actualizarAutoparte.idEntradas= idEntradas;
         await actualizarAutoparte.save();
         res.status(201).json(actualizarAutoparte);
     } catch (err) {

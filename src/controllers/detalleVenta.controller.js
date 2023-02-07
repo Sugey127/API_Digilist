@@ -20,7 +20,7 @@ export const post = async (req, res) => {
 export const put = async (req, res) => {
     const { cantidadVenta, precioVenta, AutoparteIdAutopartes, VentumIdVenta } = req.body;
     try {
-        const actualizarDetalleVenta = await DetalleVenta.findOne({ where: { [Op.or]: [{AutoparteIdAutopartes}, {VentumIdVenta}] } });
+        const actualizarDetalleVenta = await DetalleVenta.findOne({ where: { [Op.and]: [{AutoparteIdAutopartes}, {VentumIdVenta}] } });
         actualizarDetalleVenta.cantidadVenta = cantidadVenta;
         actualizarDetalleVenta.precioVenta= precioVenta;
         await actualizarDetalleVenta.save();
@@ -36,7 +36,7 @@ export const put = async (req, res) => {
 export const drop = async (req, res) => {
     const { AutoparteIdAutopartes,VentumIdVenta } = req.body;
     try {
-        const eliminarDetalleVenta = DetalleVenta.destroy({ where: { [Op.or]: [{AutoparteIdAutopartes}, {VentumIdVenta}] } });
+        const eliminarDetalleVenta = DetalleVenta.destroy({ where: { [Op.and]: [{AutoparteIdAutopartes}, {VentumIdVenta}] } });
         res.status(201).json('SE ELIMINO CON EXITO');
 
     } catch (err) { 
@@ -50,7 +50,7 @@ export const drop = async (req, res) => {
 export const getOne = async (req, res) => {
     const { AutoparteIdAutopartes, VentumIdVenta } = req.body;
     try {
-        const nuevoDetalleVenta = await DetalleVenta.findOne({ where: { [Op.or]: [{AutoparteIdAutopartes}, {VentumIdVenta}] } });
+        const nuevoDetalleVenta = await DetalleVenta.findOne({ where: { [Op.and]: [{AutoparteIdAutopartes}, {VentumIdVenta}] } });
         res.status(201).json(nuevoDetalleVenta);
 
     } catch (err) { 

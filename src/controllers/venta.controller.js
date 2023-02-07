@@ -25,7 +25,7 @@ export const post = async (req, res) => {
 export const put = async (req, res) => {
     const { fechaVenta, idVenta } = req.body;
     try {
-        const actualizarVenta = await Venta.findOne( { where: { [Op.or]: [{idVenta}, {fechaVenta}] } })
+        const actualizarVenta = await Venta.findOne( { where: { [Op.and]: [{idVenta}, {fechaVenta}] } })
         actualizarVenta.fechaVenta = fechaVenta;
         await actualizarVenta.save();
         res.status(201).json(actualizarVenta);

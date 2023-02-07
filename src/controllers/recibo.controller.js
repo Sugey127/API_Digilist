@@ -3,8 +3,6 @@ import { Recibo } from "../models/recibo.js";
 import { Venta } from "../models/venta.js";
 
 
-// //request = peticion, response = respuesta
-
 //POST
 export const post = async (req, res) => {
     const { cantidad, VentumIdVenta } = req.body;

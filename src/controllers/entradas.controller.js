@@ -4,8 +4,6 @@ import { Entradas } from "../models/entradas.js";
 import { Proveedor } from "../models/proveedor.js";
 
 
-// //request = peticion, response = respuesta
-
 //POST
 export const post = async (req, res) => {
     const { nombreAutoparte, stock, precio, code_entrada,AutomovilIdAutomovil,ProveedorIdTipoProveedor } = req.body;
@@ -30,7 +28,6 @@ export const put = async (req, res) => {
         actualizarEntrada.nombreAutoparte = nombreAutoparte;
         actualizarEntrada.stock = stock;
         actualizarEntrada.precio = precio;
-        actualizarEntrada.code_entrada = code_entrada;
         await actualizarEntrada.save();
         res.status(201).json(actualizarEntrada);
     } catch (err) {

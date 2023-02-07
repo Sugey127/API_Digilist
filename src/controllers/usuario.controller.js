@@ -2,8 +2,7 @@ import { Op } from "sequelize";
 import { Usuario } from "../models/usuario.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'; 
-import dotevn from 'dotenv';
-import { validateUsuario } from "../validators/validateUsuario.js";
+import dotevn from 'dotenv'; 
 import { body } from "express-validator";
 
 dotevn.config({path: './.env'});
@@ -105,69 +104,5 @@ export const getAll = async (req, res) => {
     }
 }
 
-
-// export const login = async () => {
-//     const { email, password } = req.body;
-// }
-
-// export const deleteAccount = async (req, res) => {
-//     const { email, password } = req.body;
-
-//     try {
-//         const dropUser = Users.destroy({ where: { email } });
-//         res.status(200).json(dropUser);
-//     } catch (err) {
-
-//     }
-// }
-
-// export const updateProfile = async (req, res) => {
-//     const { userNombre, usuarioApellido, password, telefono } = req.body;
-//     const { email } = req.query;
-//     console.log(req);
-//     try {
-//         const changeProfile = await Users.findOne({ where: { email } })
-//         console.log(changeProfile);
-//         changeProfile.userNombre = userNombre;
-//         changeProfile.usuarioApellido = usuarioApellido;
-//         changeProfile.password = password;
-//         changeProfile.telefono = telefono;
-//         await changeProfile.save();
-
-//         res.status(200).json(changeProfile);
-
-//     } catch (err) {
-
-//     }
-// }
-
-// export const userList = async (req, res) => {
-//     try {
-//         const users = await Users.findAll();
-//         res.status(200).json(users);
-//     } catch (err) {
-
-//     }
-// }
-
-// export const findUsersByName = async (req, res) => {
-//     const {userNombre} = req.body;
-//     try {
-//         const users = await Users.findAll({ where: { userNombre } });
-//         res.status(200).json(users);
-//     } catch (err) {
-
-//     }
-// }
-
-// export const findUserByEmail = async(req, res)=> {
-//     const {email}=req.body;
-//     try {
-//         const user = await Users.findOne({where:{email}});
-//         res.status(200).json(user);
-//     } catch (err) {
-        
-//     }
-// }
 
 

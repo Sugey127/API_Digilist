@@ -12,14 +12,4 @@ usuarioRouter.delete('/eliminar', authentification, authorization, usuarioContro
 usuarioRouter.get('/buscarUno', authentification, authorization, usuarioController.getOne);
 usuarioRouter.get('/buscarTodos', authentification, authorization, usuarioController.getAll);
 
-// userRouter.post('/login', userController.login);
-// userRouter.delete('/deleteAccount', userController.deleteAccount);
-// userRouter.put('/updateProfile', userController.updateProfile);
-// userRouter.get('/userList', userController.userList);
-// userRouter.get('/findUsersByName', userController.findUsersByName);
-// userRouter.get('/findUserByEmail', userController.findUserByEmail);
-
-
 export default usuarioRouter;
-
-//http:localhost:4000/users/resgsiter

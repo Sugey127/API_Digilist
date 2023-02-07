@@ -21,7 +21,7 @@ export const post = async (req, res) => {
 export const put = async (req, res) => {
     const { modelo, año, marca, idAutomovil} = req.body;
     try {
-        const actualizarAutomovil = await Automovil.findOne( { where: { [Op.or]: [{idAutomovil}, {modelo}, {marca}, {año}] } })
+        const actualizarAutomovil = await Automovil.findOne( { where: { [Op.and]: [{idAutomovil}, {modelo}, {marca}, {año}] } })
         actualizarAutomovil.modelo = modelo;
         actualizarAutomovil.año = año;
         actualizarAutomovil.marca = marca;
