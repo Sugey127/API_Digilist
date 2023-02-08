@@ -11,5 +11,5 @@ usuarioRouter.put('/actualizar', authentification, usuarioController.put);
 usuarioRouter.delete('/eliminar', authentification, authorization, usuarioController.drop);
 usuarioRouter.get('/buscarUno', authentification, authorization, usuarioController.getOne);
 usuarioRouter.get('/buscarTodos', authentification, authorization, usuarioController.getAll);
-
+usuarioRouter.post('/login', usuarioController.login);
 export default usuarioRouter;

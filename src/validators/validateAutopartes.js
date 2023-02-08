@@ -12,8 +12,8 @@ export const validadorAutoparte =[
         .withMessage('El precio debe ser un número decimal positivo'),
     check('Imagen')
         .not().isEmpty().withMessage('El campo Imagen es requerido'),
-    check('idEntradas')
-        .not().isEmpty().withMessage('El campo idEntradas es requerido')
+    check('EntradaIdEntradas')
+        .not().isEmpty().withMessage('El campo EntradaIdEntradas es requerido')
 ];
 
 export const validadorAutoparteActualizar =[

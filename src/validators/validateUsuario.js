@@ -22,9 +22,24 @@ export const validaCamposUsuario = [
         .not().isEmpty().withMessage('El apellido es requerido').matches(/^[a-zA-Z]+$/)
         .withMessage('El apellido solo puede contener letras'),
     check('telefono')
-        .not().isEmpty().withMessage('El teléfono es requerido').withMessage('El teléfono debe ser un número válido').isLength({ min: 12, max: 12 }).withMessage('la longitud maxima de es de 12')
-        .matches(/^\d{3}-\d{3}-\d{4}$/).withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx')
-        .withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx'),
+        .not().isEmpty().withMessage('El teléfono es requerido').isLength({ min: 12, max: 12 })
+        .withMessage('El número de teléfono debe tener 12 digitos')
+        .matches(/^\d{3}-\d{3}-\d{4}$/)
+        .withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx')
+        .custom(value => {
+            const arr = value.split('-');
+        
+            const [n1, n2, n3] = arr;
+
+            // console.log(n1, n2, n3);
+        
+            if(typeof parseInt(n1) !== 'number') return false;
+            if(typeof parseInt(n2) !== 'number') return false;
+            if(typeof parseInt(n3) !== 'number') return false;
+
+            return true;
+        
+        }).withMessage('no es un formato númerico'),
     check('email')
         .not().isEmpty().withMessage('El email es requerido').isEmail().withMessage('Debe proporcionar un email valido, <ejemplo@gmail.com>'),
     check('password')
@@ -43,10 +58,10 @@ export const validaCamposUsuarioActualizar = [
         .not().isEmpty().withMessage('El apellido es requerido').matches(/^[a-zA-Z]+$/)
         .withMessage('El apellido solo puede contener letras'),
     check('telefono')
-        .not().isEmpty().withMessage('El teléfono es requerido').isNumeric().withMessage('El teléfono debe ser un número válido').isLength({ min: 12, max: 12 })
-        .withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx')
-        .matches(/^\d{3}-\d{3}-\d{4}$/)
-        .withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx'),
+        .not().isEmpty().withMessage('El teléfono es requerido').isNumeric().withMessage('El teléfono debe ser un número válido').isLength({ min: 10, max: 10 })
+        .withMessage('El número de teléfono debe tener 10 digitos'),
+        // .matches(/^\d{3}-\d{3}-\d{4}$/)
+        // .withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx'),
     check('email')
         .not().isEmpty().withMessage('El email es requerido').isEmail().withMessage('Debe proporcionar un email valido, <ejemplo@gmail.com>'),
     check('password')
@@ -56,4 +71,6 @@ export const validaCamposUsuarioActualizar = [
         .not().isEmpty().withMessage('La contraseña es requerida').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
         .withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un signo')
 ];
+
+
 

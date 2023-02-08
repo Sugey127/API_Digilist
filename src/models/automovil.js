@@ -8,7 +8,7 @@ export const Automovil = sequelize.define('Automovil',{
         primaryKey: true
     },
     modelo: {
-        type: DataTypes.STRING(45),
+        type: DataTypes.STRING,
         allowNull:false
     },
     año:{
@@ -16,7 +16,7 @@ export const Automovil = sequelize.define('Automovil',{
         allowNull:false
     },
     marca:{
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull:false
     },
     fechaRegistroAuto:{

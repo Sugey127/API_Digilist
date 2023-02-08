@@ -9,7 +9,7 @@ export const Autopartes = sequelize.define('Autopartes', {
         primaryKey: true 
     },
     description:{
-        type:DataTypes.STRING(250),
+        type:DataTypes.STRING,
         allowNull: false,
     },
     stock:{
@@ -17,7 +17,7 @@ export const Autopartes = sequelize.define('Autopartes', {
         allowNull: false
     },
     precio:{
-        type: DataTypes.DECIMAL(10,2),
+        type: DataTypes.DECIMAL,
         allowNull: false
     },
     Imagen:{
@@ -35,14 +35,12 @@ export const Autopartes = sequelize.define('Autopartes', {
 
 Entradas.hasMany(Autopartes, {
     foreignKey:{
-        name:"idEntradas",
         allowNull:false
     }
 })
 
 Autopartes.belongsTo(Entradas, {
     foreignKey:{
-        name:"idEntradas",
         allowNull:false
     }
 });

@@ -10,11 +10,11 @@ export const Envio = sequelize.define('Envio', {
         defaultValue: DataTypes.UUIDV4,
     },
     direccion: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING,
         allowNull: false
     },
     description: {
-        type: DataTypes.STRING(255), 
+        type: DataTypes.STRING, 
     },
     fechaEntrega: {
         type: DataTypes.DATEONLY
@@ -33,30 +33,26 @@ export const Envio = sequelize.define('Envio', {
 });
 
 Envio.belongsTo(Usuario, {
-    // foreignKey: {
-    //     name:"idUsuario",
-    //     allowNull:false
-    // }
+    foreignKey:{
+        allowNull:false
+    }
 });
 
 Usuario.hasMany(Envio, {
-    // foreignKey: {
-    //     name:"idUsuario",
-    //     allowNull:false
-    // }
+    foreignKey: {
+        allowNull:false
+    }
 })
 
 Envio.belongsTo(Recibo, {
-    // foreignKey: {
-    //     name:"idRecibo",
-    //     allowNull:false
-    // }
+    foreignKey:{
+        allowNull:false
+    }
 });
 
 Recibo.hasMany(Envio, {
-    // foreignKey: {
-    //     name:"idRecibo",
-    //     allowNull:false
-    // }
+    foreignKey: {
+        allowNull:false
+    }
 })
 

@@ -10,6 +10,7 @@ export const post = async (req, res) => {
         const nuevoProveedor = await Proveedor.create({
             nombreProveedor
         });
+        console.log(body);
         res.status(201).json(nuevoProveedor);
 
     } catch (err) {

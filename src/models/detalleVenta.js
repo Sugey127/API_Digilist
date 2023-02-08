@@ -10,7 +10,7 @@ export const DetalleVenta = sequelize.define('DetalleVenta', {
         allowNull: false
     },
     precioVenta: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: false
     }
 }, {
@@ -18,11 +18,19 @@ export const DetalleVenta = sequelize.define('DetalleVenta', {
         fields: ['idVenta', 'idAutopartes'],
     },
     timestamps: false
-    
+
 });
 
-Autopartes.belongsToMany(Venta, { through: DetalleVenta });
+Autopartes.belongsToMany(Venta, {
+    through: DetalleVenta, 
+    foreignKey: {
+        allowNull: false
+    }
+});
 Venta.belongsToMany(Autopartes, {
+    foreignKey: {
+        allowNull: false
+    },
     through: DetalleVenta,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'

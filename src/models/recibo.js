@@ -9,7 +9,7 @@ export const Recibo = sequelize.define('Recibo', {
         primaryKey: true
     },
     cantidad:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false,
         defaultValue: 0
     },

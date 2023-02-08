@@ -19,14 +19,12 @@ export const Venta = sequelize.define('Venta', {
 
 Usuario.hasMany(Venta, {
     foreignKey:{
-        name:"idUsuario",
         allowNull:false
     }
 })
 
 Venta.belongsTo(Usuario, {
     foreignKey:{
-        name:"idUsuario",
         allowNull:false
     }
 });

@@ -6,7 +6,7 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
 
 const proveedorRouter = Router();
 
-proveedorRouter.post('/registro',validadorProveedor,validateReutilizable,authentification,authorization, proveedorController.post); 
+proveedorRouter.post('/registro',validadorProveedor,validateReutilizable,authorization, proveedorController.post); 
 proveedorRouter.put('/actualizar', validadorProveedorActualizar,validateReutilizable,authentification,authorization, proveedorController.put); 
 proveedorRouter.delete('/eliminar',authentification,authorization, proveedorController.drop); 
 proveedorRouter.get('/buscarUno',authentification,authorization, proveedorController.getOne); 

@@ -21,7 +21,7 @@ const port = process.env.PORT || 4001;
  
 async function proyect() {
     try {
-        //await Usuario.sync({ alter: true });    
+        //await sequelize.sync({ force: true });    
         app.listen(port, () => {
             console.log("hello server");
         });

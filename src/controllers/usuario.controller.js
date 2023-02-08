@@ -9,15 +9,20 @@ dotevn.config({path: './.env'});
 // //request = peticion, response = respuesta
 
 export const login = async  (req, res) => {
-    const { email, password} = req.body; 
+    let { email, password} = req.body; 
+    // password = await bcrypt.hash(password, 10);
 
+    console.log(password);
     try {
-        console.log(body);
+        console.log(req.body);
         const user = await Usuario.findOne({where: {[Op.and]: [{password}, {email}]}});
-        const token = jwt.sign(user, process.env.JWT_KEY); 
+        console.log("hla sugey tines sueño", user);
+        const token = jwt.sign(user.dataValues, process.env.JWT_KEY); 
+        console.log("addddddddddddddddddddddddddddddddd");
         res.status(200).json([token, user]);
     } catch (err) {
-        res.status(500).json(err);
+        console.log("error:", err.message);
+        res.status(500).json(err.message);
     }
 }
 
@@ -25,7 +30,7 @@ export const login = async  (req, res) => {
 export const registro = async (req, res) => {
     
     try {
-        req.body.password = await bcrypt.hash(req.body.password, 10);
+        // req.body.password = await bcrypt.hash(req.body.password, 10);
         const usuarioNuevo = await Usuario.create(req.body);
         // console.log(usuarioNuevo);
         console.log(usuarioNuevo.dataValues);

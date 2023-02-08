@@ -10,7 +10,7 @@ export const Comentario = sequelize.define('Comentario', {
         primaryKey: true
     },
     comentario:{
-        type:DataTypes.STRING(250),
+        type:DataTypes.STRING,
         allowNull:false
     },
     fechaComentario:{

@@ -8,7 +8,7 @@ export const Proveedor = sequelize.define('Proveedor',{
         primaryKey: true
     },
     nombreProveedor: {
-        type: DataTypes.STRING(45),
+        type: DataTypes.STRING,
         allowNull:false
     },
     fechaRegistroProveedor:{
