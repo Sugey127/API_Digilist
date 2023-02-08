@@ -22,9 +22,8 @@ export const validaCamposUsuario = [
         .not().isEmpty().withMessage('El apellido es requerido').matches(/^[a-zA-Z]+$/)
         .withMessage('El apellido solo puede contener letras'),
     check('telefono')
-        .not().isEmpty().withMessage('El teléfono es requerido').isNumeric().withMessage('El teléfono debe ser un número válido').isLength({ min: 12, max: 12 })
-        .withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx')
-        .matches(/^\d{3}-\d{3}-\d{4}$/)
+        .not().isEmpty().withMessage('El teléfono es requerido').withMessage('El teléfono debe ser un número válido').isLength({ min: 12, max: 12 }).withMessage('la longitud maxima de es de 12')
+        .matches(/^\d{3}-\d{3}-\d{4}$/).withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx')
         .withMessage('El número de teléfono debe tener el formato xxx-xxx-xxxx'),
     check('email')
         .not().isEmpty().withMessage('El email es requerido').isEmail().withMessage('Debe proporcionar un email valido, <ejemplo@gmail.com>'),
