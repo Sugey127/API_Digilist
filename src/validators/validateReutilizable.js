@@ -5,7 +5,7 @@ export const validateReutilizable = (req, res, next) => {
 
     if (!errors.isEmpty()) {
         console.log(errors);
-        return res.status(500).json({ errors: errors.errors[0].msg});
+        return res.status(500).json(errors);
     }
 
     next();

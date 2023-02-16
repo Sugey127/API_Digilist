@@ -6,11 +6,10 @@ dotenv.config({ path: './.env' });
 
 export const authorization = (req, res, next) => {
 
-    let token = req.rawHeaders.find(x => x.split(' ').includes('Bearer'));
-    token = token.split(' ').pop();
+    const token = req.headers.authorization;
 
     try {
-        validateRole(token, "administrador", "role", "no eres admin");
+        validateRole(token.split(' ').pop(), "administrador", "role", "no eres admin");
         next();
     } catch (err) {
         res.status(500).json(err.message)
@@ -18,7 +17,8 @@ export const authorization = (req, res, next) => {
 }
 
 export const authentification = (req, res, next) => {
-    let token = req.rawHeaders.find(x => x.split(' ').includes('Bearer'));
+    
+    let token = req.headers.authorization;
     token = token.split(' ').pop();
     console.log(token);
     try {

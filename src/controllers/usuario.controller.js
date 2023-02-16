@@ -54,18 +54,31 @@ export const put = async (req, res) => {
     
     try {
         const actualizarUsuario = await Usuario.findOne({ where: { [Op.and]: [{email}, {password}] } })
-        
         actualizarUsuario.userNombre = userNombre;
         actualizarUsuario.usuarioApellido = usuarioApellido;
         actualizarUsuario.telefono = telefono;
-        actualizarUsuario.password = passwordNuevo;
-
         await actualizarUsuario.save();
         res.status(201).json(actualizarUsuario);
     } catch (err) {
         res.status(500).json(err);
     }
 }
+
+export const cambiarPass = async (req, res) => {
+    let { email, password } = req.body;
+
+        password = await bcrypt.hash(password, 10);
+    
+    try {
+        const actualizarUsuario = await Usuario.findOne({ where: {email}})
+        actualizarUsuario.password = password;
+        await actualizarUsuario.save();
+        res.status(201).json(actualizarUsuario);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 
 
 //DELETE
@@ -86,10 +99,14 @@ export const drop = async (req, res) => {
 //GET
 
 export const getOne = async (req, res) => {
-    const { email } = req.body;
+    const { email } = req.query;
+    console.log("email", email)
+    console.log(req.query);
     try {
         const user = await Usuario.findOne({where:{email}});
-        res.status(201).json(user);
+        console.log(user);
+        const token = jwt.sign(user, process.env.JWT_KEY);
+        res.status(201).json([user, token]);
 
     } catch (err) {
         res.status(500).json(err);

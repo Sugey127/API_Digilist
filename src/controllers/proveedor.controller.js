@@ -1,30 +1,33 @@
+import { body } from "express-validator";
 import { Op } from "sequelize";
 import { Proveedor } from "../models/proveedor.js";
-
+  
 
 
 //POST
 export const post = async (req, res) => {
     const { nombreProveedor } = req.body; 
+    console.log(req.body);
     try { 
         const nuevoProveedor = await Proveedor.create({
             nombreProveedor
         });
-        console.log(body);
+        
         res.status(201).json(nuevoProveedor);
 
     } catch (err) {
-        res.status(500).json(err); 
+        res.status(500).json(err);  
     }
 }
 
 //PUT
 
 export const put = async (req, res) => {
-    const { nombreProveedor, idTipoProveedor, nombreProveedorNuevo } = req.body;
+    const { nombreProveedor, idTipoProveedor } = req.body;
+    console.log(req.body);
     try {
-        const actualizarProveedor = await Proveedor.findOne( { where: { [Op.and]: [{idTipoProveedor}, {nombreProveedor} ] } })
-        actualizarProveedor.nombreProveedor = nombreProveedorNuevo;
+        const actualizarProveedor = await Proveedor.findOne( { where: {idTipoProveedor } })
+        actualizarProveedor.nombreProveedor = nombreProveedor;
         await actualizarProveedor.save();
         res.status(201).json(actualizarProveedor);
     } catch (err) {
@@ -37,6 +40,7 @@ export const put = async (req, res) => {
 
 export const drop = async (req, res) => {
     const {idTipoProveedor} = req.body;
+    console.log(req.body);
     try {
         const eliminarProveedor = Proveedor.destroy({ where: { idTipoProveedor } });
         res.status(201).json('SE ELIMINO EL PROVEEDOR'); 
@@ -51,6 +55,7 @@ export const drop = async (req, res) => {
 
 export const getOne = async (req, res) => {
     const { nombreProveedor} = req.body;
+    console.log(req.body);
     try {
         const proveedor = await Proveedor.findOne( { where:   {nombreProveedor}  });
         res.status(201).json(proveedor);
@@ -74,13 +79,14 @@ export const getOne = async (req, res) => {
     }
 } */
 
-
+  
 
 //GETS
 
 export const getAll = async (req, res) => {
     try {
         const proveedores = await Proveedor.findAll();
+        console.log(req.body);
         res.status(201).json(proveedores);
 
     } catch (err) {

@@ -27,7 +27,7 @@ app.use('/recibos', reciboRouter);
 app.use('/entradas', entradasRouter);
 app.use('/automoviles', automovilRouter);
 app.use('/autopartes', autoparteRouter);
-app.use('/proveedores', proveedorRouter); 
+app.use('/proveedores', proveedorRouter);  
 app.use('/ventas', ventaRouter);
 app.use('/envios',envioRouter);
 app.use('/detalleVenta', detalleVenta);

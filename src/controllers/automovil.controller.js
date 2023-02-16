@@ -5,7 +5,7 @@ import { Automovil } from "../models/automovil.js";
 //POST
 export const post = async (req, res) => {
     const { modelo, año, marca } = req.body;
-    try { 
+    try {
         const nuevaAutomovil = await Automovil.create({
             modelo, año, marca
         });
@@ -19,9 +19,12 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { modelo, año, marca, idAutomovil} = req.body;
+    const { modelo, año, marca, idAutomovil } = req.body;
     try {
-        const actualizarAutomovil = await Automovil.findOne( { where: { [Op.and]: [{idAutomovil}, {modelo}, {marca}, {año}] } })
+
+        console.log(modelo, año, marca, idAutomovil);
+
+        const actualizarAutomovil = await Automovil.findOne({ where: { idAutomovil } })
         actualizarAutomovil.modelo = modelo;
         actualizarAutomovil.año = año;
         actualizarAutomovil.marca = marca;
@@ -31,14 +34,14 @@ export const put = async (req, res) => {
         res.status(500).json(err);
     }
 }
-  
+
 
 //DELETE
 
 export const drop = async (req, res) => {
     const { idAutomovil } = req.body;
     try {
-        const eliminarAutomovil = Automovil.destroy({ where: {idAutomovil}});
+        const eliminarAutomovil = Automovil.destroy({ where: { idAutomovil } });
         res.status(201).json('SE ELIMINO EL AUTOMOVIL');
 
     } catch (err) {
@@ -52,7 +55,7 @@ export const drop = async (req, res) => {
 export const getOne = async (req, res) => {
     const { idAutomovil } = req.body;
     try {
-        const nuevoAutomovil = await Automovil.findOne( { where: {idAutomovil } });
+        const nuevoAutomovil = await Automovil.findOne({ where: { idAutomovil } });
         res.status(201).json(nuevoAutomovil);
 
     } catch (err) {

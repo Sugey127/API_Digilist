@@ -10,7 +10,9 @@ export const post = async (req, res) => {
         const nuevaAutoparte = await Autopartes.create({
             description, stock, precio, Imagen, EntradaIdEntradas
         });
-        res.status(201).json(nuevaAutoparte);
+
+        console.log(nuevaAutoparte.dataValues)
+        res.status(201).json(nuevaAutoparte.dataValues);
 
     } catch (err) {
         res.status(500).json(err);
@@ -21,6 +23,7 @@ export const post = async (req, res) => {
 
 export const put = async (req, res) => {
     const { description, stock, precio, Imagen, idAutopartes} = req.body;
+    console.log(req.body)
     try {
         const actualizarAutoparte = await Autopartes.findOne( { where:  {idAutopartes} })
         actualizarAutoparte.description = description;
@@ -68,6 +71,9 @@ export const getOne = async (req, res) => {
 export const getAll = async (req, res) => {
     try {
         const autopartes = await Autopartes.findAll();
+
+        console.log(autopartes);
+
         res.status(201).json(autopartes);
 
     } catch (err) {
