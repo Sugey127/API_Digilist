@@ -64,8 +64,8 @@ export const getOne = async (req, res) => {
 export const getAllActivo = async (req, res) => {
     try {
         const { StatusId } = req.body;
-        const year = await DetalleVenta.findAll({ where:{ StatusId : 1 } });
-        res.status(201).json(year);
+        const detallVenta = await DetalleVenta.findAll({ where:{ StatusId : 1 } });
+        res.status(201).json(detallVenta);
 
     } catch (err) {
         res.status(500).json(err.message);
@@ -77,8 +77,8 @@ export const getAllActivo = async (req, res) => {
 export const getAllInactivo = async (req, res) => {
     try {
         const { StatusId } = req.body;
-        const year = await DetalleVenta.findAll({ where:{ StatusId : 2 } });
-        res.status(201).json(year);
+        const detallVenta = await DetalleVenta.findAll({ where:{ StatusId : 2 } });
+        res.status(201).json(detallVenta);
 
     } catch (err) {
         res.status(500).json(err.message);

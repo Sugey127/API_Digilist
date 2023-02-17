@@ -11,5 +11,7 @@ entradasRouter.put('/actualizar',validadorEntradaActualizar,validateReutilizable
 //entradasRouter.delete('/eliminar', authentification, authorization, entradasController.drop);
 entradasRouter.get('/buscarUno', authentification, entradasController.getOne);
 entradasRouter.get('/buscarTodos', authentification, entradasController.getAll);
+entradasRouter.get('/buscarActivo', entradasController.getAllActivo);
+entradasRouter.get('/buscarInactivo', entradasController.getAllInactivo);
 
 export default entradasRouter; 

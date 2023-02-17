@@ -6,8 +6,8 @@ import dotevn from 'dotenv';
 import { body } from "express-validator";
 
 dotevn.config({ path: './.env' });
-// //request = peticion, response = respuesta
 
+//Login
 export const login = async (req, res) => {
     let { email, password } = req.body;
     // password = await bcrypt.hash(password, 10);
@@ -16,9 +16,7 @@ export const login = async (req, res) => {
     try {
         console.log(req.body);
         const user = await Usuario.findOne({ where: { [Op.and]: [{ password }, { email }] } });
-        console.log("hla sugey tines sueño", user);
         const token = jwt.sign(user.dataValues, process.env.JWT_KEY);
-        console.log("addddddddddddddddddddddddddddddddd");
         res.status(200).json([token, user]);
     } catch (err) {
         console.log("error:", err.message);
@@ -38,15 +36,14 @@ export const registro = async (req, res) => {
         console.log(token);
         res.status(201).json({ token, usuarioNuevo });
     } catch (err) {
-        console.log(err)
-        res.status(500).json(err);
+         res.status(500).json(err.message);
     }
 }
 
 //PUT
 
 export const put = async (req, res) => {
-    let { userNombre, usuarioApellido, telefono, email, password, passwordNuevo } = req.body;
+    let { userNombre, usuarioApellido, telefono, email, password, passwordNuevo, StatusId } = req.body;
     password = await bcrypt.hash(password, 10);
     passwordNuevo = await bcrypt.hash(passwordNuevo, 10);
 
@@ -55,12 +52,15 @@ export const put = async (req, res) => {
         actualizarUsuario.userNombre = userNombre;
         actualizarUsuario.usuarioApellido = usuarioApellido;
         actualizarUsuario.telefono = telefono;
+        actualizarUsuario.StatusId=StatusId;
         await actualizarUsuario.save();
         res.status(201).json(actualizarUsuario);
     } catch (err) {
-        res.status(500).json(err);
+         res.status(500).json(err.message);
     }
 }
+
+//Cambiar Contraseña
 
 export const cambiarPass = async (req, res) => {
     let { email, password } = req.body;
@@ -73,7 +73,7 @@ export const cambiarPass = async (req, res) => {
         await actualizarUsuario.save();
         res.status(201).json(actualizarUsuario);
     } catch (err) {
-        res.status(500).json(err);
+         res.status(500).json(err.message);
     }
 }
 
@@ -81,17 +81,17 @@ export const cambiarPass = async (req, res) => {
 
 //DELETE
 
-export const drop = async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const eliminarUsuario = Usuario.destroy({ where: { email } });
-        res.status(201).json('SE ELIMINO USUARIO');
+// export const drop = async (req, res) => {
+//     const { email, password } = req.body;
+//     try {
+//         const eliminarUsuario = Usuario.destroy({ where: { email } });
+//         res.status(201).json('SE ELIMINO USUARIO');
 
-    } catch (err) {
+//     } catch (err) {
 
-        res.status(500).json(err);
-    }
-}
+//          res.status(500).json(err.message);
+//     }
+// }
 
 
 //GET
@@ -107,10 +107,35 @@ export const getOne = async (req, res) => {
         res.status(201).json([user, token]);
 
     } catch (err) {
-        res.status(500).json(err);
+         res.status(500).json(err.message);
     }
 }
 
+//GETS Status Activo
+
+export const getAllActivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const usuario = await Usuario.findAll({ where:{ StatusId : 1 } });
+        res.status(201).json(usuario);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+//GETS Status Inactivo
+
+export const getAllInactivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const usuario = await Usuario.findAll({ where:{ StatusId : 2 } });
+        res.status(201).json(usuario);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
 
 //GETS
 
@@ -120,7 +145,7 @@ export const getAll = async (req, res) => {
         res.status(201).json(usuarios);
 
     } catch (err) {
-        res.status(500).json(err);
+         res.status(500).json(err.message);
     }
 }
 

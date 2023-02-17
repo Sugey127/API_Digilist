@@ -11,5 +11,7 @@ autoparteRouter.put('/actualizar', validadorAutoparteActualizar, validateReutili
 //autoparteRouter.delete('/eliminar', authentification, authorization, autoparteController.drop);
 autoparteRouter.get('/buscarUno', authentification, autoparteController.getOne);
 autoparteRouter.get('/buscarTodos', authentification, autoparteController.getAll);
+autoparteRouter.get('/buscarActivo', autoparteController.getAllActivo);
+autoparteRouter.get('/buscarInactivo', autoparteController.getAllInactivo);
 
 export default autoparteRouter; 

@@ -5,10 +5,10 @@ import { Venta } from "../models/venta.js";
 
 //POST
 export const post = async (req, res) => {
-    const { cantidad, VentumIdVenta } = req.body;
+    const { Folio,cantidad, VentumCodeVenta } = req.body;
     try {
         const nuevoRecibo = await Recibo.create({
-            cantidad, VentumIdVenta
+            Folio, cantidad, VentumCodeVenta
         });
         res.status(201).json(nuevoRecibo);
 
@@ -20,9 +20,9 @@ export const post = async (req, res) => {
 //PUT
 
 /* export const put = async (req, res) => {
-    const { idRecibo, cantidad } = req.body;
+    const { Folio, cantidad } = req.body;
     try {
-        const actualizarRecibo = await Recibo.findOne( { where: { idRecibo } })
+        const actualizarRecibo = await Recibo.findOne( { where: { Folio } })
         actualizarRecibo.cantidad = cantidad;
         await actualizarRecibo.save();
         res.status(201).json(actualizarRecibo);
@@ -35,9 +35,9 @@ export const post = async (req, res) => {
 //DELETE
 
 /* export const drop = async (req, res) => {
-    const { idRecibo } = req.body;
+    const { Folio } = req.body;
     try {
-        const eliminarRecibo = Recibo.destroy({ where: { idRecibo } });
+        const eliminarRecibo = Recibo.destroy({ where: { Folio } });
         res.status(201).json('SE ELIMINO CON EXITO');
 
     } catch (err) {
@@ -49,9 +49,9 @@ export const post = async (req, res) => {
 //GET
 
 export const getOne = async (req, res) => {
-    const { idRecibo } = req.body;
+    const { Folio } = req.body;
     try {
-        const nuevoRecibo = await Recibo.findOne( { where:{ idRecibo } });
+        const nuevoRecibo = await Recibo.findOne( { where:{ Folio } });
         res.status(201).json(nuevoRecibo);
 
     } catch (err) {

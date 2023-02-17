@@ -8,7 +8,10 @@ const envioRouter = Router();
 
 envioRouter.post('/registro',validadorEnvio,validateReutilizable,authentification, envioController.post); 
 envioRouter.put('/actualizar',validadorEnvioActualizar,validateReutilizable,authentification, envioController.put); 
-envioRouter.delete('/eliminar',authentification,authorization, envioController.drop); 
+//envioRouter.delete('/eliminar',authentification,authorization, envioController.drop); 
 envioRouter.get('/buscarUno',authentification,authorization, envioController.getOne); 
 envioRouter.get('/buscarTodos',authentification,authorization, envioController.getAll); 
+envioRouter.get('/buscarActivo', envioController.getAllActivo);
+envioRouter.get('/buscarInactivo', envioController.getAllInactivo);
+
 export default envioRouter;

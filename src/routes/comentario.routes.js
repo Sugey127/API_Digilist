@@ -11,5 +11,6 @@ comentarioRouter.put('/actualizar',validadorComentarioActualizar,validateReutili
 //comentarioRouter.delete('/eliminar',authentification,authorization, comentarioController.drop); 
 comentarioRouter.get('/buscarUno',authentification,authorization, comentarioController.getOne); 
 comentarioRouter.get('/buscarTodos',authentification,authorization, comentarioController.getAll); 
-
+comentarioRouter.get('/buscarActivo', comentarioController.getAllActivo);
+comentarioRouter.get('/buscarInactivo', comentarioController.getAllInactivo);
 export default comentarioRouter;

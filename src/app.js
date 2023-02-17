@@ -15,6 +15,8 @@ import ventaRouter from './routes/venta.routes.js';
 import envioRouter from './routes/envio.routes.js';
 import detalleVentaRouter from './routes/detalleVenta.routes.js';
 import { yearsRouter } from './routes/year.routes.js';
+import { Automovil } from './models/automovil.js';
+import automovilRouter from './routes/automovil.routes.js';
 
 dotevn.config({path: './.env'});
 
@@ -35,4 +37,5 @@ app.use('/ventas', ventaRouter);
 app.use('/envios',envioRouter);
 app.use('/detalleVenta', detalleVentaRouter);
 app.use('/year',yearsRouter);
+app.use('/automovil', automovilRouter);
 export default app;

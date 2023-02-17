@@ -4,7 +4,6 @@ import { Autopartes } from "./autopartes.js";
 import { Usuario } from "./usuario.js";
 import { Marca } from "./marca.js";
 import { Venta } from "./venta.js";
-import { Recibo } from "./recibo.js";
 import { Proveedor } from "./proveedor.js";
 import { Modelo } from "./modelo.js";
 import { Envio } from "./envio.js";
@@ -69,19 +68,6 @@ Status.hasMany(Venta, {
     onUpdate: 'CASCADE'
 })
 
-Recibo.belongsTo(Status, {
-    foreignKey: {
-        allowNull: false
-    }
-});
-
-Status.hasMany(Recibo, {
-    foreignKey: {
-        allowNull: false
-    },
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-})
 
 Proveedor.belongsTo(Status, {
     foreignKey: {

@@ -11,4 +11,6 @@ detalleVentaRouter.put('/actualizar',validadorDetalleVentaActualizar,validateReu
 //detalleVentaRouter.delete('/eliminar',authentification,authorization, detalleVentaController.drop); 
 detalleVentaRouter.get('/buscarUno',authentification,authorization, detalleVentaController.getOne); 
 detalleVentaRouter.get('/buscarTodos',authentification,authorization, detalleVentaController.getAll); 
+detalleVentaRouter.get('/buscarActivo', detalleVentaController.getAllActivo);
+detalleVentaRouter.get('/buscarInactivo', detalleVentaController.getAllInactivo);
 export default detalleVentaRouter;

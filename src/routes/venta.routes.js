@@ -8,8 +8,10 @@ const ventaRouter = Router();
 
 ventaRouter.post('/registro',validadorVenta,validateReutilizable,authentification, ventaController.post); 
 ventaRouter.put('/actualizar',validadorVentaActualizar,validateReutilizable,authentification,authorization, ventaController.put); 
-ventaRouter.delete('/eliminar',authentification,authorization, ventaController.drop); 
+//ventaRouter.delete('/eliminar',authentification,authorization, ventaController.drop); 
 ventaRouter.get('/buscarUno',authentification,authorization, ventaController.getOne); 
 ventaRouter.get('/buscarTodos',authentification,authorization, ventaController.getAll); 
+ventaRouter.get('/buscarActivo', ventaController.getAllActivo);
+ventaRouter.get('/buscarInactivo', ventaController.getAllInactivo);
 
 export default ventaRouter;

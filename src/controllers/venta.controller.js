@@ -4,12 +4,12 @@ import { Venta } from "../models/venta.js";
 
 //POST
 export const post = async (req, res) => {
-    const { idUsuario } = req.body;
+    const { UsuarioEmail, code_venta, StatusId } = req.body;
     
     try {
         
         const nuevaVenta = await Venta.create({
-             idUsuario: req.body.idUsuario
+             UsuarioEmail, code_venta, StatusId
         });   
         console.log(req.body);
         res.status(201).json(nuevaVenta);
@@ -23,10 +23,10 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { fechaVenta, idVenta } = req.body;
+    const { StatusId, code_venta } = req.body;
     try {
-        const actualizarVenta = await Venta.findOne( { where: { [Op.and]: [{idVenta}, {fechaVenta}] } })
-        actualizarVenta.fechaVenta = fechaVenta;
+        const actualizarVenta = await Venta.findOne( { where: { [Op.and]: [{code_venta}, {fechaVenta}] } })
+        actualizarVenta.StatusId = StatusId;
         await actualizarVenta.save();
         res.status(201).json(actualizarVenta);
     } catch (err) {
@@ -37,24 +37,24 @@ export const put = async (req, res) => {
 
 //DELETE
 
-export const drop = async (req, res) => {
-    const {idVenta} = req.body;
-    try {
-        const eliminarVenta = Venta.destroy({ where: { idVenta } });
-        res.status(201).json('SE ELIMINO CON EXITO LA VENTA');
+// export const drop = async (req, res) => {
+//     const {code_venta} = req.body;
+//     try {
+//         const eliminarVenta = Venta.destroy({ where: { code_venta } });
+//         res.status(201).json('SE ELIMINO CON EXITO LA VENTA');
 
-    } catch (err) {
-        console.error(err);
-    }
-}
+//     } catch (err) {
+//         console.error(err);
+//     }
+// }
 
 
 //GET
 
 export const getOne = async (req, res) => {
-    const { idVenta} = req.body;
+    const { code_venta} = req.body;
     try {
-        const venta = await Venta.findOne( { where: {idVenta } });
+        const venta = await Venta.findOne( { where: {code_venta } });
         res.status(201).json(venta);
 
     } catch (err) {
@@ -62,13 +62,39 @@ export const getOne = async (req, res) => {
     }
 }
 
+//GETS Status Activo
+
+export const getAllActivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const venta = await Venta.findAll({ where:{ StatusId : 1 } });
+        res.status(201).json(venta);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+//GETS Status Inactivo
+
+export const getAllInactivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const venta = await Venta.findAll({ where:{ StatusId : 2 } });
+        res.status(201).json(venta);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
 
 //GETS
 
 /* export const getAllCoditional = async (req, res) => {
-    const { fechaVenta, idVenta} = req.body;
+    const { fechaVenta, code_venta} = req.body;
     try {
-        const ventas = await Venta.findAll( { where: { [Op.or]: [{idVenta}, {fechaVenta} ] } });
+        const ventas = await Venta.findAll( { where: { [Op.or]: [{code_venta}, {fechaVenta} ] } });
         res.status(201).json(ventas);
 
     } catch (err) {

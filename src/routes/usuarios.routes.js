@@ -9,8 +9,11 @@ const usuarioRouter = Router();
 usuarioRouter.post('/registro', validaCamposUsuario, validateReutilizable, usuarioController.registro);
 usuarioRouter.put('/actualizar', authentification, usuarioController.put);
 usuarioRouter.put('/cambiarPass', usuarioController.cambiarPass);
-usuarioRouter.delete('/eliminar', authentification, authorization, usuarioController.drop);
+//usuarioRouter.delete('/eliminar', authentification, authorization, usuarioController.drop);
 usuarioRouter.get('/buscarUno', authentification, authorization, usuarioController.getOne);
 usuarioRouter.get('/buscarTodos', authentification, authorization, usuarioController.getAll);
 usuarioRouter.post('/login', usuarioController.login);
+usuarioRouter.get('/buscarActivo', usuarioController.getAllActivo);
+usuarioRouter.get('/buscarInactivo', usuarioController.getAllInactivo);
+
 export default usuarioRouter;
