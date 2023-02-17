@@ -1,29 +1,43 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
-import { Años } from "./años.js";
+import { Years } from "./years.js";
+import { Automovil } from "./automovil.js";
 
-
-export const Modelo= sequelize.define('Modelo',{
+export const Modelo = sequelize.define('Modelo', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
+        allowNull: false
     },
     modelo: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        primaryKey: true
     }
 }, { timestamps: false })
 
-Modelo.belongsTo(Años, {
+Modelo.belongsTo(Years, {
     foreignKey: {
         allowNull: false
     }
 });
 
-Años.hasMany(Modelo, {
+Years.hasMany(Modelo, {
     foreignKey: {
         allowNull: false
     },
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 })
+
+Modelo.hasMany(Automovil, {
+    foreignKey:{
+        allowNull:false
+    }
+})
+
+Automovil.belongsTo(Modelo, {
+    foreignKey:{
+        allowNull:false
+    }
+});

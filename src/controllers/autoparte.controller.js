@@ -5,10 +5,10 @@ import { Autopartes } from "../models/autopartes.js";
 
 //POST
 export const post = async (req, res) => {
-    const { description, stock, precio, Imagen, EntradaIdEntradas } = req.body;
+    const { description, stock,code_autoparte, precio, Imagen, EntradaCodeEntrada,StatusId } = req.body;
     try {
         const nuevaAutoparte = await Autopartes.create({
-            description, stock, precio, Imagen, EntradaIdEntradas
+            description, stock,code_autoparte, precio, Imagen, EntradaCodeEntrada,StatusId
         });
 
         console.log(nuevaAutoparte.dataValues)
@@ -22,14 +22,15 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { description, stock, precio, Imagen, idAutopartes} = req.body;
+    const { description, stock, precio, Imagen, code_autoparte,StatusId} = req.body;
     console.log(req.body)
     try {
-        const actualizarAutoparte = await Autopartes.findOne( { where:  {idAutopartes} })
+        const actualizarAutoparte = await Autopartes.findOne( { where:  {code_autoparte} })
         actualizarAutoparte.description = description;
         actualizarAutoparte.stock = stock;
         actualizarAutoparte.precio = precio;
         actualizarAutoparte.Imagen = Imagen;
+        actualizarAutoparte.StatusId=StatusId;
         await actualizarAutoparte.save();
         res.status(201).json(actualizarAutoparte);
     } catch (err) {
@@ -40,24 +41,24 @@ export const put = async (req, res) => {
 
 //DELETE
 
-export const drop = async (req, res) => {
-    const {idAutopartes} = req.body;
-    try {
-        const eliminarAutopartes = Autopartes.destroy({ where: { idAutopartes } });
-        res.status(201).json('SE ELIMINO LA PIEZA');
+// export const drop = async (req, res) => {
+//     const {code_autoparte} = req.body;
+//     try {
+//         const eliminarAutopartes = Autopartes.destroy({ where: { code_autoparte } });
+//         res.status(201).json('SE ELIMINO LA PIEZA');
 
-    } catch (err) {
-        console.error(err);
-    }
-}
+//     } catch (err) {
+//         console.error(err);
+//     }
+// }
 
 
 //GET
 
 export const getOne = async (req, res) => {
-    const { precio, idAutopartes} = req.body;
+    const { code_autoparte} = req.body;
     try {
-        const nuevoAutopartes = await Autopartes.findOne( { where: { idAutopartes } });
+        const nuevoAutopartes = await Autopartes.findOne( { where: { code_autoparte } });
         res.status(201).json(nuevoAutopartes);
 
     } catch (err) { 
@@ -65,14 +66,37 @@ export const getOne = async (req, res) => {
     }
 }
 
+//GETS Status Activo
+
+export const getAllActivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const year = await Autopartes.findAll({ where:{ StatusId : 1 } });
+        res.status(201).json(year);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+//GETS Status Inactivo
+
+export const getAllInactivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const year = await Autopartes.findAll({ where:{ StatusId : 2 } });
+        res.status(201).json(year);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
 
 //GETS
 
 export const getAll = async (req, res) => {
     try {
         const autopartes = await Autopartes.findAll();
-
-        console.log(autopartes);
 
         res.status(201).json(autopartes);
 

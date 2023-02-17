@@ -5,19 +5,25 @@ import { Recibo } from "./recibo.js";
 
 export const Envio = sequelize.define('Envio', {
     idEnvio: {
-        primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
+        allowNull: false
+    },
+    codEnvio:{
+        type: DataTypes.STRING,
+        primaryKey: true
     },
     direccion: {
         type: DataTypes.STRING,
         allowNull: false
     },
     description: {
-        type: DataTypes.STRING, 
+        type: DataTypes.STRING,
+        allowNull: false
     },
     fechaEntrega: {
-        type: DataTypes.DATEONLY
+        type: DataTypes.DATEONLY,
+        allowNull: false
     },
     EstadoPaquete:{
         type:DataTypes.ENUM('Preparacion','Pendiente','Entregado', 'Cancelado'),

@@ -8,7 +8,7 @@ const comentarioRouter = Router();
 
 comentarioRouter.post('/registro',validadorComentario,validateReutilizable,authentification, comentarioController.post); 
 comentarioRouter.put('/actualizar',validadorComentarioActualizar,validateReutilizable,authentification, comentarioController.put); 
-comentarioRouter.delete('/eliminar',authentification,authorization, comentarioController.drop); 
+//comentarioRouter.delete('/eliminar',authentification,authorization, comentarioController.drop); 
 comentarioRouter.get('/buscarUno',authentification,authorization, comentarioController.getOne); 
 comentarioRouter.get('/buscarTodos',authentification,authorization, comentarioController.getAll); 
 

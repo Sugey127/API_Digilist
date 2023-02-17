@@ -22,16 +22,9 @@ export const DetalleVenta = sequelize.define('DetalleVenta', {
 });
 
 Autopartes.belongsToMany(Venta, {
-    through: DetalleVenta, 
-    foreignKey: {
-        allowNull: false
-    }
-});
-Venta.belongsToMany(Autopartes, {
-    foreignKey: {
-        allowNull: false
-    },
     through: DetalleVenta,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
+});
+
+Venta.belongsToMany(Autopartes, {
+    through: DetalleVenta,
 });

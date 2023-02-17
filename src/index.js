@@ -10,11 +10,12 @@ import { Envio } from "./models/envio.js";
 import { DetalleVenta } from "./models/detalleVenta.js"; 
 import { Comentario } from "./models/comentario.js"; 
 import { Autopartes } from "./models/autopartes.js";
-import { Automovil } from "./models/automovil.js";
 import { Imagenes } from "./models/imagenes.js"; 
 import { ImagenUsuario } from "./models/imagenUsuario.js";
-
- 
+import { Marca } from "./models/marca.js";
+import { Modelo } from "./models/modelo.js";
+import { Status } from "./models/status.js";
+import { Years } from "./models/years.js"; 
 
 
 const port = process.env.PORT || 4001;
@@ -26,7 +27,7 @@ async function proyect() {
             console.log("hello server");
         });
     } catch (err) {
-        console.log(err); 
+        console.log(err);  
     }
 } 
 

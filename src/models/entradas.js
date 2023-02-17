@@ -1,13 +1,15 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
-import { Automovil } from "./automovil.js";
 import { Proveedor } from "./proveedor.js";
+import { Years } from "./years.js";
+import { Marca } from "./marca.js";
+import { Modelo } from "./modelo.js";
 
 export const Entradas = sequelize.define('Entradas', {
     idEntradas: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV1,
-        primaryKey: true
+        allowNull: false
     },
     nombreAutoparte: {
         type: DataTypes.STRING,
@@ -17,14 +19,13 @@ export const Entradas = sequelize.define('Entradas', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    precio: {
+    precio: { 
         type: DataTypes.DECIMAL,
         allowNull: false
     },
     code_entrada: {
         type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
+        primaryKey: true
     },
     fechaEntrada:{
         type:DataTypes.DATEONLY,
@@ -35,13 +36,37 @@ export const Entradas = sequelize.define('Entradas', {
     timestamps: false
 });
 
-Automovil.hasMany(Entradas, {
+Years.hasMany(Entradas, {
     foreignKey:{
         allowNull:false
     }
 })
 
-Entradas.belongsTo(Automovil, {
+Entradas.belongsTo(Years, {
+    foreignKey:{
+        allowNull:false
+    }
+});
+
+Marca.hasMany(Entradas, {
+    foreignKey:{
+        allowNull:false
+    }
+})
+
+Entradas.belongsTo(Marca, {
+    foreignKey:{
+        allowNull:false
+    }
+});
+
+Modelo.hasMany(Entradas, {
+    foreignKey:{
+        allowNull:false
+    }
+})
+
+Entradas.belongsTo(Modelo, {
     foreignKey:{
         allowNull:false
     }

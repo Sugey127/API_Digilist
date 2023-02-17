@@ -7,11 +7,15 @@ export const Comentario = sequelize.define('Comentario', {
     idComentario: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV1,
-        primaryKey: true
+        allowNull:false
     },
     comentario:{
         type:DataTypes.STRING,
         allowNull:false
+    },
+    code_comentario: {
+        type: DataTypes.STRING,
+        primaryKey: true
     },
     fechaComentario:{
         type:DataTypes.DATEONLY,
@@ -24,7 +28,11 @@ export const Comentario = sequelize.define('Comentario', {
 });
 
 
-Comentario.belongsTo(Usuario);
+Comentario.belongsTo(Usuario,{
+    foreignKey: {
+        allowNull: false
+    }
+});
 Usuario.hasMany(Comentario, {
     foreignKey: {
         allowNull: true
@@ -33,12 +41,15 @@ Usuario.hasMany(Comentario, {
     onUpdate: 'CASCADE'
 })
 
-Comentario.belongsTo(Autopartes);
+Comentario.belongsTo(Autopartes,{
+    foreignKey: {
+        allowNull: false
+    }
+});
 Autopartes.hasMany(Comentario, {
-    // foreignKey: {
-    //     name:"idAutoparte",
-    //     allowNull: true
-    // },
+    foreignKey: {
+        allowNull: true
+    },
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 })

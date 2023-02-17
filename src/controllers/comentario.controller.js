@@ -6,10 +6,10 @@ import { Autopartes } from "../models/autopartes.js";
 
 //POST
 export const post = async (req, res) => {
-    const { comentario,UsuarioIdUsuario, AutoparteIdAutopartes } = req.body;
+    const { comentario,code_comentario,UsuarioEmail, AutoparteCodeAutoparte,StatusId } = req.body;
     try {
         const nuevoComentario = await Comentario.create({
-            comentario, UsuarioIdUsuario, AutoparteIdAutopartes
+            comentario,code_comentario, UsuarioEmail, AutoparteCodeAutoparte,StatusId
         });
         res.status(201).json(nuevoComentario);
 
@@ -21,10 +21,10 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { idComentario, comentario } = req.body;
+    const { code_comentario,StatusId } = req.body;
     try {
-        const actualizarComentario = await Comentario.findOne( { where: { idComentario } })
-        actualizarComentario.comentario = comentario;
+        const actualizarComentario = await Comentario.findOne( { where: { code_comentario } })
+        actualizarComentario.StatusId = StatusId;
         await actualizarComentario.save();
         res.status(201).json(actualizarComentario);
     } catch (err) { 
@@ -35,28 +35,54 @@ export const put = async (req, res) => {
 
 //DELETE
 
-export const drop = async (req, res) => {
-    const { idComentario } = req.body;
+// export const drop = async (req, res) => {
+//     const { code_comentario } = req.body;
+//     try {
+//         const eliminarComentario = Comentario.destroy({ where: { code_comentario } });
+//         res.status(201).json('SE ELIMINO CON EXITO EL COMENTARIO');
+
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// }
+
+
+//GET
+
+export const getOne = async (req, res) => {
+    const { code_comentario } = req.body;
     try {
-        const eliminarComentario = Comentario.destroy({ where: { idComentario } });
-        res.status(201).json('SE ELIMINO CON EXITO EL COMENTARIO');
+        const nuevoComentario = await Comentario.findOne( { where:{ code_comentario } });
+        res.status(201).json(nuevoComentario);
 
     } catch (err) {
         res.status(500).json(err);
     }
 }
 
+//GETS Status Activo
 
-//GET
-
-export const getOne = async (req, res) => {
-    const { idComentario } = req.body;
+export const getAllActivo = async (req, res) => {
     try {
-        const nuevoComentario = await Comentario.findOne( { where:{ idComentario } });
-        res.status(201).json(nuevoComentario);
+        const { StatusId } = req.body;
+        const year = await Comentario.findAll({ where:{ StatusId : 1 } });
+        res.status(201).json(year);
 
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
+    }
+}
+
+//GETS Status Inactivo
+
+export const getAllInactivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const year = await Comentario.findAll({ where:{ StatusId : 2 } });
+        res.status(201).json(year);
+
+    } catch (err) {
+        res.status(500).json(err.message);
     }
 }
 

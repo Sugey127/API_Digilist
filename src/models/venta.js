@@ -6,6 +6,10 @@ export const Venta = sequelize.define('Venta', {
     idVenta: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV1,
+        allowNull: false
+    },
+    code_venta:{
+        type:DataTypes.STRING,
         primaryKey: true
     },
     fechaVenta:{

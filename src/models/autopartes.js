@@ -6,11 +6,11 @@ export const Autopartes = sequelize.define('Autopartes', {
     idAutopartes: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV1,
-        primaryKey: true 
+        allowNull: false
     },
     description:{
         type:DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     stock:{
         type: DataTypes.INTEGER,
@@ -21,7 +21,12 @@ export const Autopartes = sequelize.define('Autopartes', {
         allowNull: false
     },
     Imagen:{
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    code_autoparte: {
+        type: DataTypes.STRING,
+        primaryKey: true
     },
     fechaRegistroAutoparte:{
         type:DataTypes.DATEONLY,

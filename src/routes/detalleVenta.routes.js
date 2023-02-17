@@ -8,7 +8,7 @@ const detalleVentaRouter = Router();
 
 detalleVentaRouter.post('/registro',validadorDetalleVenta,validateReutilizable,authentification, detalleVentaController.post); 
 detalleVentaRouter.put('/actualizar',validadorDetalleVentaActualizar,validateReutilizable,authentification, detalleVentaController.put); 
-detalleVentaRouter.delete('/eliminar',authentification,authorization, detalleVentaController.drop); 
+//detalleVentaRouter.delete('/eliminar',authentification,authorization, detalleVentaController.drop); 
 detalleVentaRouter.get('/buscarUno',authentification,authorization, detalleVentaController.getOne); 
 detalleVentaRouter.get('/buscarTodos',authentification,authorization, detalleVentaController.getAll); 
 export default detalleVentaRouter;

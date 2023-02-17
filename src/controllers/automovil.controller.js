@@ -4,10 +4,10 @@ import { Automovil } from "../models/automovil.js";
 
 //POST
 export const post = async (req, res) => {
-    const { modelo, año, marca } = req.body;
+    const { ModeloModelo, YearYear, MarcaMarca, codeAuto, StatusId } = req.body;
     try {
         const nuevaAutomovil = await Automovil.create({
-            modelo, año, marca
+            ModeloModelo, YearYear, MarcaMarca,codeAuto,StatusId
         });
         res.status(201).json(nuevaAutomovil);
 
@@ -19,15 +19,11 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { modelo, año, marca, idAutomovil } = req.body;
+    const { codeAuto,StatusId} = req.body;
     try {
 
-        console.log(modelo, año, marca, idAutomovil);
-
-        const actualizarAutomovil = await Automovil.findOne({ where: { idAutomovil } })
-        actualizarAutomovil.modelo = modelo;
-        actualizarAutomovil.año = año;
-        actualizarAutomovil.marca = marca;
+        const actualizarAutomovil = await Automovil.findOne({ where: { codeAuto } })
+        actualizarAutomovil.StatusId = StatusId;
         await actualizarAutomovil.save();
         res.status(201).json(actualizarAutomovil);
     } catch (err) {
@@ -38,30 +34,57 @@ export const put = async (req, res) => {
 
 //DELETE
 
-export const drop = async (req, res) => {
-    const { idAutomovil } = req.body;
-    try {
-        const eliminarAutomovil = Automovil.destroy({ where: { idAutomovil } });
-        res.status(201).json('SE ELIMINO EL AUTOMOVIL');
+// export const drop = async (req, res) => {
+//     const { codeAuto } = req.body;
+//     try {
+//         const eliminarAutomovil = Automovil.destroy({ where: { codeAuto } });
+//         res.status(201).json('SE ELIMINO EL AUTOMOVIL');
 
-    } catch (err) {
-        res.status(500).json(err);
-    }
-}
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// }
 
 
 //GET
 
 export const getOne = async (req, res) => {
-    const { idAutomovil } = req.body;
+    const { codeAuto } = req.body;
     try {
-        const nuevoAutomovil = await Automovil.findOne({ where: { idAutomovil } });
+        const nuevoAutomovil = await Automovil.findOne({ where: { codeAuto } });
         res.status(201).json(nuevoAutomovil);
 
     } catch (err) {
         res.status(500).json(err);
     }
 }
+
+//GETS Status Activo
+
+export const getAllActivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const year = await Automovil.findAll({ where:{ StatusId : 1 } });
+        res.status(201).json(year);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+//GETS Status Inactivo
+
+export const getAllInactivo = async (req, res) => {
+    try {
+        const { StatusId } = req.body;
+        const year = await Automovil.findAll({ where:{ StatusId : 2 } });
+        res.status(201).json(year);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
 
 
 //GETS

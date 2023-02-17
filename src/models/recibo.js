@@ -6,6 +6,10 @@ export const Recibo = sequelize.define('Recibo', {
     idRecibo: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
+        allowNull: false
+    },
+    Folio:{
+        type:DataTypes.STRING,
         primaryKey: true
     },
     cantidad:{
