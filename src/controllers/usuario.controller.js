@@ -26,7 +26,7 @@ export const login = async (req, res) => {
 
 //POST
 export const registro = async (req, res) => {
-
+    console.log('verificando subida...', req.file);
     try {
         // req.body.password = await bcrypt.hash(req.body.password, 10);
         const usuarioNuevo = await Usuario.create(req.body);
@@ -36,7 +36,7 @@ export const registro = async (req, res) => {
         console.log(token);
         res.status(201).json({ token, usuarioNuevo });
     } catch (err) {
-         res.status(500).json(err.message);
+        res.status(500).json(err.message);
     }
 }
 
@@ -73,11 +73,9 @@ export const cambiarPass = async (req, res) => {
         await actualizarUsuario.save();
         res.status(201).json(actualizarUsuario);
     } catch (err) {
-         res.status(500).json(err.message);
+        res.status(500).json(err.message);
     }
 }
-
-
 
 //DELETE
 
@@ -92,7 +90,6 @@ export const cambiarPass = async (req, res) => {
 //          res.status(500).json(err.message);
 //     }
 // }
-
 
 //GET
 
@@ -148,6 +145,3 @@ export const getAll = async (req, res) => {
          res.status(500).json(err.message);
     }
 }
-
-
-

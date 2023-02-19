@@ -17,14 +17,18 @@ import detalleVentaRouter from './routes/detalleVenta.routes.js';
 import { yearsRouter } from './routes/year.routes.js';
 import { Automovil } from './models/automovil.js';
 import automovilRouter from './routes/automovil.routes.js';
+import path from 'path';
 
-dotevn.config({path: './.env'});
+dotevn.config({ path: './.env' });
+
+// console.log(path.join(import.meta.url, '../uploads').split('file:\\').pop());
 
 const app = express();
-
+app.use('/imagenes', express.static(path.join(import.meta.url, '../uploads').split('file:\\').pop()));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 app.use(express.json());
-app.use('/usuario', usuarioRouter); 
+app.use('/usuario', usuarioRouter);
 app.use('/comentarios', comentarioRouter);
 app.use('/recibos', reciboRouter);
 app.use('/entradas', entradasRouter);
@@ -32,10 +36,10 @@ app.use('/status', statusRouter);
 app.use('/marca', marcaRouter);
 app.use('/modelo', modeloRouter);
 app.use('/autopartes', autoparteRouter);
-app.use('/proveedores', proveedorRouter);  
+app.use('/proveedores', proveedorRouter);
 app.use('/ventas', ventaRouter);
-app.use('/envios',envioRouter);
+app.use('/envios', envioRouter);
 app.use('/detalleVenta', detalleVentaRouter);
-app.use('/year',yearsRouter);
+app.use('/year', yearsRouter);
 app.use('/automovil', automovilRouter);
-export default app;
+export default app; 
