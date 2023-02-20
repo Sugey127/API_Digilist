@@ -2,19 +2,19 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../config/DB.js";
 import { Usuario } from "./usuario.js";
 
-export const Imagenes = sequelize.define('Imagenes', {
-    id: {
-        primaryKey: true,
+
+export const ImagenUsuarioFondo = sequelize.define('ImagenUsuarioFondo', {
+    code: {
         type: DataTypes.INTEGER,
         autoIncrement: true
-    },
-    url: {
+    }, 
+    imagenFondo: {
         type: DataTypes.STRING,
-        allowNull: false
+        primaryKey: true
     }
 },{
     timestamps: false
 });
 
-/* Usuario.belongsTo(Imagenes);
-Imagenes.hasMany(Usuario); */
+ImagenUsuarioFondo.belongsTo(Usuario);
+Usuario.hasMany(ImagenUsuarioFondo);

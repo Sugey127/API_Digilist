@@ -10,12 +10,13 @@ import { Envio } from "./models/envio.js";
 import { DetalleVenta } from "./models/detalleVenta.js"; 
 import { Comentario } from "./models/comentario.js"; 
 import { Autopartes } from "./models/autopartes.js";
-import { Imagenes } from "./models/imagenes.js"; 
-import { ImagenUsuario } from "./models/imagenUsuario.js";
 import { Marca } from "./models/marca.js";
 import { Modelo } from "./models/modelo.js";
 import { Status } from "./models/status.js";
 import { Years } from "./models/years.js"; 
+import { ImagenUsuarioFondo } from "./models/imagenUsuarioFondo.js";
+import { ImagenUsuarioPerfil } from "./models/imagenUsuarioPerfil.js";
+import { ImagenAutopartes } from "./models/imagenAutoparte.js";
 
 
 const port = process.env.PORT || 4001;

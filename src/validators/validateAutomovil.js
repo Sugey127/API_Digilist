@@ -8,7 +8,7 @@ export const validadorAutomovil =[
         .not().isEmpty().withMessage('El campo marca es requerido').isLength({ min: 2 })
         .withMessage('La marca debe tener al menos 2 caracteres'),
     check('año').not().isEmpty().withMessage('El campo año es requerido').isInt({ min: 1900, max: new Date().getFullYear() })
-    .withMessage(`El año debe estar entre 1900 y ${new Date().getFullYear()}`)
+    .withMessage(`El año debe estar entre 1900 y ${new Date().getFullYear() + 1}`)
 ];
 
 export const validadorAutomovilActualizar =[

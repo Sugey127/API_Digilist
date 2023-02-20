@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<%- include('../components/head') %>
+
+<body>
+    <div class="grid-container">
+
+        <!-- Header -->
+        <%- include('../components/header') %>
+            <!-- End Header -->
+
+            <!-- Sidebar -->
+            <%- include('../components/sidebar') %>
+                <!-- End Sidebar -->
+
+                <div class="container-fluid">
+                    <div class="col">
+                        <div class="row">
+                            <form action="">
+                                <div class="form-group m-3">
+
+                                    <label for="descripcion">descripcion</label>
+                                    <input type="text" class="form-control" id="descripcion" name="descripcion">
+
+                                    <label for="stock">stock</label>
+                                    <input type="number" class="form-control" id="stock" name="stock">
+
+                                    <label for="precio">precio</label>
+                                    <input type="number" class="form-control mb-3" id="precio" name="precio">
+
+                                    <button type="button" class="btn btn-primary">Agregar</button>
+
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="row">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">id</th>
+                                        <th scope="col">descripcion</th>
+                                        <th scope="col">stock</th>
+                                        <th scope="col">precio</th>
+                                        <th scope="col">fecha de registro</th>
+                                        <th scope="col">put</th>
+                                        <th scope="col">delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    <% productos.forEach(p => { %>
+                                        <tr>
+                                            <td><%= p.id %></td>
+                                            <td><%= p.descripcion %></td>
+                                            <td><%= p.stock %></td>
+                                            <td><%= p.precio %></td>
+                                            <td><%= p.fechaRegistroAutoparte %></td>
+                                            <td><button class="btn btn-success">update</button></td>
+                                            <td><button type="button" class="btn btn-danger">delete</button></td>
+                                          </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../javascript/dashboard.js"></script>
+</body>
+
+</html>

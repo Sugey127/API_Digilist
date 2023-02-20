@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+  <!-- Montserrat Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+  <div class="grid-container">
+
+    <!-- Header -->
+    <%- include('../components/header') %>
+    <!-- End Header -->
+
+    <!-- Sidebar -->
+    <%- include('../components/sidebar') %>
+    <!-- End Sidebar -->
+
+    <!-- Main -->
+    <main class="main-container">
+      <div class="main-title">
+        <p class="font-weight-bold">Panel de administración</p>
+      </div>
+
+      <div class="main-cards">
+
+        <div class="card">
+          <div class="card-inner">
+            <span class="material-icons-outlined text-blue">Productos</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <span class="material-icons-outlined text-orange">Usuarios</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <span class="material-icons-outlined text-green">Automoviles</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="charts">
+
+        <div class="charts-card">
+          <p class="chart-title">Top 5 productos</p>
+          <div id="bar-chart"></div>
+        </div>
+
+        <div class="charts-card">
+          <p class="chart-title">Purchase and Sales Orders</p>
+          <div id="area-chart"></div>
+        </div>
+
+      </div>
+    </main>
+    <!-- End Main -->
+
+  </div>
+
+  <!-- Scripts -->
+  <!-- ApexCharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+  <!-- Custom JS -->
+  <script src="../../javascript/dashboard.js"></script>
+</body>
+
+</html>

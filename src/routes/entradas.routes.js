@@ -4,9 +4,9 @@ import { authentification, authorization } from "../middlewares/auth.js";
 import { validadorEntrada, validadorEntradaActualizar } from "../validators/validateEntrada.js";
 import { validateReutilizable } from "../validators/validateReutilizable.js";
 
-const entradasRouter = Router();
+const entradasRouter = Router();  
 
-entradasRouter.post('/registro',validadorEntrada,validateReutilizable, authentification, authorization, entradasController.post);
+entradasRouter.post('/registro',  entradasController.post);
 entradasRouter.put('/actualizar',validadorEntradaActualizar,validateReutilizable, authentification, authorization, entradasController.put);
 //entradasRouter.delete('/eliminar', authentification, authorization, entradasController.drop);
 entradasRouter.get('/buscarUno', authentification, entradasController.getOne);

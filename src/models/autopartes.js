@@ -20,10 +20,6 @@ export const Autopartes = sequelize.define('Autopartes', {
         type: DataTypes.DECIMAL,
         allowNull: false
     },
-    Imagen:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     code_autoparte: {
         type: DataTypes.STRING,
         primaryKey: true

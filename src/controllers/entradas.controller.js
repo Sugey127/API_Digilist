@@ -6,10 +6,10 @@ import { Proveedor } from "../models/proveedor.js";
 
 //POST
 export const post = async (req, res) => {
-    const { nombreAutoparte, stock, precio, code_entrada,YearYear,MarcaMarca,ModeloModelo,ProveedorRfcTipoProveedor,StatusId } = req.body;
+    const { nombreAutoparte, stock, precio, code_entrada,YearYear,MarcaMarca,ModeloModelo,ProveedorRfcProveedor,StatusId } = req.body;
     try {
         const nuevaEntrada = await Entradas.create({
-            nombreAutoparte, stock, precio, code_entrada,YearYear,MarcaMarca,ModeloModelo, ProveedorRfcTipoProveedor,StatusId
+            nombreAutoparte, stock, precio, code_entrada,YearYear,MarcaMarca,ModeloModelo, ProveedorRfcProveedor,StatusId
         });
         res.status(201).json(nuevaEntrada);
  

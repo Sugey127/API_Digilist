@@ -12,11 +12,17 @@ export const login = async (req, res) => {
     let { email, password } = req.body;
     // password = await bcrypt.hash(password, 10);
 
-    console.log(password);
-    try {
+    console.log('passwprd:', password);
+    try {  
         console.log(req.body);
         const user = await Usuario.findOne({ where: { [Op.and]: [{ password }, { email }] } });
         const token = jwt.sign(user.dataValues, process.env.JWT_KEY);
+
+        res.cookie('token', token, {
+            maxAge: 2 * 24 * 60 * 60 * 1000,
+            httpOnly: true
+        });
+
         res.status(200).json([token, user]);
     } catch (err) {
         console.log("error:", err.message);
@@ -30,10 +36,7 @@ export const registro = async (req, res) => {
     try {
         // req.body.password = await bcrypt.hash(req.body.password, 10);
         const usuarioNuevo = await Usuario.create(req.body);
-        // console.log(usuarioNuevo);
-        console.log(usuarioNuevo.dataValues);
         const token = jwt.sign(usuarioNuevo.dataValues, process.env.JWT_KEY);
-        console.log(token);
         res.status(201).json({ token, usuarioNuevo });
     } catch (err) {
         res.status(500).json(err.message);
@@ -43,6 +46,7 @@ export const registro = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
+
     let { userNombre, usuarioApellido, telefono, email, password, passwordNuevo, StatusId } = req.body;
     password = await bcrypt.hash(password, 10);
     passwordNuevo = await bcrypt.hash(passwordNuevo, 10);
