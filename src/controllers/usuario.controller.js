@@ -13,7 +13,7 @@ export const login = async (req, res) => {
     // password = await bcrypt.hash(password, 10);
 
     console.log('passwprd:', password);
-    try {  
+    try {
         console.log(req.body);
         const user = await Usuario.findOne({ where: { [Op.and]: [{ password }, { email }] } });
         const token = jwt.sign(user.dataValues, process.env.JWT_KEY);
@@ -47,7 +47,7 @@ export const registro = async (req, res) => {
 
 export const put = async (req, res) => {
 
-    let { userNombre, usuarioApellido, telefono,password, email, StatusId } = req.body;
+    let { userNombre, usuarioApellido, telefono, password, email, StatusId } = req.body;
     password = await bcrypt.hash(password, 10);
 
     try {
@@ -55,11 +55,11 @@ export const put = async (req, res) => {
         actualizarUsuario.userNombre = userNombre;
         actualizarUsuario.usuarioApellido = usuarioApellido;
         actualizarUsuario.telefono = telefono;
-        actualizarUsuario.StatusId=StatusId;
+        actualizarUsuario.StatusId = StatusId;
         await actualizarUsuario.save();
         res.status(201).json(actualizarUsuario);
     } catch (err) {
-         res.status(500).json(err.message);
+        res.status(500).json(err.message);
     }
 }
 
@@ -107,7 +107,7 @@ export const getOne = async (req, res) => {
         res.status(201).json([user, token]);
 
     } catch (err) {
-         res.status(500).json(err.message);
+        res.status(500).json(err.message);
     }
 }
 
@@ -116,7 +116,7 @@ export const getOne = async (req, res) => {
 export const getAllActivo = async (req, res) => {
     try {
         const { StatusId } = req.body;
-        const usuario = await Usuario.findAll({ where:{ StatusId : 1 } });
+        const usuario = await Usuario.findAll({ where: { StatusId: 1 } });
         res.status(201).json(usuario);
 
     } catch (err) {
@@ -129,7 +129,7 @@ export const getAllActivo = async (req, res) => {
 export const getAllInactivo = async (req, res) => {
     try {
         const { StatusId } = req.body;
-        const usuario = await Usuario.findAll({ where:{ StatusId : 2 } });
+        const usuario = await Usuario.findAll({ where: { StatusId: 2 } });
         res.status(201).json(usuario);
 
     } catch (err) {
@@ -145,6 +145,22 @@ export const getAll = async (req, res) => {
         res.status(201).json(usuarios);
 
     } catch (err) {
-         res.status(500).json(err.message);
+        res.status(500).json(err.message);
+    }
+}
+
+
+export const rendiImagen = async (req, res, next) => {
+    try {
+        const url = req.protocol + "://" + req.get('host') + '/imagenes/' + req.file.filename;
+
+        console.log(url)
+
+        //Tabla.create({url: rul})
+        //console.log(req.file)
+        RenderizadorImagen(req.file.path, 100);
+        res.send("imagen subida con exito")
+    } catch (err) {
+        res.send(err);
     }
 }
