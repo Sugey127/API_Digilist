@@ -11,7 +11,7 @@ ventaRouter.put('/actualizar',validadorVentaActualizar,validateReutilizable,auth
 //ventaRouter.delete('/eliminar',authentification,authorization, ventaController.drop); 
 ventaRouter.get('/buscarUno',authentification,authorization, ventaController.getOne); 
 ventaRouter.get('/buscarTodos',authentification,authorization, ventaController.getAll); 
-ventaRouter.get('/buscarActivo', ventaController.getAllActivo);
-ventaRouter.get('/buscarInactivo', ventaController.getAllInactivo);
+ventaRouter.get('/buscarActivo',authentification,authorization, ventaController.getAllActivo);
+ventaRouter.get('/buscarInactivo',authentification,authorization, ventaController.getAllInactivo);
 
 export default ventaRouter;

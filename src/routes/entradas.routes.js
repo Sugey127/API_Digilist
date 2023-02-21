@@ -6,12 +6,12 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
 
 const entradasRouter = Router();  
 
-entradasRouter.post('/registro',  entradasController.post);
+entradasRouter.post('/registro',validadorEntrada,validateReutilizable, entradasController.post);
 entradasRouter.put('/actualizar',validadorEntradaActualizar,validateReutilizable, authentification, authorization, entradasController.put);
 //entradasRouter.delete('/eliminar', authentification, authorization, entradasController.drop);
 entradasRouter.get('/buscarUno', authentification, entradasController.getOne);
 entradasRouter.get('/buscarTodos', authentification, entradasController.getAll);
-entradasRouter.get('/buscarActivo', entradasController.getAllActivo);
-entradasRouter.get('/buscarInactivo', entradasController.getAllInactivo);
+entradasRouter.get('/buscarActivo',authentification,authorization, entradasController.getAllActivo);
+entradasRouter.get('/buscarInactivo',authentification,authorization, entradasController.getAllInactivo);
 
 export default entradasRouter; 

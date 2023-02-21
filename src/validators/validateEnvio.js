@@ -16,9 +16,13 @@ export const validadorEnvio =[
     check('EstadoPaquete')
         .not().isEmpty().withMessage('El campo EstadoPaquete es requerido').isIn(validatEstadoPaquete)
         .withMessage('El EstadoPaquete proporcionado no es válido <Preparacion> || <Pendiente> || <Entregado> || <Cancelado>'),
-    check('UsuarioIdUsuario')
-        .not().isEmpty().withMessage('El campo UsuarioIdUsuario es requerido'),
-    check('ReciboIdRecibo').not().isEmpty().withMessage('El campo ReciboIdRecibo es requerido')
+    check('UsuarioEmail')
+        .not().isEmpty().withMessage('El campo UsuarioEmail es requerido'),
+    check('ReciboFolio').not().isEmpty().withMessage('El campo ReciboFolio es requerido'),
+    check('codEnvio')
+        .not().isEmpty().withMessage('El campo codEnvio es requerido'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];
 
 export const validadorEnvioActualizar =[
@@ -35,6 +39,8 @@ export const validadorEnvioActualizar =[
     check('EstadoPaquete')
         .not().isEmpty().withMessage('El campo EstadoPaquete es requerido').isIn(validatEstadoPaquete)
         .withMessage('El EstadoPaquete proporcionado no es válido <Preparacion> || <Pendiente> || <Entregado> || <Cancelado>'),
-    check('idEnvio')
-        .not().isEmpty().withMessage('El campo idEnvio es requerido')
+    check('codEnvio')
+        .not().isEmpty().withMessage('El campo codEnvio es requerido'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];

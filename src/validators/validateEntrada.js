@@ -11,10 +11,12 @@ export const validadorEntrada =[
         .withMessage('El precio debe ser un número decimal positivo'),
     check('code_entrada')
         .not().isEmpty().withMessage('El campo code_entrada es requerido'),
-    check('AutomovilIdAutomovil')
-        .not().isEmpty().withMessage('El campo AutomovilIdAutomovil es requerido'),
-    check('ProveedorIdTipoProveedor')
-        .not().isEmpty().withMessage('El campo ProveedorIdTipoProveedor es requerido')
+    check('AutomovilCodeAuto')
+        .not().isEmpty().withMessage('El campo AutomovilCodeAuto es requerido'),
+    check('ProveedorRfcProveedor')
+        .not().isEmpty().withMessage('El campo ProveedorRfcProveedor es requerido'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];
 
 export const validadorEntradaActualizar =[
@@ -27,5 +29,7 @@ export const validadorEntradaActualizar =[
         .not().isEmpty().withMessage('El campo precio es requerido').isFloat({ min: 0 })
         .withMessage('El precio debe ser un número decimal positivo'),
     check('code_entrada')
-        .not().isEmpty().withMessage('El campo code_entrada es requerido')
+        .not().isEmpty().withMessage('El campo code_entrada es requerido'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];

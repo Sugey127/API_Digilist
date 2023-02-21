@@ -6,12 +6,12 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
 
 const autoparteRouter = Router();
 
-autoparteRouter.post('/registro',  authentification, authorization, autoparteController.post);
+autoparteRouter.post('/registro',validadorAutoparte,validateReutilizable, authorization, autoparteController.post);
 autoparteRouter.put('/actualizar', validadorAutoparteActualizar, validateReutilizable, authentification, authorization, autoparteController.put);
 //autoparteRouter.delete('/eliminar', authentification, authorization, autoparteController.drop);
-autoparteRouter.get('/buscarUno', authentification, autoparteController.getOne);
-autoparteRouter.get('/buscarTodos', authentification, autoparteController.getAll);
-autoparteRouter.get('/buscarActivo', autoparteController.getAllActivo);
-autoparteRouter.get('/buscarInactivo', autoparteController.getAllInactivo);
+autoparteRouter.get('/buscarUno', authentification,authorization, autoparteController.getOne);
+autoparteRouter.get('/buscarTodos', authentification,authorization, autoparteController.getAll);
+autoparteRouter.get('/buscarActivo', authentification,authorization, autoparteController.getAllActivo);
+autoparteRouter.get('/buscarInactivo', authentification,authorization, autoparteController.getAllInactivo);
 
 export default autoparteRouter; 

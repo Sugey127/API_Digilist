@@ -1,25 +1,27 @@
 import { check } from "express-validator";
 
 export const validadorAutomovil =[
-    check('modelo')
-        .not().isEmpty().withMessage('El campo modelo es requerido') .isLength({ min: 2 })
-        .withMessage('El modelo debe tener al menos 2 caracteres'),
-    check('marca')
-        .not().isEmpty().withMessage('El campo marca es requerido').isLength({ min: 2 })
-        .withMessage('La marca debe tener al menos 2 caracteres'),
-    check('año').not().isEmpty().withMessage('El campo año es requerido').isInt({ min: 1900, max: new Date().getFullYear() })
-    .withMessage(`El año debe estar entre 1900 y ${new Date().getFullYear() + 1}`)
+    check('codeAuto')
+        .not().isEmpty().withMessage('El campo codigo auto es requerido [Las 2 primeras letras de marca + los cuatro numeros del año + las cuatro ultimas letras de modelo]') .isLength({ min: 10, max: 10 })
+        .withMessage('El codigo auto debe tener 10 caracteres'),
+    check('ModeloModelo')
+        .not().isEmpty().withMessage('El campo modelo es requerido') .isLength({ min: 5 })
+        .withMessage('El modelo debe tener al menos 5 caracteres'),
+    check('MarcaMarca')
+        .not().isEmpty().withMessage('El campo marca es requerido').isLength({ min: 5 })
+        .withMessage('La marca debe tener al menos 5 caracteres'),
+    check('YearYear').not().isEmpty().withMessage('El campo año es requerido').isInt({ min: 1900, max: new Date().getFullYear() + 1})
+    .withMessage(`El año debe estar entre 1900 y ${new Date().getFullYear() +1}`),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];
 
 export const validadorAutomovilActualizar =[
-    check('modelo')
-        .not().isEmpty().withMessage('El campo modelo es requerido') .isLength({ min: 2 })
-        .withMessage('El modelo debe tener al menos 2 caracteres'),
-    check('marca')
-        .not().isEmpty().withMessage('El campo marca es requerido').isLength({ min: 2 })
-        .withMessage('La marca debe tener al menos 2 caracteres'),
-    check('año').not().isEmpty().withMessage('El campo año es requerido').isInt({ min: 1900, max: new Date().getFullYear() })
-    .withMessage(`El año debe estar entre 1900 y ${new Date().getFullYear()}`),
-     check('idAutomovil')
-        .not().isEmpty().withMessage('El campo idAutomovil es requerido')
+    check('codeAuto')
+    .not().isEmpty().withMessage('El campo codigo auto es requerido [Las 2 primeras letras de marca + los cuatro numeros del año + las cuatro ultimas letras de modelo]') .isLength({ min: 10, max: 10 })
+    .withMessage('El codigo auto debe tener 10 caracteres'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
+
+   
 ];

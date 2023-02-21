@@ -21,9 +21,10 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { code_comentario,StatusId } = req.body;
+    const { code_comentario,StatusId, comentario } = req.body;
     try {
         const actualizarComentario = await Comentario.findOne( { where: { code_comentario } })
+        actualizarComentario.comentario = comentario;
         actualizarComentario.StatusId = StatusId;
         await actualizarComentario.save();
         res.status(201).json(actualizarComentario);

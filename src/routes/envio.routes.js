@@ -11,7 +11,7 @@ envioRouter.put('/actualizar',validadorEnvioActualizar,validateReutilizable,auth
 //envioRouter.delete('/eliminar',authentification,authorization, envioController.drop); 
 envioRouter.get('/buscarUno',authentification,authorization, envioController.getOne); 
 envioRouter.get('/buscarTodos',authentification,authorization, envioController.getAll); 
-envioRouter.get('/buscarActivo', envioController.getAllActivo);
-envioRouter.get('/buscarInactivo', envioController.getAllInactivo);
+envioRouter.get('/buscarActivo',authentification,authorization, envioController.getAllActivo);
+envioRouter.get('/buscarInactivo',authentification,authorization, envioController.getAllInactivo);
 
 export default envioRouter;

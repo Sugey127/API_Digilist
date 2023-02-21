@@ -5,10 +5,10 @@ import { Autopartes } from "../models/autopartes.js";
 
 //POST
 export const post = async (req, res) => {
-    const { description, stock,code_autoparte, precio, Imagen, EntradaCodeEntrada,StatusId } = req.body;
+    const { description, stock,code_autoparte, precio, EntradaCodeEntrada,StatusId } = req.body;
     try {
         const nuevaAutoparte = await Autopartes.create({
-            description, stock,code_autoparte, precio, Imagen, EntradaCodeEntrada,StatusId
+            description, stock,code_autoparte, precio, EntradaCodeEntrada,StatusId
         });
 
         console.log(nuevaAutoparte.dataValues)
@@ -29,7 +29,6 @@ export const put = async (req, res) => {
         actualizarAutoparte.description = description;
         actualizarAutoparte.stock = stock;
         actualizarAutoparte.precio = precio;
-        actualizarAutoparte.Imagen = Imagen;
         actualizarAutoparte.StatusId=StatusId;
         await actualizarAutoparte.save();
         res.status(201).json(actualizarAutoparte);

@@ -6,16 +6,15 @@ import { Proveedor } from "../models/proveedor.js";
 
 //POST
 export const post = async (req, res) => {
-    const { nombreAutoparte, stock, precio, code_entrada,YearYear,MarcaMarca,ModeloModelo,ProveedorRfcProveedor,StatusId } = req.body;
+    const { nombreAutoparte, stock, precio, code_entrada,AutomovilCodeAuto,ProveedorRfcProveedor,StatusId } = req.body;
     try {
         const nuevaEntrada = await Entradas.create({
-            nombreAutoparte, stock, precio, code_entrada,YearYear,MarcaMarca,ModeloModelo, ProveedorRfcProveedor,StatusId
+            nombreAutoparte, stock, precio, code_entrada,AutomovilCodeAuto,ProveedorRfcProveedor,StatusId
         });
         res.status(201).json(nuevaEntrada);
  
     } catch (err) {
-        // res.status(500).json(err); 
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 }
 
@@ -32,7 +31,7 @@ export const put = async (req, res) => {
         await actualizarEntrada.save();
         res.status(201).json(actualizarEntrada);
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 }
 
@@ -46,7 +45,7 @@ export const put = async (req, res) => {
 //         res.status(201).json('SE ELIMINO CON EXITO LA PIEZA');
 
 //     } catch (err) { 
-//         res.status(500).json(err);
+//         res.status(500).json(err.message);
 //     }
 // }
 
@@ -60,7 +59,7 @@ export const getOne = async (req, res) => {
         res.status(201).json(nuevoEntrada);
 
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 }
 
@@ -98,7 +97,7 @@ export const getAll = async (req, res) => {
         res.status(201).json(entradas);
 
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 }
 

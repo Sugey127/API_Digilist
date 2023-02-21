@@ -7,10 +7,12 @@ export const validadorDetalleVenta =[
     check('precioVenta')
         .not().isEmpty().withMessage('El campo precioVenta es requerido').isFloat({ min: 0 })
         .withMessage('El precioVenta debe ser un número decimal positivo'),
-    check('VentumIdVenta')
-        .not().isEmpty().withMessage('El campo VentumIdVenta es requerido'),
-    check('AutoparteIdAutopartes')
-        .not().isEmpty().withMessage('El campo AutoparteIdAutopartes es requerido'),
+    check('VentumCodeVenta')
+        .not().isEmpty().withMessage('El campo VentumCodeVenta es requerido'),
+    check('AutoparteCodeAutoparte')
+        .not().isEmpty().withMessage('El campo AutoparteCodeAutoparte es requerido'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];
 
 export const validadorDetalleVentaActualizar =[
@@ -20,8 +22,10 @@ export const validadorDetalleVentaActualizar =[
     check('precioVenta')
         .not().isEmpty().withMessage('El campo precioVenta es requerido').isFloat({ min: 0 })
         .withMessage('El precioVenta debe ser un número decimal positivo'),
-    check('VentumIdVenta')
-        .not().isEmpty().withMessage('El campo VentumIdVenta es requerido'),
-    check('AutoparteIdAutopartes')
-        .not().isEmpty().withMessage('El campo AutoparteIdAutopartes es requerido'),
+    check('VentumCodeVenta')
+        .not().isEmpty().withMessage('El campo VentumCodeVenta es requerido'),
+    check('AutoparteCodeAutoparte')
+        .not().isEmpty().withMessage('El campo AutoparteCodeAutoparte es requerido'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];

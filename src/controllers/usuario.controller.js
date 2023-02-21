@@ -47,9 +47,8 @@ export const registro = async (req, res) => {
 
 export const put = async (req, res) => {
 
-    let { userNombre, usuarioApellido, telefono, email, password, passwordNuevo, StatusId } = req.body;
+    let { userNombre, usuarioApellido, telefono,password, email, StatusId } = req.body;
     password = await bcrypt.hash(password, 10);
-    passwordNuevo = await bcrypt.hash(passwordNuevo, 10);
 
     try {
         const actualizarUsuario = await Usuario.findOne({ where: { [Op.and]: [{ email }, { password }] } })

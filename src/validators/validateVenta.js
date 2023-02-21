@@ -1,15 +1,17 @@
 import { check } from "express-validator";
 
 export const validadorVenta =[
-    check('idUsuario').not().isEmpty().withMessage('El campo idUsuario es requerido'),
+    check('UsuarioEmail')
+        .not().isEmpty().withMessage('El campo UsuarioEmail es requerido'),
+    check('code_venta')
+        .not().isEmpty().withMessage('El campo code_venta es requerido'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];
 
 export const validadorVentaActualizar =[
-    check('fechaVenta')
-        .not().isEmpty().withMessage('El campo fechaVenta es requerido').isLength({ min: 10, max: 10 })
-        .withMessage('La fecha debe tener el formato yyyy-mm-dd')
-        .matches(/^\d{4}-\d{2}-\d{2}$/)
-        .withMessage('La fecha debe tener el formato yyyy-mm-dd'),
-    check('idVenta')
-        .not().isEmpty().withMessage('El campo idVenta es requerido'),
+    check('code_venta')
+        .not().isEmpty().withMessage('El campo code_venta es requerido'),
+    check('StatusId')
+        .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];
