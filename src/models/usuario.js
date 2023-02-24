@@ -41,4 +41,3 @@ export const Usuario = sequelize.define('Usuarios', {
 }, {
     timestamps: false
 });
-

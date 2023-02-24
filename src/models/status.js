@@ -20,7 +20,8 @@ export const Status = sequelize.define('Status', {
         autoIncrement: true
     },
     status: {
-        type: DataTypes.ENUM('activo', 'inactivo')
+        type: DataTypes.ENUM('activo', 'inactivo'),
+        unique: true
     }
 }, { timestamps: false });
 

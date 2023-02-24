@@ -14,15 +14,14 @@ import { Marca } from "./models/marca.js";
 import { Modelo } from "./models/modelo.js";
 import { Status } from "./models/status.js";
 import { Years } from "./models/years.js"; 
-import { ImagenUsuarioFondo } from "./models/imagenUsuarioFondo.js";
-import { ImagenUsuarioPerfil } from "./models/imagenUsuarioPerfil.js";
-import { ImagenAutopartes } from "./models/imagenAutoparte.js";
+import { Imagenes } from "./models/imagenes.js";
+
 
 
 const port = process.env.PORT || 4001;
  
 async function proyect() {
-    try {
+    try {  
         //await sequelize.sync({ force: true });    
         app.listen(port, () => {
             console.log("hello server");

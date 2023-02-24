@@ -4,6 +4,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotevn from 'dotenv';
 import { body } from "express-validator";
+import { Imagenes } from "../models/imagenes.js";
+import { RenderizadorImagen } from "../utils/RenderizadorImagenes.js";
 
 dotevn.config({ path: './.env' });
 
@@ -34,6 +36,16 @@ export const login = async (req, res) => {
 export const registro = async (req, res) => {
     console.log('verificando subida...', req.file);
     try {
+        const fotoPerfil = await Imagenes.create({
+            url: 'http://localhost:4000/imagenes/default-profile.jpg'
+        })
+
+        console.log("antes de modificar", req.body)
+
+        req.body.ImagenId = fotoPerfil.id;
+
+        console.log("DESPUES DE MODIFICAR", req.body)
+
         // req.body.password = await bcrypt.hash(req.body.password, 10);
         const usuarioNuevo = await Usuario.create(req.body);
         const token = jwt.sign(usuarioNuevo.dataValues, process.env.JWT_KEY);
@@ -150,17 +162,48 @@ export const getAll = async (req, res) => {
 }
 
 
-export const rendiImagen = async (req, res, next) => {
+export const rendiImagenPerfil = async (req, res, next) => {  
     try {
         const url = req.protocol + "://" + req.get('host') + '/imagenes/' + req.file.filename;
 
-        console.log(url)
+        const token = req.headers.authorization;
+        const user = jwt.verify(token, process.env.JWT_KEY);
+        console.log("AAAAAAAAAAAAAAAHHHHHHHHH", user);
+        const imagenPerfil = await Imagenes.update({ url }, {
+            where: { id: user.ImagenId }
+        });
 
+        
+        console.log(url)
         //Tabla.create({url: rul})
-        //console.log(req.file)
+        console.log(req.file)
         RenderizadorImagen(req.file.path, 100);
-        res.send("imagen subida con exito")
+        res.status(200).json(imagenPerfil);
     } catch (err) {
-        res.send(err);
+        res.status(500).json(err.message);  
+        console.log(err);
     }
 }
+
+// export const rendiImagenFondo = async (req, res, next) => {
+//     try {
+//         const url = req.protocol + "://" + req.get('host') + '/imagenes/' + req.file.filename;
+
+//         const token = req.headrs.authorization;
+//         const user = jwt.verify(token, process.env.JWT_KEY);
+//         const imagenFondo = await Imagenes.update({ url }, {
+//             where: { id: user.ImagenId }
+//         });
+
+//         res.status(200).json(imagenFondo);
+//         console.log(url)
+
+//         //Tabla.create({url: rul})
+//         //console.log(req.file)
+//         RenderizadorImagen(req.file.path, 100);
+//         res.send("imagen de fondo se actualizo con exito")
+//     } catch (err) {
+//         res.send(err);
+//     }
+// }
+
