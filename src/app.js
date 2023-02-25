@@ -23,7 +23,6 @@ import cookieParser from 'cookie-parser';
 
 dotevn.config({ path: './.env' });
 
-
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -31,7 +30,6 @@ app.use(cookieParser());
 app.use('/imagenes', express.static(path.join(import.meta.url, '../uploads').split('file:\\').pop()));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 app.use(express.static(path.join(import.meta.url, '../../public').split('file:\\').pop()));
 app.use(cors())
