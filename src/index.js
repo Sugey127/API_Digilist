@@ -14,12 +14,13 @@ import { Marca } from "./models/marca.js";
 import { Modelo } from "./models/modelo.js";
 import { Status } from "./models/status.js";
 import { Years } from "./models/years.js";
-import { Imagenes } from "./models/imagenes.js";
+import { Imagenes } from "./models/avatares.js";
 import { PORT } from "./utils/env.js";
+import { ImagenesAutopartes } from "./models/imagenesAutopartes.js";
 
 async function proyect() {
     try {
-        // await sequelize.sync({ force: true });    
+        //await sequelize.sync({ force: true });    
         app.listen(PORT, () => {
             console.log(`server listen on: ${PORT}`);
         });
@@ -27,8 +28,6 @@ async function proyect() {
         console.log(err);
     }
 }
-
-console.log("hello");
 
 proyect();
 

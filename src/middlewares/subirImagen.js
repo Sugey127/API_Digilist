@@ -1,5 +1,7 @@
 import multer from  'multer'
 import path from 'path';
+import { JWT_KEY } from '../utils/env.js';
+import jwt from 'jsonwebtoken';
 
 const dir = path.join(import.meta.url, '../../uploads').split('file:\\').pop();
 
@@ -8,9 +10,10 @@ const storage = multer.diskStorage({
         cb(null, dir)
     },
     filename: function(req, file, cb) {
-        const extension = file.originalname.split('.').pop();
-        const uniqueSuffix = Date.now();
-        cb(null, file.fieldname + '-' + uniqueSuffix + '.' + extension);
+        // const extension = file.originalname.split('.').pop();
+        // const uniqueSuffix = Date.now();
+        // cb(null, file.fieldname + '-' + uniqueSuffix + '.' + extension);
+        cb(null, `${file.fieldname}-${jwt.verify(req.headers.authorization, JWT_KEY).ImagenId}.jpg`);
     }
 });
 

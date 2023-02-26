@@ -4,10 +4,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotevn from 'dotenv';
 import { body } from "express-validator";
-import { Imagenes } from "../models/imagenes.js";
+import { Imagenes } from "../models/avatares.js";
 import { RenderizadorImagen } from "../utils/RenderizadorImagenes.js";
-
-dotevn.config({ path: './.env' });
+import { JWT_KEY } from "../utils/env.js";
 
 //Login
 export const login = async (req, res) => {
@@ -18,7 +17,7 @@ export const login = async (req, res) => {
     try {
         console.log(req.body);
         const user = await Usuario.findOne({ where: { [Op.and]: [{ password }, { email }] } });
-        const token = jwt.sign(user.dataValues, process.env.JWT_KEY);
+        const token = jwt.sign(user.dataValues, JWT_KEY);
 
         res.cookie('token', token, {
             maxAge: 2 * 24 * 60 * 60 * 1000,
@@ -48,7 +47,7 @@ export const registro = async (req, res) => {
 
         // req.body.password = await bcrypt.hash(req.body.password, 10);
         const usuarioNuevo = await Usuario.create(req.body);
-        const token = jwt.sign(usuarioNuevo.dataValues, process.env.JWT_KEY);
+        const token = jwt.sign(usuarioNuevo.dataValues, JWT_KEY);
         res.status(201).json({ token, usuarioNuevo });
     } catch (err) {
         res.status(500).json(err.message);
@@ -115,7 +114,7 @@ export const getOne = async (req, res) => {
     try {
         const user = await Usuario.findOne({ where: { email } });
         console.log(user);
-        const token = jwt.sign(user, process.env.JWT_KEY);
+        const token = jwt.sign(user, JWT_KEY);
         res.status(201).json([user, token]);
 
     } catch (err) {
@@ -167,7 +166,7 @@ export const rendiImagenPerfil = async (req, res, next) => {
         const url = req.protocol + "://" + req.get('host') + '/imagenes/' + req.file.filename;
 
         const token = req.headers.authorization;
-        const user = jwt.verify(token, process.env.JWT_KEY);
+        const user = jwt.verify(token, JWT_KEY);
         console.log("AAAAAAAAAAAAAAAHHHHHHHHH", user);
         const imagenPerfil = await Imagenes.update({ url }, {
             where: { id: user.ImagenId }

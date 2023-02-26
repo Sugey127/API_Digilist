@@ -3,8 +3,8 @@ import { check } from "express-validator";
 export const validadorModelo =[
 
     check('modelo')
-        .not().isEmpty().withMessage('El campo modelo es requerido').isLength({ min: 5 })
-        .withMessage('La modelo debe tener al menos 5 caracteres'),
+        .not().isEmpty().withMessage('El campo modelo es requerido').isLength({ min: 2 })
+        .withMessage('La modelo debe tener al menos 2 caracteres'),
     check('StatusId')
         .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2'),
     check('YearYear')
@@ -13,8 +13,8 @@ export const validadorModelo =[
 
 export const validadorModeloActualizar =[
     check('modelo')
-        .not().isEmpty().withMessage('El campo modelo es requerido').isLength({ min: 5 })
-        .withMessage('La modelo debe tener al menos 5 caracteres'),
+        .not().isEmpty().withMessage('El campo modelo es requerido').isLength({ min: 2 })
+        .withMessage('La modelo debe tener al menos 2 caracteres'),
     check('StatusId')
         .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 

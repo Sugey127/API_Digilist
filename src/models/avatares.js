@@ -1,10 +1,8 @@
-import { DataRowMessage } from "pg-protocol/dist/messages.js";
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/DB.js";
-import { Autopartes } from "./autopartes.js";
 import { Usuario } from "./usuario.js";
 
-
+//todo: cambiar nombre de imagenes a avatar para no confindirse
 export const Imagenes = sequelize.define('Imagen', {
     id: {
         type: DataTypes.UUID,
@@ -18,9 +16,6 @@ export const Imagenes = sequelize.define('Imagen', {
 }, {
     timestamps: false
 });
-
-Autopartes.belongsTo(Imagenes);
-Imagenes.hasMany(Autopartes);
 
 Usuario.belongsTo(Imagenes);
 Imagenes.hasMany(Usuario); 

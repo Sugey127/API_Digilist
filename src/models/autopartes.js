@@ -3,20 +3,15 @@ import { DataTypes } from "sequelize";
 import { Entradas } from "./entradas.js";
 
 export const Autopartes = sequelize.define('Autopartes', {
-    idAutopartes: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV1,
+    description: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    description:{
-        type:DataTypes.STRING,
-        allowNull: false
-    },
-    stock:{
+    stock: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    precio:{
+    precio: {
         type: DataTypes.DECIMAL,
         allowNull: false
     },
@@ -24,24 +19,24 @@ export const Autopartes = sequelize.define('Autopartes', {
         type: DataTypes.STRING,
         primaryKey: true
     },
-    fechaRegistroAutoparte:{
-        type:DataTypes.DATEONLY,
+    fechaRegistroAutoparte: {
+        type: DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     }
-},{
+}, {
     timestamps: false
 });
 
 
 Entradas.hasMany(Autopartes, {
-    foreignKey:{
-        allowNull:false
+    foreignKey: {
+        allowNull: false
     }
 })
 
 Autopartes.belongsTo(Entradas, {
-    foreignKey:{
-        allowNull:false
+    foreignKey: {
+        allowNull: false
     }
 });

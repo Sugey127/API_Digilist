@@ -3,20 +3,27 @@ import { Modelo } from "../models/modelo.js";
 import { Status } from "../models/status.js";
 
 //POST
+
+// * un tip señorita: si solo es de esta modelo, puedo enviar el req.body, ya que contiene todos los datos que esta destructurando, ojo, solo cuando sea un model
 export const post = async (req, res) => {
-    const { modelo,YearYear, StatusId } = req.body;
+    const { MarcaMarca,modelo,YearYear, StatusId } = req.body;
     try {
-        const nuevomodelo = await Modelo.create({
-            StatusId, modelo,YearYear
-        });
+        // const nuevomodelo = await Modelo.create({
+        //     StatusId, modelo,YearYear,MarcaMarca
+        // });
+
+        //alternativa aquivalente a la de arriba
+        const nuevomodelo = await Modelo.create(req.body);
         res.status(201).json(nuevomodelo);
 
     } catch (err) {
         res.status(500).json(err.message);
     }
-}
+} 
 
 //PUT
+
+
 
  export const put = async (req, res) => {
     const { modelo, StatusId } = req.body;

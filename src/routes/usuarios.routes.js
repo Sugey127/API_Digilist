@@ -7,7 +7,7 @@ import { subirImagen } from "../middlewares/subirImagen.js";
 import path from 'path';
 
 import { Usuario } from "../models/usuario.js";
-import { Imagenes } from "../models/imagenes.js";
+import { Imagenes } from "../models/avatares.js";
 const usuarioRouter = Router();
 
 usuarioRouter.post('/registro', validaCamposUsuario, validateReutilizable, usuarioController.registro);

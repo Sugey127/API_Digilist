@@ -1,0 +1,26 @@
+[
+    {
+        "MarcaMarca": "Audi",
+        "modelo": "A6",
+        "YearYear": 2018,
+        "StatusId": 1
+    },
+    {
+        "MarcaMarca": "Audi",
+        "modelo": "A3 Sedan",
+        "YearYear": 2013,
+        "StatusId": 1
+    },
+    {
+        "MarcaMarca": "Audi",
+        "modelo": "A8",
+        "YearYear": 1994,
+        "StatusId": 1
+    },
+    {
+        "MarcaMarca": "Audi",
+        "modelo": "Q2",
+        "YearYear": 2016,
+        "StatusId": 1
+    }
+]

@@ -1,16 +1,18 @@
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
+import { sequelize } from "../config/DB.js";
 import { Autopartes } from "../models/autopartes.js";
 
+
+//todo: tengo que hacer esto
+// ? deberia hacer esto?
+// * hola como estas
+// ! no tocar
 
 
 //POST
 export const post = async (req, res) => {
-    const { description, stock,code_autoparte, precio, EntradaCodeEntrada,ImagenImagenAutoparte,StatusId } = req.body;
     try {
-        const nuevaAutoparte = await Autopartes.create({
-            description, stock,code_autoparte, precio, EntradaCodeEntrada,ImagenImagenAutoparte,StatusId
-        });
-
+        const nuevaAutoparte = await Autopartes.create(req.body);
         console.log(nuevaAutoparte.dataValues)
         res.status(201).json(nuevaAutoparte.dataValues);
 
@@ -22,14 +24,14 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { description, stock, precio, Imagen, code_autoparte,StatusId} = req.body;
+    const { description, stock, precio, Imagen, code_autoparte, StatusId } = req.body;
     console.log(req.body)
     try {
-        const actualizarAutoparte = await Autopartes.findOne( { where:  {code_autoparte} })
+        const actualizarAutoparte = await Autopartes.findOne({ where: { code_autoparte } })
         actualizarAutoparte.description = description;
         actualizarAutoparte.stock = stock;
         actualizarAutoparte.precio = precio;
-        actualizarAutoparte.StatusId=StatusId;
+        actualizarAutoparte.StatusId = StatusId;
         await actualizarAutoparte.save();
         res.status(201).json(actualizarAutoparte);
     } catch (err) {
@@ -55,12 +57,12 @@ export const put = async (req, res) => {
 //GET
 
 export const getOne = async (req, res) => {
-    const { code_autoparte} = req.body;
+    const { code_autoparte } = req.body;
     try {
-        const nuevoAutopartes = await Autopartes.findOne( { where: { code_autoparte } });
+        const nuevoAutopartes = await Autopartes.findOne({ where: { code_autoparte } });
         res.status(201).json(nuevoAutopartes);
 
-    } catch (err) { 
+    } catch (err) {
         console.error(err);
     }
 }
@@ -70,7 +72,7 @@ export const getOne = async (req, res) => {
 export const getAllActivo = async (req, res) => {
     try {
         const { StatusId } = req.body;
-        const year = await Autopartes.findAll({ where:{ StatusId : 1 } });
+        const year = await Autopartes.findAll({ where: { StatusId: 1 } });
         res.status(201).json(year);
 
     } catch (err) {
@@ -83,7 +85,7 @@ export const getAllActivo = async (req, res) => {
 export const getAllInactivo = async (req, res) => {
     try {
         const { StatusId } = req.body;
-        const year = await Autopartes.findAll({ where:{ StatusId : 2 } });
+        const year = await Autopartes.findAll({ where: { StatusId: 2 } });
         res.status(201).json(year);
 
     } catch (err) {
@@ -104,4 +106,17 @@ export const getAll = async (req, res) => {
     }
 }
 
+export const agregarImagenAutoparte = async (req, res, next) => {
+    try {
+        const { code } = req.params;
+        const autoparte =  await Autopartes.findOne({ where: { code } });
+        console.log(autoparte);
+        console.log(req.file);
 
+        // req.file.array.forEach(i => console.log(i));
+
+
+    } catch (err) {
+
+    }
+}

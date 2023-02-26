@@ -1,0 +1,38 @@
+[
+    {
+        "userNombre": "Sugey",
+        "usuarioApellido": "Rosado",
+        "telefono": "999-001-9999",
+        "email": "sugey@gmail.com",
+        "password": "Nolose$12",
+        "role": "administrador",
+        "StatusId": 1
+    },
+    {
+        "userNombre": "Yaremi",
+        "usuarioApellido": "rosado",
+        "telefono": "999-001-9999",
+        "email": "yaremi@gmail.com",
+        "password": "Silose$12",
+        "role": "administrador",
+        "StatusId": 1
+    },
+    {
+        "userNombre": "Jesus",
+        "usuarioApellido": "Tirado",
+        "telefono": "999-001-9999",
+        "email": "jesus@gmail.com",
+        "password": "Silose$12",
+        "role": "administrador",
+        "StatusId": 1
+    },
+    {
+        "userNombre": "Sugy",
+        "usuarioApellido": "Avila",
+        "telefono": "999-001-9999",
+        "email": "sugy@gmail.com",
+        "password": "Talvezlose$12",
+        "role": "administrador",
+        "StatusId": 1
+    }
+]

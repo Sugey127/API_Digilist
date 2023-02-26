@@ -1,0 +1,14 @@
+[
+    {
+        "marca": "Audi",
+        "StatusId": 1
+    },
+    {
+        "marca": "BMW",
+        "StatusId": 1
+    },
+    {
+        "marca": "Volkswagen",
+        "StatusId": 1
+    }
+]
