@@ -52,4 +52,4 @@ webRouter.get('/dashboard-productos', async (req, res) => {
     } catch (err) {
         res.render('404');
     }
-});
+}); 
