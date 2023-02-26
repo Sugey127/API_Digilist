@@ -28,5 +28,7 @@ async function proyect() {
     }
 }
 
+console.log("hello");
+
 proyect();
 
