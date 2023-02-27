@@ -1,18 +1,30 @@
 [
     {
-        "codeAuto": "mazdaprecioso",
-        "fechaRegistroAuto": "2023-02-20"
+        "ModeloModelo": "A6",
+        "YearYear": 2018,
+        "MarcaMarca": "Audi",
+        "codeAuto":"au2018a6",
+        "StatusId":1
     },
     {
-        "codeAuto": "hondacivicprecioso",
-        "fechaRegistroAuto": "2023-03-21"
+        "ModeloModelo": "A3 Sedan",
+        "YearYear": 2013,
+        "MarcaMarca": "Audi",
+        "codeAuto":"au2013a3se",
+        "StatusId":1
     },
     {
-        "codeAuto": "sopademono",
-        "fechaRegistroAuto": "2023-02-11"
+        "ModeloModelo": "A8",
+        "YearYear": 1994,
+        "MarcaMarca": "Audi",
+        "codeAuto":"au1994a8",
+        "StatusId":1
     },
     {
-        "codeAuto": "suyrayomcqueen",
-        "fechaRegistroAuto": "2023-03-13"
+        "ModeloModelo": "Q2",
+        "YearYear": 2016,
+        "MarcaMarca": "Audi",
+        "codeAuto":"au2016q2",
+        "StatusId":1
     }
 ]

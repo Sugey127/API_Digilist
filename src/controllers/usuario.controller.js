@@ -172,7 +172,6 @@ export const rendiImagenPerfil = async (req, res, next) => {
             where: { id: user.ImagenId }
         });
 
-        
         console.log(url)
         //Tabla.create({url: rul})
         console.log(req.file)

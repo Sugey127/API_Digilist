@@ -1,11 +1,8 @@
 [
     {
-        "id": 1,
         "status": "activo"
     },
     {
-        "id": 2,
         "status": "inactivo" 
-        
     }
 ]

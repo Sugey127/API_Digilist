@@ -8,6 +8,7 @@
         "ModeloModelo": "A8",
         "MarcaMarca": "Audi",
         "YearYear": 1994, 
+        "AutomovilCodeAuto":"au1994a8",
         "StatusId": 1
       },
       {
@@ -19,6 +20,7 @@
         "ModeloModelo": "A8",
         "MarcaMarca": "Audi",
         "YearYear": 1994, 
+        "AutomovilCodeAuto":"au1994a8",
         "StatusId": 1
       },
       {
@@ -29,7 +31,8 @@
         "ProveedorRfcProveedor": "Kali1234567890",
         "ModeloModelo": "A8",
         "MarcaMarca": "Audi",
-        "YearYear": 1994, 
+        "YearYear": 1994,
+        "AutomovilCodeAuto":"au1994a8", 
         "StatusId": 1
       }
 ]

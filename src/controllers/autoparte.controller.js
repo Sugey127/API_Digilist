@@ -108,15 +108,15 @@ export const getAll = async (req, res) => {
 
 export const agregarImagenAutoparte = async (req, res, next) => {
     try {
+
         const { code } = req.params;
-        const autoparte =  await Autopartes.findOne({ where: { code } });
+        const autoparte =  await Autopartes.findOne({ where: { code_autoparte: code } });
         console.log(autoparte);
-        console.log(req.file);
 
-        // req.file.array.forEach(i => console.log(i));
-
+        req.files.forEach(x => console.log(x));
+        res.send("hola");
 
     } catch (err) {
-
+        res.send("hola")
     }
 }

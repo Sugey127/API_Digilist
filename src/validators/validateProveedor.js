@@ -2,8 +2,8 @@ import { check } from "express-validator";
 
 export const validadorProveedor =[
     check('nombreProveedor')
-        .not().isEmpty().withMessage('El campo nombreProveedor es requerido').isLength({ min: 5 })
-        .withMessage('La marca debe tener al menos 5 caracteres'),
+        .not().isEmpty().withMessage('El campo nombreProveedor es requerido').isLength({ min: 2 })
+        .withMessage('La marca debe tener al menos 2 caracteres'),
     check('direccionProveedor')
         .not().isEmpty().withMessage('El campo direccionProveedor es requerido'),
     check('RfcProveedor')
@@ -35,8 +35,8 @@ export const validadorProveedor =[
 
 export const validadorProveedorActualizar =[  
     check('nombreProveedor')
-        .not().isEmpty().withMessage('El campo nombreProveedor es requerido').isLength({ min: 5 })
-        .withMessage('La marca debe tener al menos 5 caracteres'),
+        .not().isEmpty().withMessage('El campo nombreProveedor es requerido').isLength({ min: 2 })
+        .withMessage('La marca debe tener al menos 2 caracteres'),
     check('direccionProveedor')
         .not().isEmpty().withMessage('El campo direccionProveedor es requerido'),
     check('RfcProveedor')
