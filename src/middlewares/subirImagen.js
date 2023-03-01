@@ -2,6 +2,7 @@ import multer from  'multer'
 import path from 'path';
 import { JWT_KEY } from '../utils/env.js';
 import jwt from 'jsonwebtoken';
+import { Console } from 'console';
 
 const dir = path.join(import.meta.url, '../../uploads').split('file:\\').pop();
 
@@ -39,15 +40,12 @@ const storageAutoparte = multer.diskStorage({
         cb(null, dirAutopartes)
     },
     filename: function(req, file, cb) {
-        // const extension = file.originalname.split('.').pop();
-        // const uniqueSuffix = Date.now();
-        // cb(null, file.fieldname + '-' + uniqueSuffix + '.' + extension);
-        cb(null, `${file.fieldname}-${req.params.code}.jpg`);
+        cb(null, `${file.originalname}-${req.params.code}.jpg`);
     }
 });
 
 export const subirImagenAutoparte = multer({
-    storageAutoparte,
+    storage: storageAutoparte,
     limits: {
         fieldSize: 1024 * 1024 * 100, //10mb
         files: 3

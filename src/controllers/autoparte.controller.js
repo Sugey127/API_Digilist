@@ -1,6 +1,8 @@
 import { Op, where } from "sequelize";
 import { sequelize } from "../config/DB.js";
 import { Autopartes } from "../models/autopartes.js";
+import { ImagenesAutopartes } from "../models/imagenesAutopartes.js";
+import { RenderizadorImagen } from "../utils/RenderizadorImagenes.js";
 
 
 //todo: tengo que hacer esto
@@ -108,14 +110,14 @@ export const getAll = async (req, res) => {
 
 export const agregarImagenAutoparte = async (req, res, next) => {
     try {
-
         const { code } = req.params;
-        const autoparte =  await Autopartes.findOne({ where: { code_autoparte: code } });
-        console.log(autoparte);
-
-        req.files.forEach(x => console.log(x));
-        res.send("hola");
-
+        req.files.forEach(x => {
+            RenderizadorImagen(x.path, 500);
+            ImagenesAutopartes.create({
+                AutoparteCodeAutoparte: code,
+                url: req.protocol + "://" + req.get('host') + '/imagenes/autopartes/' + x.filename,
+            });
+        });
     } catch (err) {
         res.send("hola")
     }

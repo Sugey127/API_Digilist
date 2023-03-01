@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: './.env' });
 
-console.log(process.env.DB_PASS);
+// console.log(process.env.DB_PASS);
 
 /**Base de datos local */
 

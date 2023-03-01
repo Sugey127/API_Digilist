@@ -11,7 +11,7 @@ autoparteRouter.post('/registro', validadorAutoparte, validateReutilizable, auth
 autoparteRouter.put('/actualizar', validadorAutoparteActualizar, validateReutilizable, authentification, authorization, autoparteController.put);
 //autoparteRouter.delete('/eliminar', authentification, authorization, autoparteController.drop);
 autoparteRouter.get('/buscarUno', authentification, authorization, autoparteController.getOne);
-autoparteRouter.get('/buscarTodos', authentification, authorization, autoparteController.getAll);
+autoparteRouter.get('/buscarTodos', autoparteController.getAll);
 autoparteRouter.get('/buscarActivo', authentification, authorization, autoparteController.getAllActivo);
 autoparteRouter.get('/buscarInactivo', authentification, authorization, autoparteController.getAllInactivo);
 autoparteRouter.put('/agregarImagenes/:code', authentification, authorization, subirImagenAutoparte.array('autopartes', 10), autoparteController.agregarImagenAutoparte);
