@@ -6,8 +6,8 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
 export const yearsRouter = Router();
 
 yearsRouter.post('/registro',validadorYear,validateReutilizable, yearsController.post); 
-yearsRouter.put('/actualizar',validadorYearActualizar,validateReutilizable,authentification, yearsController.put);  
-yearsRouter.get('/buscarUno',authentification,authorization, yearsController.getOne); 
-yearsRouter.get('/buscarTodos',authentification,authorization, yearsController.getAll); 
-yearsRouter.get('/buscarActivo',authentification,authorization, yearsController.getAllActivo);
-yearsRouter.get('/buscarInactivo',authentification,authorization, yearsController.getAllInactivo);
+yearsRouter.put('/actualizar',validadorYearActualizar,validateReutilizable, yearsController.put);  
+yearsRouter.get('/buscarUno', yearsController.getOne); 
+yearsRouter.get('/buscarTodos', yearsController.getAll); 
+yearsRouter.get('/buscarActivo', yearsController.getAllActivo);
+yearsRouter.get('/buscarInactivo', yearsController.getAllInactivo);
