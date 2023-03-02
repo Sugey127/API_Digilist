@@ -70,7 +70,7 @@ export const getOne = async (req, res) => {
 export const getYear = async (req, res) => {
     const { YearYear } = req.body;
     try {
-        const nuevomodelo = await Modelo.findOne( { where:{ YearYear } });
+        const nuevomodelo = await Modelo.findAll( { where:{ YearYear } });
         res.status(201).json(nuevomodelo);
 
     } catch (err) {
@@ -83,7 +83,7 @@ export const getYear = async (req, res) => {
 export const getMarca = async (req, res) => {
     const { MarcaMarca } = req.body;
     try {
-        const nuevomodelo = await Modelo.findOne( { where:{ MarcaMarca } });
+        const nuevomodelo = await Modelo.findAll( { where:{ MarcaMarca } });
         res.status(201).json(nuevomodelo);
 
     } catch (err) {
