@@ -65,6 +65,32 @@ export const getOne = async (req, res) => {
     }
 }
 
+//GET year
+
+export const getYear = async (req, res) => {
+    const { YearYear } = req.body;
+    try {
+        const nuevomodelo = await Modelo.findOne( { where:{ YearYear } });
+        res.status(201).json(nuevomodelo);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+//GET Marca
+
+export const getMarca = async (req, res) => {
+    const { MarcaMarca } = req.body;
+    try {
+        const nuevomodelo = await Modelo.findOne( { where:{ MarcaMarca } });
+        res.status(201).json(nuevomodelo);
+
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
 //GETS Status Activo
 
 export const getAllActivo = async (req, res) => {
