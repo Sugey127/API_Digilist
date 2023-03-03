@@ -10,7 +10,7 @@ proveedorRouter.post('/registro',validadorProveedor,validateReutilizable,authori
 proveedorRouter.put('/actualizar', validadorProveedorActualizar,validateReutilizable,authentification,authorization, proveedorController.put); 
 //proveedorRouter.delete('/eliminar',authentification,authorization, proveedorController.drop); 
 proveedorRouter.get('/buscarUno',authentification,authorization, proveedorController.getOne); 
-proveedorRouter.get('/buscarTodos',authentification,authorization, proveedorController.getAll); 
+proveedorRouter.get('/buscarTodos', proveedorController.getAll); 
 proveedorRouter.get('/buscarActivo',authentification,authorization, proveedorController.getAllActivo);
 proveedorRouter.get('/buscarInactivo',authentification,authorization, proveedorController.getAllInactivo);
 

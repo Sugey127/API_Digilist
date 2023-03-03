@@ -71,7 +71,7 @@ export const getYear = async (req, res) => {
     const { YearYear } = req.params;
     try {
         const nuevomodelo = await Modelo.findAll( { where:{ YearYear } });
-        res.status(201).json(nuevomodelo);
+        res.status(200).json(nuevomodelo);
 
     } catch (err) {
         res.status(500).json(err.message);
