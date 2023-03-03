@@ -12,7 +12,7 @@ modeloRouter.get('/buscarUno', modeloController.getOne);
 modeloRouter.get('/buscarTodos', modeloController.getAll); 
 modeloRouter.get('/buscarActivo', modeloController.getAllActivo);
 modeloRouter.get('/buscarInactivo', modeloController.getAllInactivo);
-modeloRouter.get('/buscarMarca',modeloController.getMarca);
-modeloRouter.get('/buscarYear',modeloController.getYear);
+modeloRouter.get('/buscarMarca/:MarcaMarca',modeloController.getMarca);
+modeloRouter.get('/buscarYear/:YearYear',modeloController.getYear);
 
 export default modeloRouter;

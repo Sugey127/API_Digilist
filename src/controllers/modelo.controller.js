@@ -68,7 +68,7 @@ export const getOne = async (req, res) => {
 //GET year
 
 export const getYear = async (req, res) => {
-    const { YearYear } = req.body;
+    const { YearYear } = req.params;
     try {
         const nuevomodelo = await Modelo.findAll( { where:{ YearYear } });
         res.status(201).json(nuevomodelo);
@@ -81,11 +81,10 @@ export const getYear = async (req, res) => {
 //GET Marca
 
 export const getMarca = async (req, res) => {
-    const { MarcaMarca } = req.body;
+    const { MarcaMarca } = req.params;
     try {
-        const nuevomodelo = await Modelo.findAll( { where:{ MarcaMarca } });
-        res.status(201).json(nuevomodelo);
-
+        const nuevoModelo = await Modelo.findAll( { where:{ MarcaMarca } });
+        res.status(201).json(nuevoModelo);
     } catch (err) {
         res.status(500).json(err.message);
     }
@@ -116,7 +115,6 @@ export const getAllInactivo = async (req, res) => {
         res.status(500).json(err.message);
     }
 }
-
 
 //GETS
 
