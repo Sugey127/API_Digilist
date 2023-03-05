@@ -49,7 +49,7 @@ app.use('/detalleVenta', detalleVentaRouter);
 app.use('/year', yearsRouter);
 app.use('/automovil', automovilRouter);
 app.use('/digilist', webRouter);
-
+//app.use(express.static(dirección de la carpeta publica'));
 export default app;
 
 // // "aloh".split('').reverse().forEach(x => console.log(x));
