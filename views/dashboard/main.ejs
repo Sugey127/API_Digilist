@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../components/head')%>
+<body>
+  <div class="grid-container">
+
+    <!-- Header -->
+    <%- include('../components/header') %>
+    <!-- End Header -->
+
+    <!-- Sidebar -->
+    <%- include('../components/sidebar') %>
+    <!-- End Sidebar -->
+
+    <!-- Main -->
+    <main class="main-container">
+      <div class="main-title">
+        <p class="font-weight-bold">Panel de administración</p>
+      </div>
+
+      <div class="main-cards">
+
+        <div class="card">
+          <div class="card-inner">
+            <span class="material-icons-outlined text-blue">Productos</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <span class="material-icons-outlined text-orange">Usuarios</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <span class="material-icons-outlined text-green">Automoviles</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="charts">
+
+        <div class="charts-card">
+          <p class="chart-title">Top 5 productos</p>
+          <div id="bar-chart"></div>
+        </div>
+
+        <div class="charts-card">
+          <p class="chart-title">Purchase and Sales Orders</p>
+          <div id="area-chart"></div>
+        </div>
+
+      </div>
+    </main>
+    <!-- End Main -->
+
+  </div>
+
+  <!-- Scripts -->
+  <!-- ApexCharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+  <!-- Custom JS -->
+  <script src="../../javascript/dashboard.js"></script>
+</body>
+
+</html>

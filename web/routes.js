@@ -28,7 +28,7 @@ webRouter.get('/home', async (req, res) => {
 
 webRouter.get('/dashboard', async (req, res) => {
     try {
-        res.render('dashboard');
+        res.render('dashboard/main');
     } catch (err) {
         res.render('404');
     }
