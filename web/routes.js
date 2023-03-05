@@ -34,6 +34,31 @@ webRouter.get('/dashboard', async (req, res) => {
     }
 });
 
+webRouter.get('/automovil', async (req, res) => {
+    try {
+        res.render('dashboard/automovil');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/producto', async (req, res) => {
+    try {
+        res.render('dashboard/productos');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/proveedor', async (req, res) => {
+    try {
+        res.render('dashboard/proveedor');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+
 webRouter.get('/dashboard-productos', async (req, res) => {
     try {
 
