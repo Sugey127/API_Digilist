@@ -6,8 +6,8 @@ const [descripcion, stock, precio] = inputs;
 console.log(stock, descripcion, precio);
 const boton = document.querySelector('.btn');
 
-const post = "http://localhost:4000/autopartes/registro";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOiIwNDIyZDFkZi1hZDU1LTRkNGItODhmMC1lZGM3YzVlZWRjMjEiLCJmZWNoYVJlZ2lzdHJvVXN1YXJpbyI6IjIwMjMtMDItMDkiLCJ1c2VyTm9tYnJlIjoicm9vdCIsInVzdWFyaW9BcGVsbGlkbyI6InJvb3QiLCJ0ZWxlZm9ubyI6Ijk5OS05MjQtNjI1MyIsImVtYWlsIjoicm9vdEBnbWFpbC5jb20iLCJwYXNzd29yZCI6Ik5vbG9zZSQxMiIsInJvbGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNjc1OTcyNDkwfQ.l5M8s3_N5k0c02v1DfJrvPSoKfuEdvP4KhzSa8jCvlI";
+const post = "https://apidigilist-production.up.railway.app/autopartes/registro";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOiI5NTRhZTdjZi1kOGFjLTRiOWQtODcyYy0yZmE2MTA2MjY3NzEiLCJmZWNoYVJlZ2lzdHJvVXN1YXJpbyI6IjIwMjMtMDMtMDUiLCJ1c2VyTm9tYnJlIjoiTWFyaWFuYSIsInVzdWFyaW9BcGVsbGlkbyI6IlRydWppbGxvIiwidGVsZWZvbm8iOiI5MDYtNDQ2LTkxODAiLCJlbWFpbCI6Im1hcmlhbmFAZ21haWwuY29tIiwicGFzc3dvcmQiOiJOb2xvc2UkMTIiLCJyb2xlIjoiYWRtaW5pc3RyYWRvciIsIlN0YXR1c0lkIjoxLCJJbWFnZW5JZCI6IjY1YWJiYzNmLWY3ZTMtNDY2Mi05ZDAzLTg3NmM3Mzk4ZTc5MiIsImlhdCI6MTY3ODAzODAwMX0.3uZXBC9vs7hv81tLI8F7p5UqD5T07Kl7p2xG5_txQiQ";
 
 const table = document.getElementById('tr');
 
@@ -32,7 +32,7 @@ boton.addEventListener('click', () => {
 
 const tbody = document.getElementById('tbody');
 
-const get = "http://localhost:4000/autopartes/buscarTodos"
+const get = "https://apidigilist-production.up.railway.app/autopartes/buscarTodos"
 
 fetch(get, {
     method: 'get',
@@ -54,9 +54,9 @@ fetch(get, {
     `
 }))
 
-const put = "http://localhost:4000/autopartes/actualizar";
+const put = "https://apidigilist-production.up.railway.app/autopartes/actualizar";
 
-const deleteUrl = "http://localhost:4000/autopartes/eliminar";
+const deleteUrl = "https://apidigilist-production.up.railway.app/autopartes/eliminar";
 
 
 tbody.addEventListener('click', e => {
