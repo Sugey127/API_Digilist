@@ -38,7 +38,7 @@ webRouter.get('/automovil', async (req, res) => {
     try {
         res.render('dashboard/automovil');
     } catch (err) {
-        res.render('404');
+        res.render('404'); 
     }
 });
 
