@@ -39,7 +39,7 @@ webRouter.get('/dashboard-productos', async (req, res) => {
 
         const token = req.cookies.token;
 
-        const productos = fetch('http://localhost:4000/autopartes/buscarTodos', {
+        const productos = fetch('http://apidigilist-production.up.railway.app/autopartes/buscarTodos', {
             method: 'get',
             headers: {
                 Authorization: token
