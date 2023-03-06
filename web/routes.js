@@ -19,6 +19,7 @@ webRouter.get('/login', async (req, res) => {
 });
 
 webRouter.get('/home', async (req, res) => {
+
     try {
         res.render('home');
     } catch (err) {
@@ -38,7 +39,7 @@ webRouter.get('/automovil', async (req, res) => {
     try {
         res.render('dashboard/automovil');
     } catch (err) {
-        res.render('404'); 
+        res.render('404');
     }
 });
 
@@ -61,19 +62,15 @@ webRouter.get('/proveedor', async (req, res) => {
 
 webRouter.get('/dashboard-productos', async (req, res) => {
     try {
-
         const token = req.cookies.token;
-
-        const productos = fetch('http://apidigilist-production.up.railway.app/autopartes/buscarTodos', {
+        const productos = fetch('https://apidigilist-production.up.railway.app/autopartes/buscarTodos', {
             method: 'get',
             headers: {
                 Authorization: token
             }
         }).then(res => res.json()).then(data => data);
-
         console.log(productos);
-
-        res.render('dashboard/productos', {productos});
+        res.render('dashboard/productos', { productos });
     } catch (err) {
         res.render('404');
     }

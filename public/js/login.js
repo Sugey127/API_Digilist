@@ -4,7 +4,7 @@ const [v1, v2] = inputs;
 
 document.forms[0].addEventListener('submit', e => {
     e.preventDefault();
-    fetch('http://localhost:4000/usuario/login', {
+    fetch('https://apidigilist-production.up.railway.app/usuario/login', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -13,6 +13,6 @@ document.forms[0].addEventListener('submit', e => {
             email: v1.value,
             password: v2.value
         })
-    }).then(res => res.json()).then(data => data);
+    }).then(res => res.json()).then(data => localStorage.setItem('token', data[0]));
 });
 

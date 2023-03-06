@@ -30,8 +30,6 @@ app.use(cookieParser());
 app.use('/imagenes', express.static(path.join(import.meta.url, '../uploads').split('file:\\').pop()));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-app.use(express.static(path.join(import.meta.url, '../../public').split('file:\\').pop()));
 app.use(cors())
 app.use('/', express.static('./public'));
 app.use('/usuario', usuarioRouter);
