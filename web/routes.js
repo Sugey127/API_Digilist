@@ -43,7 +43,7 @@ webRouter.get('/automovil', async (req, res) => {
     }
 });
 
-webRouter.get('/producto', async (req, res) => {
+webRouter.get('/productos', async (req, res) => {
     try {
         res.render('dashboard/productos');
     } catch (err) {
