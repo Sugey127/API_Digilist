@@ -75,3 +75,54 @@ webRouter.get('/dashboard-productos', async (req, res) => {
         res.render('404');
     }
 }); 
+
+//cruds usuarios 
+
+webRouter.get('/dashboard-put-usuarios', async (req, res) => {
+    try {
+    } catch (err) {
+        res.render('404');
+    }
+}); 
+
+webRouter.get('/dashboard-delete-usuarios', async (req, res) => {
+    try {
+
+    } catch (err) {
+        res.render('404');
+    }
+}); 
+
+webRouter.get('/dashboard-post-usuarios', async (req, res) => {
+    try {
+
+    } catch (err) {
+        res.render('404');
+    }
+}); 
+
+//cruds usuarios 
+
+webRouter.get('/dashboard-update-utopartes', async (req, res) => {
+    try {
+
+    } catch (err) {
+        res.render('404');
+    }
+}); 
+
+webRouter.get('/dashboard-delete-autopartes', async (req, res) => {
+    try {
+        
+    } catch (err) {
+        res.render('404');
+    }
+}); 
+
+webRouter.get('/dashboard-post-autopartes', async (req, res) => {
+    try {
+
+    } catch (err) {
+        res.render('404');
+    }
+}); 

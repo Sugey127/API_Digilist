@@ -12,6 +12,10 @@ export const Imagenes = sequelize.define('Imagen', {
     url: {
         type: DataTypes.STRING,
         defaultValue: ''
+    },
+    publicId: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     timestamps: false

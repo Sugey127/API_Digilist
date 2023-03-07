@@ -1,7 +1,7 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
 
-export const Usuario = sequelize.define('Usuarios', { 
+export const PreResgistro= sequelize.define('PreResgistro', { 
     
     userNombre:{
         type: DataTypes.STRING,

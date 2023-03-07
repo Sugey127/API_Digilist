@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as autoparteController from "../controllers/autoparte.controller.js";
 import { authentification, authorization } from "../middlewares/auth.js";
-import { subirImagen, subirImagenAutoparte } from "../middlewares/subirImagen.js";
+import { subirImagen } from "../middlewares/subirImagen.js";
 import { validadorAutoparte, validadorAutoparteActualizar } from "../validators/validateAutopartes.js";
 import { validateReutilizable } from "../validators/validateReutilizable.js";
 
@@ -14,6 +14,6 @@ autoparteRouter.get('/buscarUno', authentification, authorization, autoparteCont
 autoparteRouter.get('/buscarTodos', autoparteController.getAll);
 autoparteRouter.get('/buscarActivo', authentification, authorization, autoparteController.getAllActivo);
 autoparteRouter.get('/buscarInactivo', authentification, authorization, autoparteController.getAllInactivo);
-autoparteRouter.put('/agregarImagenes/:code', authentification, authorization, subirImagenAutoparte.array('autopartes', 10), autoparteController.agregarImagenAutoparte);
+autoparteRouter.put('/agregarImagenes/:code', authentification, authorization, subirImagen.array('autopartes', 10), autoparteController.agregarImagenAutoparte);
 
 export default autoparteRouter; 

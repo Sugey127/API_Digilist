@@ -3,6 +3,10 @@ import { DataTypes } from "sequelize";
 import { Entradas } from "./entradas.js";
 
 export const Autopartes = sequelize.define('Autopartes', {
+    nombreAutoparte: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     description: {
         type: DataTypes.STRING,
         allowNull: false
@@ -18,6 +22,10 @@ export const Autopartes = sequelize.define('Autopartes', {
     code_autoparte: {
         type: DataTypes.STRING,
         primaryKey: true
+    },
+    descuento:{
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     fechaRegistroAutoparte: {
         type: DataTypes.DATEONLY,

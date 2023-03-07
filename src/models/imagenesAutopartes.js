@@ -11,6 +11,10 @@ export const ImagenesAutopartes = sequelize.define('ImagenesAutopartes', {
     url: {
         type: DataTypes.STRING,
         defaultValue: ''
+    },
+    publicId: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     timestamps: false

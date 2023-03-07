@@ -19,8 +19,9 @@ usuarioRouter.get('/buscarTodos', usuarioController.getAll);
 usuarioRouter.post('/login', validateLogin, validateReutilizable, usuarioController.login);
 usuarioRouter.get('/buscarActivo', usuarioController.getAllActivo);
 usuarioRouter.get('/buscarInactivo', usuarioController.getAllInactivo);
+usuarioRouter.put('/olvidarContraseña', usuarioController.cambiarContrasena);
 usuarioRouter.put('/cambiar-foto-perfil', subirImagen.single('perfil'),
- usuarioController.rendiImagenPerfil);
+ usuarioController.updatePerfil);
 
 // usuarioRouter.post('/cambiar-imagen-fondo',authentification, subirImagen.single('fondo'), usuarioController.rendiImagenFondo);
 

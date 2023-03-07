@@ -17,6 +17,9 @@ import { Years } from "./models/years.js";
 import { Imagenes } from "./models/avatares.js";
 import { PORT } from "./utils/env.js";
 import { ImagenesAutopartes } from "./models/imagenesAutopartes.js";
+import { PreResgistro } from "./models/PreRegistro.js";
+import { RecordarPassword } from "./models/RecordarPass.js";
+
 
 async function proyect() {
     try {
