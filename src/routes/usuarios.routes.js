@@ -11,13 +11,13 @@ import { Imagenes } from "../models/avatares.js";
 import { forgotPassword } from "../middlewares/emailAuth.js";
 const usuarioRouter = Router();
 
-usuarioRouter.post('/registro', authentification, validaCamposUsuario, validateReutilizable, usuarioController.registro);
+usuarioRouter.post('/registro', validaCamposUsuario, validateReutilizable, usuarioController.registro);
 usuarioRouter.put('/actualizar', authentification, validaCamposUsuarioActualizar, validateReutilizable, authentification, usuarioController.put);
 usuarioRouter.put('/cambiarPass', authentification, validateCambioContraseña, validateReutilizable, usuarioController.cambiarPass);
 //usuarioRouter.delete('/eliminar', authentification, authorization, usuarioController.drop);
 usuarioRouter.get('/buscarUno', authentification, usuarioController.getOne);
 usuarioRouter.get('/buscarTodos', authentification, usuarioController.getAll);
-usuarioRouter.post('/login', authentification, validateLogin, validateReutilizable, usuarioController.login);
+usuarioRouter.post('/login', validateLogin, validateReutilizable, usuarioController.login);
 usuarioRouter.get('/buscarActivo', authentification, usuarioController.getAllActivo);
 usuarioRouter.get('/buscarInactivo', authentification, usuarioController.getAllInactivo);
 usuarioRouter.post('/olvidarContrasena', authentification, forgotPassword);
