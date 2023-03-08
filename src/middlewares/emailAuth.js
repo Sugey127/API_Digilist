@@ -1,7 +1,7 @@
-import nodemailer from 'nodemailer';
-import { RecordarPassword } from '../models/RecordarPass';
-import { EMAILER_PASS, EMAIL_ACCOUNT } from '../utils/env';
-import { validateToken } from '../utils/token.utilities';
+import nodemailer from 'nodemailer'; 
+import { RecordarPassword } from '../models/RecordarPass.js';
+import { EMAILER_PASS, EMAIL_ACCOUNT } from '../utils/env.js';
+import { validateToken } from '../utils/token.utilities.js';
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
