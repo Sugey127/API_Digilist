@@ -1,12 +1,13 @@
 import { Imagenes } from "../models/avatares.js";
 import { RenderizadorImagen } from "../utils/RenderizadorImagenes.js";
-import { JWT_KEY } from "../utils/env.js";
+import { JWT_KEY, SALT } from "../utils/env.js";
 import { Usuario } from "../models/usuario.js";
 
 import { Op } from "sequelize";
 import sharp from 'sharp';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { RecordarPassword } from "../models/RecordarPass.js";
 
 //Login
 export const login = async (req, res) => {
@@ -195,14 +196,14 @@ export const rendiImagenFondo = async (req, res, next) => {
 
 export const cambiarContrasena = async (req, res) => {
     try {
-        const cambiarContrasena = await cambiarContrasena.findOne({ where: { codigo: req.params.codigo } });
-        if (!cambiarContrasena?.codigo) {
+        const recordaPass = await RecordarPassword.findOne({ where: { codigo: req.params.codigo } });
+        if (!recordaPass?.dataValues?.codigo) {
             res.status(401).json(err);
         } else {
             const Usuario = await Usuario.update({ password: bcrypt.hashSync(cambiarContrasena.dataValues.password, SALT) }, {
-                where: { email: cambiarContrasena.dataValues.email }
-            })
-            await cambiarContrasena.destroy({ where: { codigo: req.params.codigo } });
+                where: { email: recordaPass.dataValues.email }
+            });
+            await recordaPass.destroy({ where: { codigo: req.params.codigo } });
             res.status(200).render('cambiarContrasena', { Usuario });
         }
     } catch (err) {
