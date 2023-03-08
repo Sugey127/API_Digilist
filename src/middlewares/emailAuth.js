@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
+import { RecordarPassword } from '../models/RecordarPass';
 import { EMAILER_PASS, EMAIL_ACCOUNT } from '../utils/env';
+import { validateToken } from '../utils/token.utilities';
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -121,10 +123,10 @@ export const regenerateCode = async (req, res) => {
 export const forgotPassword = async (req, res, next) => {
     try {
         const Usuario = validateToken(req.headers.authorization);
-        if (await ForgotPassword.findOne({ where: { email: Usuario.email } })?.id)
+        if (await RecordarPassword.findOne({ where: { email: Usuario.email } })?.id)
             res.status(401).send('Esta cuenta ya esta registrada')
         else {
-            const forgotPass = await ForgotPassword.create({ password: req.query.password, email: Usuario.email });
+            const forgotPass = await RecordarPassword.create({ password: req.query.password, email: Usuario.email });
             await transporter.sendMail({
                 from: 'digilist.refaccionaria@gmail.com',
                 to: Usuario.email,
@@ -133,7 +135,7 @@ export const forgotPassword = async (req, res, next) => {
             <body>
                 <h1>Bienvenido ${Usuario.Usuarioname} ${Usuario.lastname}</h1>
                 <h2>¿Intentas recordar la contraseña?</h2>
-                <a href="https://apidigilist-production.up.railway.app/usuario/olvidarContraseña/${forgotPass.dataValues.token}"><button>Confirmar cambios</button></a>
+                <a href="https://apidigilist-production.up.railway.app/usuario/olvidarContraseña/${forgotPass.dataValues.codigo}"><button>Confirmar cambios</button></a>
             </body>`
             });
             res.send('se envio el email');

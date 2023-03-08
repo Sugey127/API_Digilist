@@ -11,17 +11,17 @@ import { Imagenes } from "../models/avatares.js";
 import { forgotPassword } from "../middlewares/emailAuth.js";
 const usuarioRouter = Router();
 
-usuarioRouter.post('/registro', validaCamposUsuario, validateReutilizable, usuarioController.registro);
-usuarioRouter.put('/actualizar', validaCamposUsuarioActualizar, validateReutilizable, authentification, usuarioController.put);
-usuarioRouter.put('/cambiarPass', validateCambioContraseña, validateReutilizable, usuarioController.cambiarPass);
+usuarioRouter.post('/registro',authentification, validaCamposUsuario, validateReutilizable, usuarioController.registro);
+usuarioRouter.put('/actualizar',authentification, validaCamposUsuarioActualizar, validateReutilizable, authentification, usuarioController.put);
+usuarioRouter.put('/cambiarPass',authentification, validateCambioContraseña, validateReutilizable, usuarioController.cambiarPass);
 //usuarioRouter.delete('/eliminar', authentification, authorization, usuarioController.drop);
-usuarioRouter.get('/buscarUno', usuarioController.getOne);
-usuarioRouter.get('/buscarTodos', usuarioController.getAll);
-usuarioRouter.post('/login', validateLogin, validateReutilizable, usuarioController.login);
-usuarioRouter.get('/buscarActivo', usuarioController.getAllActivo);
-usuarioRouter.get('/buscarInactivo', usuarioController.getAllInactivo);
-usuarioRouter.post('/olvidarContraseña',forgotPassword);
-usuarioRouter.put('/verificarContraseña/:codigo', usuarioController.cambiarContrasena);
+usuarioRouter.get('/buscarUno',authentification, usuarioController.getOne);
+usuarioRouter.get('/buscarTodos',authentification, usuarioController.getAll);
+usuarioRouter.post('/login',authentification, validateLogin, validateReutilizable, usuarioController.login);
+usuarioRouter.get('/buscarActivo',authentification, usuarioController.getAllActivo);
+usuarioRouter.get('/buscarInactivo',authentification, usuarioController.getAllInactivo);
+usuarioRouter.post('/olvidarContraseña',authentification, forgotPassword);
+usuarioRouter.put('/verificarContraseña/:codigo',authentification, usuarioController.cambiarContrasena);
 usuarioRouter.put('/cambiar-foto-perfil', subirImagen.single('perfil'),
  usuarioController.updatePerfil);
 
