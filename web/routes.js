@@ -51,6 +51,14 @@ webRouter.get('/productos', async (req, res) => {
     }
 });
 
+webRouter.get('/recibos', async (req, res) => {
+    try {
+        res.render('dashboard/recibos');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
 webRouter.get('/proveedor', async (req, res) => {
     try {
         res.render('dashboard/proveedor');
@@ -59,6 +67,69 @@ webRouter.get('/proveedor', async (req, res) => {
     }
 });
 
+webRouter.get('/usuarios', async (req, res) => {
+    try {
+        res.render('dashboard/usuarios');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/entradas', async (req, res) => {
+    try {
+        res.render('dashboard/entradas');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/envios', async (req, res) => {
+    try {
+        res.render('dashboard/envios');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/detalleventa', async (req, res) => {
+    try {
+        res.render('dashboard/detalleventa');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/modelo', async (req, res) => {
+    try {
+        res.render('dashboard/modelo');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/año', async (req, res) => {
+    try {
+        res.render('dashboard/año');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/marca', async (req, res) => {
+    try {
+        res.render('dashboard/marca');
+    } catch (err) {
+        res.render('404');
+    }
+});
+
+webRouter.get('/venta', async (req, res) => {
+    try {
+        res.render('dashboard/venta');
+    } catch (err) {
+        res.render('404');
+    }
+});
 
 webRouter.get('/dashboard-productos', async (req, res) => {
     try {
