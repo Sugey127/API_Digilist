@@ -109,7 +109,7 @@ webRouter.get('/modelo', async (req, res) => {
 
 webRouter.get('/anio', async (req, res) => {
     try {
-        res.render('dashboard/año');
+        res.render('dashboard/anio');
     } catch (err) {
         res.render('404');
     }
