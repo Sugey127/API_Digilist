@@ -123,9 +123,9 @@ webRouter.get('/marca', async (req, res) => {
     }
 });
 
-webRouter.get('/venta', async (req, res) => {
+webRouter.get('/ventas', async (req, res) => {
     try {
-        res.render('dashboard/venta');
+        res.render('dashboard/ventas');
     } catch (err) {
         res.render('404');
     }
