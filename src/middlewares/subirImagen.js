@@ -1,4 +1,4 @@
-import multer from  'multer'
+import multer from 'multer'
 import path from 'path';
 import { JWT_KEY } from '../utils/env.js';
 import jwt from 'jsonwebtoken';

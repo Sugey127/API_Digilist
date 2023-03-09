@@ -1,28 +1,29 @@
-import { Imagenes } from "../models/avatares.js";
+import { Avatares } from "../models/avatares.js";
 import { RenderizadorImagen } from "../utils/RenderizadorImagenes.js";
 import { JWT_KEY, SALT } from "../utils/env.js";
-import { Usuario } from "../models/usuario.js";
 
-import { Op } from "sequelize";
+
+import sequelize, { Op } from "sequelize";
 import sharp from 'sharp';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { RecordarPassword } from "../models/RecordarPass.js";
+import { generateToken, validateToken } from "../utils/token.utilities.js";
+import { Usuario } from "../models/usuario.js";
+import { cloudinary } from "../middlewares/subirImagen.js";
+
 
 //Login
 export const login = async (req, res) => {
-    let { email, password } = req.body;
+    const { email, password } = req.body;
     try {
         console.log(req.body);
-        const Usuario = await Usuario.findOne({ where: { [Op.and]: [{ password }, { email }] } });
-        const token = jwt.sign(Usuario.dataValues, JWT_KEY);
-
+        const Usuario = await Usuario.findOne({ include: { model: Avatares }, where: { [Op.and]: [{ password }, { email }] } }); // * consulta conbinada
+        const token = generateToken(req.headers.authorization);
         res.cookie('token', token, {
             maxAge: 2 * 24 * 60 * 60 * 1000,
             httpOnly: true
-        });
-
-        res.status(200).json([token, Usuario]);
+        }); res.status(200).json([token, Usuario]);
     } catch (err) {
         console.log("error:", err.message);
         res.status(500).json(err.message);
@@ -31,22 +32,17 @@ export const login = async (req, res) => {
 
 //POST
 export const registro = async (req, res) => {
-    console.log('verificando subida...', req.file);
     try {
-        const fotoPerfil = await Imagenes.create({
-            url: 'http://localhost:4000/imagenes/default-profile.jpg'
-        })
-
-        console.log("antes de modificar", req.body)
-
-        req.body.ImagenId = fotoPerfil.id;
-
-        console.log("DESPUES DE MODIFICAR", req.body)
-
-        // req.body.password = await bcrypt.hash(req.body.password, 10);
-        const usuarioNuevo = await Usuario.create(req.body);
-        const token = jwt.sign(usuarioNuevo.dataValues, JWT_KEY);
-        res.status(201).json({ token, usuarioNuevo });
+        sequelize.transaction(async t => {
+            const fotoPerfil = await Avatares.create({
+                url: 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg',
+                publicId: 'usuarios/digilist_default_avatar_ns5j6g'
+            }, { transaction: t })
+            req.body.AvatarId = fotoPerfil.id;
+            const usuario = await Usuario.create(req.body, { transaction: t });
+            const token = generateToken(usuario);
+            res.status(201).json({ token, usuario });
+        });
     } catch (err) {
         res.status(500).json(err.message);
     }
@@ -55,18 +51,16 @@ export const registro = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-
-    let { UsuarioNombre, usuarioApellido, telefono, password, email, StatusId } = req.body;
-    password = await bcrypt.hash(password, 10);
-
     try {
+        let { UsuarioNombre, usuarioApellido, telefono, password, email, StatusId } = req.body;
+        password = bcrypt.hashSync(password, SALT);
         const actualizarUsuario = await Usuario.findOne({ where: { [Op.and]: [{ email }, { password }] } })
         actualizarUsuario.UsuarioNombre = UsuarioNombre;
         actualizarUsuario.usuarioApellido = usuarioApellido;
         actualizarUsuario.telefono = telefono;
         actualizarUsuario.StatusId = StatusId;
         await actualizarUsuario.save();
-        res.status(201).json(actualizarUsuario);
+        res.status(200).json(actualizarUsuario);
     } catch (err) {
         res.status(500).json(err.message);
     }
@@ -76,9 +70,7 @@ export const put = async (req, res) => {
 
 export const cambiarPass = async (req, res) => {
     let { email, password } = req.body;
-
-    password = await bcrypt.hash(password, 10);
-
+    password = bcrypt.hashSync(password, SALT);
     try {
         const actualizarUsuario = await Usuario.findOne({ where: { email } })
         actualizarUsuario.password = password;
@@ -110,7 +102,7 @@ export const getOne = async (req, res) => {
     console.log("email", email)
     console.log(req.query);
     try {
-        const Usuario = await Usuario.findOne({ where: { email } });
+        const Usuario = await Usuario.findOne({ include: { model: Avatares }, where: { email } });
         console.log(Usuario);
         const token = jwt.sign(Usuario, JWT_KEY);
         res.status(201).json([Usuario, token]);
@@ -124,10 +116,8 @@ export const getOne = async (req, res) => {
 
 export const getAllActivo = async (req, res) => {
     try {
-        const { StatusId } = req.body;
-        const usuario = await Usuario.findAll({ where: { StatusId: 1 } });
+        const usuario = await Usuario.findAll({ include: { model: Avatares }, where: { StatusId: 1 } });
         res.status(201).json(usuario);
-
     } catch (err) {
         res.status(500).json(err.message);
     }
@@ -135,10 +125,8 @@ export const getAllActivo = async (req, res) => {
 
 export const getAllInactivo = async (req, res) => {
     try {
-        const { StatusId } = req.body;
         const usuario = await Usuario.findAll({ where: { StatusId: 2 } });
         res.status(201).json(usuario);
-
     } catch (err) {
         res.status(500).json(err.message);
     }
@@ -148,23 +136,25 @@ export const getAllInactivo = async (req, res) => {
 
 export const getAll = async (req, res) => {
     try {
-        const usuarios = await Usuario.findAll();
+        const usuarios = await Usuario.findAll({ include: { model: Avatares } });
         res.status(201).json(usuarios);
-
     } catch (err) {
         res.status(500).json(err.message);
     }
 }
 
-export const updatePerfil = async (req, res, next) => {  
+export const subirAvatar = async (req, res, next) => {
     try {
-        const buffer = await sharp(req.file.buffer).resize(150, 150).png({ quality: 100 }).toBuffer();
+        const user = validateToken(req.headers.authorization);
+        const buffer = await sharp(req.file.buffer).resize(250, 250).png({ quality: 100 }).toBuffer();
         cloudinary.uploader.upload_stream({ folder: 'usuarios' }, async (err, result) => {
             if (err) { console.log(err); res.status(408).json(err) }
-            else {
-                const oldImg = await Avatares.update(
-                    { url: result.url, publicId: result.public_id }, { where: { id: jwt.verify(req.headers.authorization, JWT_KEY).Imagenes.id } });
-                cloudinary.uploader.destroy(oldImg.dataValues.publicId);
+            const avatar = await Avatares.findByPk(user.Avatares.id);
+            if(avatar.dataValues.url !== 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg') {
+                await cloudinary.uploader.destroy(avatar.publicId); //eliminacion de la imagen
+                avatar.url = result.url;
+                avatar.publicId = result.public_id;
+                await avatar.save();
             }
         }).end(buffer);
         res.status(200).send('se actualizó el perfil');
@@ -172,27 +162,47 @@ export const updatePerfil = async (req, res, next) => {
         console.log(err);
         res.send('hay un problema');
     }
-}
+};
 
-export const rendiImagenFondo = async (req, res, next) => {
+export const eliminarAvatar = async (req, res, next) => {
+    try {
+        const user = validateToken(req.headers.authorization);
+        cloudinary.uploader.upload_stream({ folder: 'usuarios' }, async (err, result) => {
+            if (err) { console.log(err); res.status(408).json(err) }
+            const avatar = await Avatares.findByPk(user.Avatares.id);
+            if(avatar.dataValues.url !== 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg') {
+                await cloudinary.uploader.destroy(avatar.publicId); //eliminacion de la imagen
+                avatar.url = 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg'
+                avatar.publicId = 'usuarios/digilist_default_avatar_ns5j6g';
+                await avatar.save();
+                res.status(200).send('se eliminó la foto de perfil');
+            }
+            res.status(406).send('no se encontró ningun contenido para eliminar');
+        })
+    } catch (err) {
+        console.log(err);
+        res.send('hay un problema');
+    }
+};
+
+//todo: aun esta en desicion para su implementación
+export const subirImagenFondo = async (req, res, next) => {
     try {
         const url = req.protocol + "://" + req.get('host') + '/imagenes/' + req.file.filename;
 
         const token = req.headrs.authorization;
         const Usuario = jwt.verify(token, process.env.JWT_KEY);
-        const imagenFondo = await Imagenes.update({ url }, {
+        const imagenFondo = await Avatares.update({ url }, {
             where: { id: Usuario.ImagenId }
         });
-
         res.status(200).json(imagenFondo);
         console.log(url)
         RenderizadorImagen(req.file.path, 100);
-        res.send("imagen de fondo se actualizo con exito")
+        res.send("imagen de fondo se actualizo con éxito")
     } catch (err) {
         res.send(err);
     }
 }
-
 
 export const cambiarContrasena = async (req, res) => {
     try {

@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
+import { validateToken } from '../utils/token.utilities.js';
 export const validateRole = (token, condition, parametro, msg) => {
-    const decodificado = jwt.verify(token, process.env.JWT_KEY);
+    const decodificado = validateToken(token)
     if (decodificado[`${parametro}`] != condition) throw new Error(msg);
 }
 

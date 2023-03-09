@@ -14,7 +14,7 @@ import { Marca } from "./models/marca.js";
 import { Modelo } from "./models/modelo.js";
 import { Status } from "./models/status.js";
 import { Years } from "./models/years.js";
-import { Imagenes } from "./models/avatares.js";
+import { Avatares } from "./models/avatares.js";
 import { PORT } from "./utils/env.js";
 import { ImagenesAutopartes } from "./models/imagenesAutopartes.js";
 import { PreResgistro } from "./models/PreRegistro.js";

@@ -3,7 +3,7 @@ import { sequelize } from "../config/DB.js";
 import { Usuario } from "./usuario.js";
 
 //todo: cambiar nombre de imagenes a avatar para no confindirse
-export const Imagenes = sequelize.define('Imagen', {
+export const Avatares = sequelize.define('Avatares', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -21,5 +21,5 @@ export const Imagenes = sequelize.define('Imagen', {
     timestamps: false
 });
 
-Usuario.belongsTo(Imagenes);
-Imagenes.hasMany(Usuario); 
+Usuario.belongsTo(Avatares);
+Avatares.hasMany(Usuario); 
