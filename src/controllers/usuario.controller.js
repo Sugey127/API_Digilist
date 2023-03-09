@@ -2,8 +2,7 @@ import { Avatares } from "../models/avatares.js";
 import { RenderizadorImagen } from "../utils/RenderizadorImagenes.js";
 import { JWT_KEY, SALT } from "../utils/env.js";
 
-
-import sequelize, { Op } from "sequelize";
+import { Op } from "sequelize";
 import sharp from 'sharp';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
