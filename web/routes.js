@@ -107,7 +107,7 @@ webRouter.get('/modelo', async (req, res) => {
     }
 });
 
-webRouter.get('/año', async (req, res) => {
+webRouter.get('/anio', async (req, res) => {
     try {
         res.render('dashboard/año');
     } catch (err) {
@@ -123,9 +123,9 @@ webRouter.get('/marca', async (req, res) => {
     }
 });
 
-webRouter.get('/ventas', async (req, res) => {
+webRouter.get('/venta', async (req, res) => {
     try {
-        res.render('dashboard/ventas');
+        res.render('dashboard/venta');
     } catch (err) {
         res.render('404');
     }
