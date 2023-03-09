@@ -9,10 +9,10 @@
         <!-- Sidebar -->
         <%- include('../components/sidebar') %>
         <!-- End Sidebar -->
-              <!-- Main -->
+        <!-- Main -->
       <main class="main-container">
         <div class="main-title">
-          <p class="font-weight-bold">Panel administrativo de Productos</p>
+          <p class="font-weight-bold">Panel administrativo de Venta</p>
         </div>
 
         <div class="main-cards">
@@ -51,45 +51,14 @@
         </div>
 
       <div class="cards">
-        <label for="inputPassword5" class="form-label">Descripcion</label>
+        <label for="inputPassword5" class="form-label">Codigo venta</label>
+        <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+        </div>
+        <label for="inputPassword5" class="form-label">Fecha venta</label>
         <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
         <div id="passwordHelpBlock" class="form-text">
         </div>
-        <label for="inputPassword5" class="form-label">Stock</label>
-        <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-        <label for="inputPassword5" class="form-label">Precio</label>
-        <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-        <label for="inputPassword5" class="form-label">Codigo</label>
-        <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-        <label for="inputPassword5" class="form-label">Fecha de registro</label>
-        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option selected>Marca</option>
-          <option value="1">Hyundai</option>
-          <option value="2">Chevrolet</option>
-          <option value="3">Honda</option>
-        </select>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option selected>Año</option>
-          <option value="1">2020</option>
-          <option value="2">2019</option>
-          <option value="3">2018</option>
-        </select>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option selected>Modelo</option>
-          <option value="1">A6</option>
-          <option value="2">A9</option>
-          <option value="3">A5 black</option>
-        </select>
 
         <div class="d-grid gap-2">
           <button class="btn btn-dark" type="button">Agregar</button>
@@ -103,13 +72,11 @@
           <thead>
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Descripcion</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Precio</th>
               <th scope="col">Codigo</th>
-              <th scope="col">Registro</th>
-              <th scope="col"></th>
+              <th scope="col">Fecha venta</th>
+              <th scope="col">Email usuario</th>
               <th scope="col">Estatus</th>
+
             </tr>
           </thead>
           <tbody>

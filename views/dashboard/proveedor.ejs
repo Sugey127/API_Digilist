@@ -1,119 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Admin Dashboard</title>
-  <script defer src="/js/Proveedor.js"></script>
-
-  <!-- Montserrat Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-
-  <!-- Custom CSS -->
-  <link href="/css/administrador/dashboard.css" rel="stylesheet">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
-
+    <%- include('../components/head')%>
 <body>
-  <div class="grid-container">
-
-    <!-- Header -->
-    <header class="header">
-      <div class="menu-icon" onclick="openSidebar()">
-        <span class="material-icons-outlined">menu</span>
-      </div>
-      <div class="header-left">
-        <span class="material-icons-outlined">search</span>
-        <input type="search" class="search-theme">
-      </div>
-      <div class="header-right">
-        <span class="material-icons-outlined">notifications</span>
-        <span class="material-icons-outlined">email</span>
-        <span class="material-icons-outlined">account_circle</span>
-      </div>
-    </header>
-    <!-- End Header -->
-
-    <!-- Sidebar -->
-    <aside id="sidebar">
-      <div class="sidebar-title">
-        <div class="sidebar-brand">
-            <span>Digilist</span>
+      <div class="grid-container">
+        <!-- Header -->
+        <%- include('../components/header') %>
+        <!-- End Header -->
+        <!-- Sidebar -->
+        <%- include('../components/sidebar') %>
+        <!-- End Sidebar -->
+              <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <p class="font-weight-bold">Panel administrativo de Proveedor</p>
         </div>
-        <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
-      </div>
 
-      <ul class="sidebar-list">
-        <li class="sidebar-list-item">
-          <a href="dashboard.html">
-            <span>Panel <A>dmin</A></span>
-          </a>
-        </li>
-        <li class="sidebar-list-item">
-          <a href="#">
-            <span>Proveedor</span>
-          </a>
-        </li>
-        <li class="sidebar-list-item">
-          <a href="addProductos.html">
-            <span>Productos</span>
-          </a>
-        </li>
-        <li class="sidebar-list-item">
-          <a href="addAutomovil.html">
-            <span>Automovil</span>
-          </a>
-        </li>
-        <!-- AGREGAR MAS SEGÙN SEAN REQUERIDOS -->
-      </ul>
-    </aside>
-    <!-- End Sidebar -->
+        <div class="main-cards">
 
-    <div class="container-fluid">
-      <div class="col">
-          <div class="row">
-              <form action="">
-                  <div class="form-group">
-
-                      <label for="nombreProveedor">Nombre Proveedor</label>
-                      <input type="text" class="form-control" id="nombreProveedor" name="nombreProveedor">
-
-                      <button type="button" class="btn btn-primary">Agregar</button>
-
-                  </div>
-              </form>
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">Productos</p>
+              <span class="material-icons-outlined text-blue">inventory_2</span>
+            </div>
+            <span class="text-primary font-weight-bold">249</span>
           </div>
 
-          <div class="row">
-              <table class="table">
-                  <thead>
-                      <tr>
-                          <th scope="col">id</th>
-                          <th scope="col">Nombre Proveedor</th>
-                          <th scope="col">Fecha de registro</th>
-                          <th scope="col">Put</th>
-                          <th scope="col">Delete</th>
-                      </tr>
-                  </thead>
-                  <tbody id="tbody">
-
-                  </tbody>
-              </table>
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">Ordenes de compra</p>
+              <span class="material-icons-outlined text-orange">add_shopping_cart</span>
+            </div>
+            <span class="text-primary font-weight-bold">83</span>
           </div>
 
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">Ordenes de venta</p>
+              <span class="material-icons-outlined text-green">shopping_cart</span>
+            </div>
+            <span class="text-primary font-weight-bold">79</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">INVENTORY ALERTS</p>
+              <span class="material-icons-outlined text-red">notification_important</span>
+            </div>
+            <span class="text-primary font-weight-bold">56</span>
+          </div>
+        </div>
+
+      <div class="cards">
+        <label for="inputPassword5" class="form-label">Proveedor</label>
+        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+        </div>
+        <label for="inputPassword5" class="form-label">Direccion</label>
+        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+        </div>
+        <label for="inputPassword5" class="form-label">RFC</label>
+        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+        </div>
+        <label for="inputPassword5" class="form-label">Telefono</label>
+        <input type="tel" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+        </div>
+        <label for="inputPassword5" class="form-label">Email</label>
+        <input type="email" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+        </div>
+        <label for="inputPassword5" class="form-label">Registro</label>
+        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+        </div>
+
+
+        <div class="d-grid gap-2">
+          <button class="btn btn-dark" type="button">Agregar</button>
+          <button class="btn btn-dark" type="button">Editar</button>
+          <button class="btn btn-dark" type="button">Eliminar</button>
+        </div>
       </div>
-  </div>
 
+      <div class="cards">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Proveedor</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">RFC</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Email</th>
+              <th scope="col">Registro</th>
+              <th scope="col">Estatus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2"></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
   </div>
-
+  <!-- Scripts -->
+  <!-- ApexCharts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+  <!-- Custom JS -->
+  <script src="../../public/js/sidebar.js"></script>
 </body>
-
 </html>

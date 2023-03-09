@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="views/css/usuario/sesion.css">
+    <title>Iniciar sesion</title>
+    <link rel="stylesheet" href="../../public/css/sesiones.css">
+    <script defer src="/js/login.js"></script>
+
+</head>
+
+<body>
+    <div class="contenedor-form">
+        <form action="../usuario/index.html">
+            <div class="header">
+                <h2>Iniciar sesion</h2>
+                <a href="../usuario/inicio_sesion.html" class="selected">Inciar sesion</a>
+                <a href="../usuario/registro.html">Crear cuenta</a>
+            </div>
+            <div class="fila">
+                <label for="">Email</label>
+                <input type="text" required class="login">
+            </div>
+            <div class="fila">
+                <label for="">Password</label>
+                <input type="password" required class="login">
+            </div>
+            <div class="fila">
+                <input type="checkbox" class="check">
+                <span>Mantener Sesión</span>
+            </div>
+            <input type="submit" value="Entrar" class="btn"> 
+            <hr>
+            <a href="../usuario/recuperar_contraseña.html" class="forgot-password">Olvido el password?</a>
+        </form>
+    </div>
+</body>
+
+</html>
