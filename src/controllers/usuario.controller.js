@@ -10,6 +10,7 @@ import { RecordarPassword } from "../models/RecordarPass.js";
 import { generateToken, validateToken } from "../utils/token.utilities.js";
 import { Usuario } from "../models/usuario.js";
 import { cloudinary } from "../middlewares/subirImagen.js";
+import { sequelize } from "../config/DB.js";
 
 
 //Login
@@ -17,12 +18,12 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         console.log(req.body);
-        const Usuario = await Usuario.findOne({ include: { model: Avatares }, where: { [Op.and]: [{ password }, { email }] } }); // * consulta conbinada
-        const token = generateToken(req.headers.authorization);
+        const usuario = await Usuario.findOne({ include: { model: Avatares }, where: { [Op.and]: [{ password }, { email }] } }); // * consulta conbinada
+        const token = generateToken(usuario.dataValues);
         res.cookie('token', token, {
             maxAge: 2 * 24 * 60 * 60 * 1000,
             httpOnly: true
-        }); res.status(200).json([token, Usuario]);
+        }); res.status(200).json([token, usuario]);
     } catch (err) {
         console.log("error:", err.message);
         res.status(500).json(err.message);
@@ -37,9 +38,12 @@ export const registro = async (req, res) => {
                 url: 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg',
                 publicId: 'usuarios/digilist_default_avatar_ns5j6g'
             }, { transaction: t })
-            req.body.AvatarId = fotoPerfil.id;
+
+            console.log(fotoPerfil);
+
+            req.body.AvatareId = fotoPerfil.dataValues.id;
             const usuario = await Usuario.create(req.body, { transaction: t });
-            const token = generateToken(usuario);
+            const token = generateToken(usuario.dataValues);
             res.status(201).json({ token, usuario });
         });
     } catch (err) {
