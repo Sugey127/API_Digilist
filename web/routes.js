@@ -137,7 +137,7 @@ webRouter.get('/web-registro-modelo', async (req, res) => {
         console.log(req.query);
         req.query.StatusId=1;
         await Modelo.create(req.query);
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/modelo')
+        res.redirect('http://localhost:4000/digilist/modelo')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
