@@ -50,23 +50,25 @@
           </div>
         </div>
 
-      <div class="cards">
+      <div class="cards form-container">
         <label for="inputPassword5" class="form-label">Modelo</label>
         <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
         <div id="passwordHelpBlock" class="form-text">
-        </div>
 
-        
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option selected>Año</option>
-          
+        <label for="">Año</label>
+        <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
+          <% anios.forEach((anio) => { %>
+              <option value="<%= anio.year %>"><%= anio.year %></option>
+            <% }) %>
         </select>
 
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option selected>Marca</option>
-          <option value="1">Hyundai</option>
-          <option value="2">Chevrolet</option>
-          <option value="3">Honda</option>
+        <label for="">Marca</label>
+        <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
+          
+          <% marcas.forEach((marc) => { %>
+              
+              <option value="<%= marc.marca %>"><%= marc.marca %></option>
+            <% }) %>
         </select>
 
         <div class="d-grid gap-2">
@@ -105,7 +107,7 @@
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
         
-        document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-proveedor?modelo=${mol.value}&YearYear=${anio.value}&MarcaMarca=${mar.value}`
+        document.querySelectorAll('.btn')[0].href = `http://localhost:4000/digilist/web-registro-modelo?modelo=${mol.value}&YearYear=${anio.value}&MarcaMarca=${mar.value}`
       }
     });
   </script>
