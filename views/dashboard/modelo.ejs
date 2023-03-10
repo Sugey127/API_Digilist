@@ -107,7 +107,7 @@
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
         
-        document.querySelectorAll('.btn')[0].href = `http://localhost:4000/digilist/web-registro-modelo?modelo=${mol.value}&YearYear=${anio.value}&MarcaMarca=${mar.value}`
+        document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-modelo?modelo=${mol.value}&YearYear=${anio.value}&MarcaMarca=${mar.value}`
       }
     });
   </script>
