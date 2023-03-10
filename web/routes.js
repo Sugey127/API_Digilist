@@ -79,7 +79,7 @@ webRouter.get('/web-registro-proveedor', async (req, res) => {
         console.log(req.query);
         req.query.StatusId=1;
         await Proveedor.create(req.query);
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/proveedor')
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/proveedor')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -137,7 +137,7 @@ webRouter.get('/web-registro-modelo', async (req, res) => {
         console.log(req.query);
         req.query.StatusId=1;
         await Modelo.create(req.query);
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/modelo')
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/modelo')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -159,7 +159,7 @@ webRouter.get('/web-registro-anio', async (req, res) => {
         console.log(req.query);
         req.query.StatusId=1;
         await Years.create(req.query);
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/anio')
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/anio')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -181,7 +181,7 @@ webRouter.get('/web-registro-marca', async (req, res) => {
         console.log(req.query);
         req.query.StatusId=1;
         await Marca.create(req.query);
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/marca')
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/marca')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
