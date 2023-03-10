@@ -1,4 +1,8 @@
 import { Router } from "express";
+import { Marca } from "../src/models/marca.js";
+import { Modelo } from "../src/models/modelo.js";
+import { Proveedor } from "../src/models/proveedor.js";
+import { Years } from "../src/models/years.js";
 
 export const webRouter = Router();
 
@@ -61,11 +65,28 @@ webRouter.get('/recibos', async (req, res) => {
 
 webRouter.get('/proveedor', async (req, res) => {
     try {
-        res.render('dashboard/proveedor');
+        const proveedores = await Proveedor.findAll();
+        res.render('dashboard/proveedor', { proveedores });
     } catch (err) {
         res.render('404');
     }
 });
+
+//consumo post
+
+webRouter.get('/web-registro-proveedor', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Proveedor.create(req.query);
+        res.redirect('http://localhost:4000/digilist/proveedor')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
+
 
 webRouter.get('/usuarios', async (req, res) => {
     try {
@@ -101,25 +122,68 @@ webRouter.get('/detalleventa', async (req, res) => {
 
 webRouter.get('/modelo', async (req, res) => {
     try {
-        res.render('dashboard/modelo');
+        const modelos = await Modelo.findAll() ;
+       
+        res.render('dashboard/modelo', {modelos});
     } catch (err) {
         res.render('404');
+    }
+});
+
+//consumo post
+webRouter.get('/web-registro-modelo', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Years.create(req.query);
+        res.redirect('http://localhost:4000/digilist/modelo')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
     }
 });
 
 webRouter.get('/anio', async (req, res) => {
     try {
-        res.render('dashboard/anio');
+        const anios = await Years.findAll();
+        res.render('dashboard/anio', {anios});
     } catch (err) {
         res.render('404');
     }
 });
 
+//consumo post
+webRouter.get('/web-registro-anio', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Years.create(req.query);
+        res.redirect('http://localhost:4000/digilist/anio')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
 webRouter.get('/marca', async (req, res) => {
     try {
-        res.render('dashboard/marca');
+        const marcas = await Marca.findAll();
+        res.render('dashboard/marca', { marcas });
     } catch (err) {
         res.render('404');
+    }
+});
+
+//consumo post
+webRouter.get('/web-registro-marca', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Marca.create(req.query);
+        res.redirect('http://localhost:4000/digilist/marca')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
     }
 });
 
@@ -145,7 +209,7 @@ webRouter.get('/dashboard-productos', async (req, res) => {
     } catch (err) {
         res.render('404');
     }
-}); 
+});
 
 //cruds usuarios 
 
@@ -154,7 +218,7 @@ webRouter.get('/dashboard-put-usuarios', async (req, res) => {
     } catch (err) {
         res.render('404');
     }
-}); 
+});
 
 webRouter.get('/dashboard-delete-usuarios', async (req, res) => {
     try {
@@ -162,7 +226,7 @@ webRouter.get('/dashboard-delete-usuarios', async (req, res) => {
     } catch (err) {
         res.render('404');
     }
-}); 
+});
 
 webRouter.get('/dashboard-post-usuarios', async (req, res) => {
     try {
@@ -170,7 +234,7 @@ webRouter.get('/dashboard-post-usuarios', async (req, res) => {
     } catch (err) {
         res.render('404');
     }
-}); 
+});
 
 //cruds usuarios 
 
@@ -180,15 +244,15 @@ webRouter.get('/dashboard-update-utopartes', async (req, res) => {
     } catch (err) {
         res.render('404');
     }
-}); 
+});
 
 webRouter.get('/dashboard-delete-autopartes', async (req, res) => {
     try {
-        
+
     } catch (err) {
         res.render('404');
     }
-}); 
+});
 
 webRouter.get('/dashboard-post-autopartes', async (req, res) => {
     try {
