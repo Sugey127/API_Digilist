@@ -85,7 +85,6 @@
               <th scope="col">Modelo</th>
               <th scope="col">Año</th>
               <th scope="col">Marca</th>
-
             </tr>
           </thead>
           <tbody>
@@ -104,12 +103,14 @@
   <!-- Scripts -->
   <script defer>
     const [mol, anio, mar] = document.querySelectorAll('.form-control');
-    document.querySelector('.form-container').addEventListener('input', e => {
+    document.querySelector('.form-container').addEventListener('click', e => {
       if (e.target.className === 'form-control') {
-        
+        console.log(e.target.value);
         document.querySelectorAll('.btn')[0].href = `https://apidigilist-production.up.railway.app/digilist/web-registro-modelo?modelo=${mol.value}&YearYear=${anio.value}&MarcaMarca=${mar.value}`
+        console.log(document.querySelectorAll('.btn')).href;
       }
     });
+
   </script>
   <!-- ApexCharts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
