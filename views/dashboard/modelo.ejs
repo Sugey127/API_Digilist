@@ -51,10 +51,6 @@
         </div>
 
       <div class="cards form-container">
-        <label for="inputPassword5" class="form-label">Modelo</label>
-        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-
         <label for="">Año</label>
         <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
           <% anios.forEach((anio) => { %>
@@ -70,6 +66,10 @@
               <option value="<%= marc.marca %>"><%= marc.marca %></option>
             <% }) %>
         </select>
+
+        <label for="inputPassword5" class="form-label">Modelo</label>
+        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
 
         <div class="d-grid gap-2">
           <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
@@ -102,11 +102,11 @@
   </div>
   <!-- Scripts -->
   <script defer>
-    const [mol, anio, mar] = document.querySelectorAll('.form-control');
-    document.querySelector('.form-container').addEventListener('click', e => {
+    const [ anio, mar, mol] = document.querySelectorAll('.form-control');
+    document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
         console.log(e.target.value);
-        document.querySelectorAll('.btn')[0].href = `https://apidigilist-production.up.railway.app/digilist/web-registro-modelo?modelo=${mol.value}&YearYear=${anio.value}&MarcaMarca=${mar.value}`
+        document.querySelectorAll('.btn')[0].href = `https://apidigilist-production.up.railway.app/digilist/web-registro-modelo?YearYear=${anio.value}&MarcaMarca=${mar.value}&modelo=${mol.value}`
         console.log(document.querySelectorAll('.btn')).href;
       }
     });
