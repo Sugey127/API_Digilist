@@ -18,7 +18,7 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         console.log(req.body);
-        const usuario = await Usuario.findOne({ include: { model: Avatares }, where: { [Op.and]: [{ password }, { email }] } }); // * consulta conbinada
+        const usuario = await Usuario.findOne({ include: { model: Avatares }, where: { [Op.and]: [{ password }, { email }] } }); 
         const token = generateToken(usuario.dataValues);
         res.cookie('token', token, {
             maxAge: 2 * 24 * 60 * 60 * 1000,
@@ -42,6 +42,31 @@ export const registro = async (req, res) => {
             console.log(fotoPerfil);
 
             req.body.AvatareId = fotoPerfil.dataValues.id;
+            req.body.StatusId=1;
+            req.body.role= "administrador";
+            const usuario = await Usuario.create(req.body, { transaction: t });
+            const token = generateToken(usuario.dataValues);
+            res.status(201).json({ token, usuario });
+        });
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+//POST
+export const registroCliente = async (req, res) => {
+    try {
+        sequelize.transaction(async t => {
+            const fotoPerfil = await Avatares.create({
+                url: 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg',
+                publicId: 'usuarios/digilist_default_avatar_ns5j6g'
+            }, { transaction: t })
+
+            console.log(fotoPerfil);
+
+            req.body.AvatareId = fotoPerfil.dataValues.id;
+            req.body.StatusId=1;
+            req.body.role= "cliente";
             const usuario = await Usuario.create(req.body, { transaction: t });
             const token = generateToken(usuario.dataValues);
             res.status(201).json({ token, usuario });

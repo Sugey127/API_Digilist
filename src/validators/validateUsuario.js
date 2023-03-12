@@ -47,12 +47,12 @@ export const validaCamposUsuario = [
         .withMessage('La contraseña debe tener al menos 8 caracteres')
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
         .withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un signo'),
-    check('role')
-        .not().isEmpty().withMessage('El role es requerido').isIn(validRoles)
-        .withMessage('El rol proporcionado no es válido <administrador> || <cliente>'),
-    check('StatusId')
-        .not().isEmpty().withMessage('El campo StatusId es requerido')
-        .isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
+    // check('role')
+    //     .not().isEmpty().withMessage('El role es requerido').isIn(validRoles)
+    //     .withMessage('El rol proporcionado no es válido <administrador> || <cliente>'),
+    // check('StatusId')
+    //     .not().isEmpty().withMessage('El campo StatusId es requerido')
+    //     .isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 ];
 
 export const validateLogin=[
