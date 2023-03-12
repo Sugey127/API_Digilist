@@ -21,8 +21,7 @@ usuarioRouter.post('/olvidarContrasena', authentification, forgotPassword);
 usuarioRouter.put('/verificarContrasena/:codigo', authentification, usuarioController.cambiarContrasena);
 usuarioRouter.put('/subir-avatar', authentification, subirImagen.single('perfil'), usuarioController.subirAvatar);
 usuarioRouter.put('/eliminar-avatar', authentification, usuarioController.eliminarAvatar);
-usuarioRouter.post('/pre-registro', validaCamposUsuario, validateReutilizable, emailAuth);
-// usuarioRouter.post('/cambiar-imagen-fondo',authentification, subirImagen.single('fondo'), usuarioController.rendiImagenFondo);
-
-
+usuarioRouter.post('/pre-registroCliente', validaCamposUsuarioActualizar, validateReutilizable, emailAuth);
+usuarioRouter.post('/pre-registroAdmin', validaCamposUsuario, validateReutilizable, emailAuth);
+//usuarioRouter.post('/cambiar-imagen-fondo', authentification, subirImagen.single('fondo'), usuarioController.rendiImagenFondo);
 export default usuarioRouter;

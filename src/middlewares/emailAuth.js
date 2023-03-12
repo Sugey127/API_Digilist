@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'; 
 import { PreResgistro } from '../models/PreRegistro.js';
 import { RecordarPassword } from '../models/RecordarPass.js';
+import { Usuario } from '../models/usuario.js';
 import { generateCode } from '../utils/codigo.js';
 import { EMAILER_PASS, EMAIL_ACCOUNT } from '../utils/env.js';
 import { validateToken } from '../utils/token.utilities.js';
@@ -10,7 +11,7 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        Usuario: EMAIL_ACCOUNT, //la cuenta que creaste para enviar notificaciones
+        user: EMAIL_ACCOUNT, //la cuenta que creaste para enviar notificaciones
         pass: EMAILER_PASS
     }
 });
@@ -19,7 +20,9 @@ export const emailAuth = async (req, res) => {
     try {
         const UsuarioExist = await Usuario.findOne({ where: { email: req.body.email } });
         if (UsuarioExist?.dataValues) throw new Error('Esta cuenta ya esta registrada').message;
+       
         const verificationCode = generateCode();
+        req.body.codigo = verificationCode;
         await transporter.sendMail({
             from: EMAIL_ACCOUNT,
             to: req.body.email,
@@ -34,7 +37,7 @@ export const emailAuth = async (req, res) => {
                 <title>Verificacion de tu Codigo</title>
             </head>
             <body style="background-color: rgb(11, 21, 29)">
-                <h2 style="text-align: center; color=#FA8802"> Bienvenido ${req.body.UsuarioNombre} ${req.body.usuarioApellido}!</h2>
+                <h2 style="text-align: center; color=#FA8802"> Bienvenido ${req.body.userNombre} ${req.body.usuarioApellido}!</h2>
                 <h3 style="text-align: center; background: #FA8802; padding: 10px; border-radius: 10px;">Tu codigo es: ${verificationCode}</h3>
                 <h4 style="text-align: center;">if you have not solicitated the message<br>please ignore this email</h4>
                 <h5 style="text-align: center">Digilist Refaccionaria</h5>
@@ -54,10 +57,11 @@ export const emailAuth = async (req, res) => {
 export const verifyCode = async (req, res, next) => {
     try {
         const { codigo } = req.params;
-        const Usuario = await PreResgistro.findOne({ where: { codigo } });
-        if (!Usuario?.dataValues?.id) throw new Error('Codigo Incorrecto').message;
-        req.body = Usuario.dataValues;
-        await PreResgistro.destroy({ where: { email: Usuario.dataValues.email } });
+        const usuario = await PreResgistro.findOne({ where: { codigo } });
+        if (!usuario?.dataValues?.codigo) throw new Error('Codigo Incorrecto').message;
+        console.log('ahhhh', usuario.dataValues)
+        req.body = usuario.dataValues;
+        await PreResgistro.destroy({ where: { email: usuario.dataValues.email } });
         await transporter.sendMail({
             from: EMAIL_ACCOUNT,
             to: req.body.email,
@@ -73,7 +77,7 @@ export const verifyCode = async (req, res, next) => {
             </head>
             <body style="background-color: rgb(11, 21, 29)">
                 <style> body > * {text-align: center;} </style>
-                <h2 style="text-align: center; color=#F4EDED"> Bienvedido ${req.body.Usuarioname} ${req.body.usuarioApellido}!</h2>
+                <h2 style="text-align: center; color=#F4EDED"> Bienvedido ${req.body.userNombre} ${req.body.usuarioApellido}!</h2>
                 <h5 style="text-align: center">Digilist Refaccionaria</h5>
             </body>
             </html>`
@@ -107,7 +111,7 @@ export const regenerateCode = async (req, res) => {
             </head>
             <body style="background-color: rgb(11, 21, 29); color: rgb(255, 255, 255)">
                 <style> body > * {text-align: center;} </style>
-                <h2 style="text-align: center; color:#FA8802"> Bienvenido ${Usuario.dataValues.Usuarioname} ${Usuario.dataValues.lastname}!
+                <h2 style="text-align: center; color:#FA8802"> Bienvenido ${Usuario.dataValues.userNombre} ${Usuario.dataValues.lastname}!
                 </h2>
                 <h3">Tu codigo es: ${verificationCode}</h3>
                 <h4>si no ha solicitado el mensaje<br>ignora este email</h4>

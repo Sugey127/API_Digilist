@@ -24,10 +24,7 @@ export const PreResgistro= sequelize.define('PreResgistro', {
         type: DataTypes.STRING,
         allowNull: false 
     },
-    role:{ 
-        type: DataTypes.ENUM('cliente', 'administrador'), 
-        allowNull:false
-    },
+   
     fechaRegistroUsuario:{
         type:DataTypes.DATEONLY,
         allowNull: false,
