@@ -136,7 +136,7 @@
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
           
-        document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-autopartes?nombreAutoparte=${nom.value}&descripcion=${des.value}&stock=${stk.value}&precio=${prec.value}&code_autoparte=${email.value}&descuento=${desc.value}`
+        document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-productos?nombreAutoparte=${nom.value}&descripcion=${des.value}&stock=${stk.value}&precio=${prec.value}&code_autoparte=${email.value}&descuento=${desc.value}`
       }
     });
   </script>
