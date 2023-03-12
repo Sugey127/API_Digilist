@@ -4,10 +4,10 @@ import { authentification, authorization } from "../middlewares/auth.js";
 import { validaCamposUsuario, validaCamposUsuarioActualizar, validateCambioContraseña, validateLogin } from "../validators/validateUsuario.js";
 import { validateReutilizable } from "../validators/validateReutilizable.js";
 import { subirImagen } from "../middlewares/subirImagen.js";
-import { forgotPassword } from "../middlewares/emailAuth.js";
+import { emailAuth, forgotPassword, verifyCode } from "../middlewares/emailAuth.js";
 const usuarioRouter = Router();
 
-usuarioRouter.post('/registro', validaCamposUsuario, validateReutilizable, usuarioController.registro);
+usuarioRouter.post('/registro/:codigo', verifyCode, usuarioController.registro);
 usuarioRouter.post('/registroCliente', validaCamposUsuario,validateReutilizable,usuarioController.registroCliente);
 usuarioRouter.put('/actualizar', authentification, validaCamposUsuarioActualizar, validateReutilizable, authentification, usuarioController.put);
 usuarioRouter.put('/cambiarPass', authentification, validateCambioContraseña, validateReutilizable, usuarioController.cambiarPass);
@@ -21,6 +21,7 @@ usuarioRouter.post('/olvidarContrasena', authentification, forgotPassword);
 usuarioRouter.put('/verificarContrasena/:codigo', authentification, usuarioController.cambiarContrasena);
 usuarioRouter.put('/subir-avatar', authentification, subirImagen.single('perfil'), usuarioController.subirAvatar);
 usuarioRouter.put('/eliminar-avatar', authentification, usuarioController.eliminarAvatar);
+usuarioRouter.post('/pre-registro', validaCamposUsuario, validateReutilizable, emailAuth);
 // usuarioRouter.post('/cambiar-imagen-fondo',authentification, subirImagen.single('fondo'), usuarioController.rendiImagenFondo);
 
 

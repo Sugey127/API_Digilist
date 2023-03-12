@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer'; 
+import { PreResgistro } from '../models/PreRegistro.js';
 import { RecordarPassword } from '../models/RecordarPass.js';
+import { generateCode } from '../utils/codigo.js';
 import { EMAILER_PASS, EMAIL_ACCOUNT } from '../utils/env.js';
 import { validateToken } from '../utils/token.utilities.js';
 
@@ -18,8 +20,8 @@ export const emailAuth = async (req, res) => {
         const UsuarioExist = await Usuario.findOne({ where: { email: req.body.email } });
         if (UsuarioExist?.dataValues) throw new Error('Esta cuenta ya esta registrada').message;
         const verificationCode = generateCode();
-        const info = await transporter.sendMail({
-            from: 'digilist.refaccionaria@gmail.com',
+        await transporter.sendMail({
+            from: EMAIL_ACCOUNT,
             to: req.body.email,
             subject: 'verificacion de tu cuenta',
             html: `
@@ -41,8 +43,8 @@ export const emailAuth = async (req, res) => {
             `
         });
         req.body.verificationCode = verificationCode;
-        console.log(await PreRegister.create(req.body));
-        res.send('Email enviado');
+        console.log(await PreResgistro.create(req.body)); //pre-registro del usuario
+        res.send(`Su código ha sido enviado al email ${req.body.email}`);
     } catch (err) {
         res.status(403).json(err);
         console.log(err);
@@ -51,13 +53,13 @@ export const emailAuth = async (req, res) => {
 
 export const verifyCode = async (req, res, next) => {
     try {
-        const { verificationCode } = req.params;
-        const Usuario = await PreRegister.findOne({ where: { verificationCode } });
+        const { codigo } = req.params;
+        const Usuario = await PreResgistro.findOne({ where: { codigo } });
         if (!Usuario?.dataValues?.id) throw new Error('Codigo Incorrecto').message;
         req.body = Usuario.dataValues;
-        await PreRegister.destroy({ where: { email: Usuario.dataValues.email } });
+        await PreResgistro.destroy({ where: { email: Usuario.dataValues.email } });
         await transporter.sendMail({
-            from: 'digilist.refaccionaria@gmail.com',
+            from: EMAIL_ACCOUNT,
             to: req.body.email,
             subject: 'Su cuenta se ha registrado correctamente',
             html: `
@@ -71,7 +73,7 @@ export const verifyCode = async (req, res, next) => {
             </head>
             <body style="background-color: rgb(11, 21, 29)">
                 <style> body > * {text-align: center;} </style>
-                <h2 style="text-align: center; color=#F4EDED"> Bienvedido ${req.body.Usuarioname} ${req.body.lastname}!</h2>
+                <h2 style="text-align: center; color=#F4EDED"> Bienvedido ${req.body.Usuarioname} ${req.body.usuarioApellido}!</h2>
                 <h5 style="text-align: center">Digilist Refaccionaria</h5>
             </body>
             </html>`
@@ -86,9 +88,9 @@ export const verifyCode = async (req, res, next) => {
 
 export const regenerateCode = async (req, res) => {
     try {
-        const Usuario = await PreRegister.findOne({ where: { email: req.params.email } });
+        const Usuario = await PreResgistro.findOne({ where: { email: req.params.email } });
         const verificationCode = generateCode();
-        await PreRegister.update({ verificationCode }, { where: { email: req.params.email } })
+        await PreResgistro.update({ verificationCode }, { where: { email: req.params.email } })
         
         await transporter.sendMail({
             from: 'digilist.refaccionaria@gmail.com',
