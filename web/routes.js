@@ -3,6 +3,9 @@ import { Marca } from "../src/models/marca.js";
 import { Modelo } from "../src/models/modelo.js";
 import { Proveedor } from "../src/models/proveedor.js";
 import { Years } from "../src/models/years.js";
+import { Automovil } from "../src/models/automovil.js";
+import { Autopartes } from "../src/models/autopartes.js";
+
 
 export const webRouter = Router();
 
@@ -47,11 +50,35 @@ webRouter.get('/automovil', async (req, res) => {
     }
 });
 
+webRouter.get('/web-registro-automovil', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Automovil.create(req.query);
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/automovil')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
 webRouter.get('/productos', async (req, res) => {
     try {
         res.render('dashboard/productos');
     } catch (err) {
         res.render('404');
+    }
+});
+
+webRouter.get('/web-registro-productos', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Autopartes.create(req.query);
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/productos')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
     }
 });
 
