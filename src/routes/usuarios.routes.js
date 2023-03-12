@@ -8,7 +8,7 @@ import { emailAuth, forgotPassword, verifyCode } from "../middlewares/emailAuth.
 const usuarioRouter = Router();
 
 usuarioRouter.post('/registro/:codigo', verifyCode, usuarioController.registro);
-usuarioRouter.post('/registroCliente', validaCamposUsuario,validateReutilizable,usuarioController.registroCliente);
+usuarioRouter.post('/registroCliente/:codigo', verifyCode, usuarioController.registroCliente);
 usuarioRouter.put('/actualizar', authentification, validaCamposUsuarioActualizar, validateReutilizable, authentification, usuarioController.put);
 usuarioRouter.put('/cambiarPass', authentification, validateCambioContraseña, validateReutilizable, usuarioController.cambiarPass);
 //usuarioRouter.delete('/eliminar', authentification, authorization, usuarioController.drop);
