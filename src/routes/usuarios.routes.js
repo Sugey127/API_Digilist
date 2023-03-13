@@ -18,7 +18,7 @@ usuarioRouter.post('/login', validateLogin, validateReutilizable, usuarioControl
 usuarioRouter.get('/buscarActivo', authentification, usuarioController.getAllActivo);
 usuarioRouter.get('/buscarInactivo', authentification, usuarioController.getAllInactivo);
 usuarioRouter.post('/olvidarContrasena', forgotPassword);
-usuarioRouter.put('/recuperarContrasena/:codigo', authentification, usuarioController.recuperarContrasena);
+usuarioRouter.put('/recuperarContrasena/:codigo', usuarioController.recuperarContrasena);
 usuarioRouter.put('/subir-avatar', authentification, subirImagen.single('perfil'), usuarioController.subirAvatar);
 usuarioRouter.put('/eliminar-avatar', authentification, usuarioController.eliminarAvatar);
 usuarioRouter.post('/pre-registroCliente', validaCamposUsuarioActualizar, validateReutilizable, emailAuth);

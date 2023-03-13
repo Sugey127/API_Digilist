@@ -144,7 +144,7 @@ export const forgotPassword = async (req, res, next) => {
             <body>
                 <h1>Bienvenido ${usuario.dataValues.userNombre} ${usuario.dataValues.usuarioApellido}</h1>
                 <h2>¿Estás intentando recuperar tu contraseña?</h2>
-                <a href="https://apidigilist-production.up.railway.app/usuario/recuperarContrasena/${forgotPass.dataValues.codigo}"><button>Confirmar cambios</button></a>
+                <a href="https://apidigilist-production.up.railway.app/usuario/recuperarContrasena/${forgotPass.dataValues.codigo}"><button type="button">Confirmar cambios</button></a>
             </body>`
         });
         res.send('se envio el email');
