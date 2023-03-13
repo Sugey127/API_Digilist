@@ -242,7 +242,7 @@ export const recuperarContrasena = async (req, res) => {
             //     where: { email: recordaPass.dataValues.email }
             // });
 
-            const usuario = await Usuario.findOne({ where: { email: req.query.email } });
+            const usuario = await Usuario.findOne({ where: { email: RecordarPassword.dataValues.email } });
             usuario.password = RecordarPassword.dataValues.password;
             await usuario.save();
 
