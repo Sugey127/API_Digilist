@@ -132,10 +132,11 @@ export const forgotPassword = async (req, res, next) => {
 
         const usuario = await Usuario.findOne({ where: { email: req.query.email }});
 
-    if (await RecordarPassword.findOne({ where: { email: req.query.email } })?.id)
+    if (await RecordarPassword.findOne({ where: { email: req.query.email } })?.codigo)
         res.status(401).send('Esta cuenta esta siendo verficada en este momento')
     else {
         const forgotPass = await RecordarPassword.create(req.query);
+        console.log('data', forgotPass);
         await transporter.sendMail({
             from: 'digilist.refaccionaria@gmail.com',
             to: req.query.email,
