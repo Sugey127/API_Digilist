@@ -238,11 +238,11 @@ export const recuperarContrasena = async (req, res) => {
         if (!recordaPass?.dataValues?.codigo) {
             res.status(401).json(err);
         } else {
-            const Usuario = await Usuario.update({ password: bcrypt.hashSync(cambiarContrasena.dataValues.password, SALT) }, {
+            const Usuario = await Usuario.update({ password: /*bcrypt.hashSync(cambiarContrasena.dataValues.password, SALT)*/recordaPass.dataValues.password }, {
                 where: { email: recordaPass.dataValues.email }
             });
             await recordaPass.destroy({ where: { codigo: req.params.codigo } });
-            res.status(200).render('cambiarContrasena', { Usuario });
+            res.status(200).render('cambiarPass', { Usuario });
         }
     } catch (err) {
         console.log(err);

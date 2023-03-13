@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'; 
+import nodemailer from 'nodemailer';
 import { PreResgistro } from '../models/PreRegistro.js';
 import { RecordarPassword } from '../models/RecordarPass.js';
 import { Usuario } from '../models/usuario.js';
@@ -20,7 +20,7 @@ export const emailAuth = async (req, res) => {
     try {
         const UsuarioExist = await Usuario.findOne({ where: { email: req.body.email } });
         if (UsuarioExist?.dataValues) throw new Error('Esta cuenta ya esta registrada').message;
-       
+
         const verificationCode = generateCode();
         req.body.codigo = verificationCode;
         await transporter.sendMail({
@@ -95,7 +95,7 @@ export const regenerateCode = async (req, res) => {
         const Usuario = await PreResgistro.findOne({ where: { email: req.params.email } });
         const verificationCode = generateCode();
         await PreResgistro.update({ verificationCode }, { where: { email: req.params.email } })
-        
+
         await transporter.sendMail({
             from: 'digilist.refaccionaria@gmail.com',
             to: Usuario.dataValues.email,
@@ -126,28 +126,31 @@ export const regenerateCode = async (req, res) => {
     }
 };
 
+//! ☠️☠️☠️☠️☠️☠️☠️☠️ Recuperar Contraseña ☠️☠️☠️☠️☠️☠️☠️☠️ NO TOCAR O SUGEY TE MATA
 export const forgotPassword = async (req, res, next) => {
     try {
-        const Usuario = validateToken(req.headers.authorization);
-        if (await RecordarPassword.findOne({ where: { email: Usuario.email } })?.id)
-            res.status(401).send('Esta cuenta ya esta registrada')
-        else {
-            const forgotPass = await RecordarPassword.create({ password: req.query.password, email: Usuario.email });
-            await transporter.sendMail({
-                from: 'digilist.refaccionaria@gmail.com',
-                to: Usuario.email,
-                subject: '¿Estas intentando cambiar tu contraseña?',
-                html: `
+
+        const usuario = await Usuario.findOne({ where: { email: req.query.email }});
+
+    if (await RecordarPassword.findOne({ where: { email: req.query.email } })?.id)
+        res.status(401).send('Esta cuenta esta siendo verficada en este momento')
+    else {
+        const forgotPass = await RecordarPassword.create(req.query);
+        await transporter.sendMail({
+            from: 'digilist.refaccionaria@gmail.com',
+            to: req.query.email,
+            subject: '¿Estas intentando cambiar tu contraseña?',
+            html: `
             <body>
-                <h1>Bienvenido ${Usuario.Usuarioname} ${Usuario.lastname}</h1>
-                <h2>¿Intentas recordar la contraseña?</h2>
-                <a href="https://apidigilist-production.up.railway.app/usuario/olvidarContraseña/${forgotPass.dataValues.codigo}"><button>Confirmar cambios</button></a>
+                <h1>Bienvenido ${usuario.dataValues.userNombre} ${usuario.dataValues.usuarioApellido}</h1>
+                <h2>¿Estás intentando recuperar tu contraseña?</h2>
+                <a href="https://apidigilist-production.up.railway.app/usuario/recuperarContrasena/${forgotPass.dataValues.codigo}"><button>Confirmar cambios</button></a>
             </body>`
-            });
-            res.send('se envio el email');
-        }
-    } catch (err) {
-        res.send(err);
-        console.log(err);
+        });
+        res.send('se envio el email');
     }
+} catch (err) {
+    res.send(err);
+    console.log(err);
+}
 };

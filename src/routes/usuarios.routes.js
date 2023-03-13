@@ -17,7 +17,7 @@ usuarioRouter.get('/buscarTodos', authentification, usuarioController.getAll);
 usuarioRouter.post('/login', validateLogin, validateReutilizable, usuarioController.login);
 usuarioRouter.get('/buscarActivo', authentification, usuarioController.getAllActivo);
 usuarioRouter.get('/buscarInactivo', authentification, usuarioController.getAllInactivo);
-usuarioRouter.post('/olvidarContrasena', authentification, forgotPassword);
+usuarioRouter.post('/olvidarContrasena', forgotPassword);
 usuarioRouter.put('/recuperarContrasena/:codigo', authentification, usuarioController.recuperarContrasena);
 usuarioRouter.put('/subir-avatar', authentification, subirImagen.single('perfil'), usuarioController.subirAvatar);
 usuarioRouter.put('/eliminar-avatar', authentification, usuarioController.eliminarAvatar);
