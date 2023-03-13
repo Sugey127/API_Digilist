@@ -232,7 +232,7 @@ export const subirImagenFondo = async (req, res, next) => {
     }
 }
 
-export const cambiarContrasena = async (req, res) => {
+export const recuperarContrasena = async (req, res) => {
     try {
         const recordaPass = await RecordarPassword.findOne({ where: { codigo: req.params.codigo } });
         if (!recordaPass?.dataValues?.codigo) {
