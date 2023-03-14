@@ -49,7 +49,7 @@
               </div>
             </div>
     
-          <div class="cards">
+          <div class="cards form-container">
             <label for="inputPassword5" class="form-label">Codigo</label>
             <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
@@ -76,7 +76,7 @@
             </div>
     
             <div class="d-grid gap-2">
-              <button class="btn btn-dark" type="button">Agregar</button>
+              <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
               <button class="btn btn-dark" type="button">Editar</button>
               <button class="btn btn-dark" type="button">Eliminar</button>
             </div>
@@ -86,42 +86,38 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Id</th>
                   <th scope="col">Codigo</th>
                   <th scope="col">Direccion</th>
                   <th scope="col">Descripcion</th>
                   <th scope="col">Entrega</th>
                   <th scope="col">Estado Paquete</th>
-                  <th scope="col">Registro</th>
-                  <th scope="col">Usuario Email</th>
-                  <th scope="col">Recibo Folio</th>
-                  <th scope="col">Estatus</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colspan="2"></td>
-                  <td></td>
-                </tr>
+                  <% envios.forEach(envio => { %>
+                    <tr>
+                    <td><%=envio.codEnvio%></td>
+                    <td><%=envio.direccion%></td>
+                    <td><%=envio.fechaEntrega%></td>
+                    <td><%=envio.descripcion%></td>
+                    <td><%=envio.EstadoPaquete%></td>
+                    </tr>
+                  <% }) %>
               </tbody>
             </table>
           </div>
         </main>
       </div>
       <!-- Scripts -->
+      <script defer>
+      const [code, dir, des, entrega, estado] = document.querySelectorAll('.form-control');
+      document.querySelector('.form-container').addEventListener('input', e => {
+        if (e.target.className === 'form-control') {
+          
+          document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-envio?codEnvio=${code.value}&direccion=${dir.value}&descripcion=${des.value}&fechaEntrega=${entrega.value}&EstadoPaquete=${estado.value}`
+        }
+      });        
+      </script>
       <!-- ApexCharts -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
       <!-- Custom JS -->

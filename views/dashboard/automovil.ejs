@@ -79,7 +79,7 @@
               <div id="passwordHelpBlock" class="form-text">
     
             <div class="d-grid gap-2">
-              <button class="btn btn-dark" type="button">Agregar</button>
+              <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
               <button class="btn btn-dark" type="button">Editar</button>
               <button class="btn btn-dark" type="button">Eliminar</button>
             </div>
@@ -96,9 +96,12 @@
                 </tr>
               </thead>
               <tbody>
-                <% autopartes.forEach(autoparte => { %>
+                <% automoviles.forEach(automovil => { %>
                   <tr>
-                  <td><%= autoparte.codeAuto %> </td>
+                  <td><%=automovil.codeAuto%></td>
+                  <td><%=automovil.marca%></td>
+                  <td><%=automovil.year%></td>
+                  <td><%=automovl.modelo%></td>
                   </tr>
                 <% }) %>
               </tbody>
@@ -107,12 +110,12 @@
         </main>
       </div>
       <!-- Scripts -->
-      <script>
+      <script defer>
         const [code] = document.querySelectorAll('.form-control');
         document.querySelector('.form-container').addEventListener('input', e => {
           if(e.target.className === 'form-control') {
             
-            document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-automovil?codeAuto=${code.value}` 
+            document.querySelectorAll('.btn')[0].href= `http://apidigilist-production.up.railway.app/digilist/web-registro-automovil?codeAuto=${code.value}` 
           }
         });
       </script>

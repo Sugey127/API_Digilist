@@ -50,7 +50,7 @@
               </div>
             </div>
     
-          <div class="cards">
+          <div class="cards form-container">
             <label for="inputPassword5" class="form-label">Nombre</label>
             <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
@@ -67,13 +67,9 @@
             <input type="email" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
             </div>
-            <label for="inputPassword5" class="form-label">Registro</label>
-            <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-            <div id="passwordHelpBlock" class="form-text">
-            </div>
     
             <div class="d-grid gap-2">
-                <button class="btn btn-dark" type="button">Agregar</button>
+              <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
                 <button class="btn btn-dark" type="button">Editar</button>
                 <button class="btn btn-dark" type="button">Eliminar</button>
               </div>
@@ -83,40 +79,39 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Id</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Apellido</th>
                   <th scope="col">Telefono</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Rol</th>
-                  <th scope="col">Registro</th>
-                  <th scope="col">Estatus</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colspan="2"></td>
-                  <td></td>
-                </tr>
+                <% usuarios.forEach(usuario => 
+                { 
+                  <tr>
+                  <th><%=usuario.userNombre%></th>
+                  <td><%=usuario.usuarioApellido%></td>
+                  <td><%=usuario.telefono%></td>
+                  <td><%=usuario.email%></td>
+                  </tr>
+                 })%>
+
               </tbody>
             </table>
           </div>
         </main>
       </div>
       <!-- Scripts -->
+      <script defer> 
+        const [nomU, apeU, tel, email] = document.querySelectorAll('.form-control');
+        document.querySelector('.form-container').addEventListener('input', e => {
+          if(e.target.className === 'form-control') {
+
+            document.querySelectorAll('.btn')[0].href=
+            `http://apidigilist-production.up.railway.app/digilist/web-registro-usuarios?userNombre=${nomU.value}&usuarioApellido=${apeU.value}&telefono=${tel.value}&email=${email.value}`
+          }
+        });
+      </script>
       <!-- ApexCharts -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
       <!-- Custom JS -->

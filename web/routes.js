@@ -5,6 +5,12 @@ import { Proveedor } from "../src/models/proveedor.js";
 import { Years } from "../src/models/years.js";
 import { Automovil } from "../src/models/automovil.js";
 import { Autopartes } from "../src/models/autopartes.js";
+import { Usuario } from "../src/models/usuario.js";
+import { DetalleVenta } from "../src/models/detalleVenta.js";
+import { Entradas } from "../src/models/entradas.js";
+import { Envio } from "../src/models/envio.js";
+import { Recibo } from "../src/models/recibo.js";
+import { Venta } from "../src/models/venta.js";
 
 
 export const webRouter = Router();
@@ -90,6 +96,17 @@ webRouter.get('/recibos', async (req, res) => {
     }
 });
 
+webRouter.get('/web-registro-recibos', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Recibo.create(req.query);
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/recibos')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
 webRouter.get('/proveedor', async (req, res) => {
     try {
         const proveedores = await Proveedor.findAll();
@@ -113,13 +130,22 @@ webRouter.get('/web-registro-proveedor', async (req, res) => {
     }
 });
 
-
-
 webRouter.get('/usuarios', async (req, res) => {
     try {
         res.render('dashboard/usuarios');
     } catch (err) {
         res.render('404');
+    }
+});
+
+webRouter.get('/web-registro-usuarios', async(req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Usuario.create(req.query);
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/usuarios')
+    } catch (err) {
+        res.status(403).json(err);
     }
 });
 
@@ -131,6 +157,17 @@ webRouter.get('/entradas', async (req, res) => {
     }
 });
 
+webRouter.get('/web-registro-entradas', async(req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Entradas.create(req.query);
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/entradas')
+    } catch (err) {
+        res.status(403).json(err);
+    }
+});
+
 webRouter.get('/envios', async (req, res) => {
     try {
         res.render('dashboard/envios');
@@ -139,11 +176,34 @@ webRouter.get('/envios', async (req, res) => {
     }
 });
 
+webRouter.get('/web-registro-envios', async(req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Envio.create(req.query);
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/envios')
+    } catch (err) {
+        res.status(403).json(err);
+    }
+});
+
 webRouter.get('/detalleventa', async (req, res) => {
     try {
         res.render('dashboard/detalleventa');
     } catch (err) {
         res.render('404');
+    }
+});
+
+webRouter.get('/web-registro-detalleventa', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await DetalleVenta.create(req.query);
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/detalleventa')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
     }
 });
 
@@ -220,6 +280,18 @@ webRouter.get('/venta', async (req, res) => {
         res.render('dashboard/venta');
     } catch (err) {
         res.render('404');
+    }
+});
+
+webRouter.get('/web-registro-venta', async (req, res) => {
+    try {
+        console.log(req.query);
+        req.query.StatusId=1;
+        await Venta.create(req.query);
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/venta')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
     }
 });
 
