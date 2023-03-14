@@ -6,6 +6,11 @@
         <span class="material-icons-outlined">search</span>
         <input type="search" class="search-theme">
     </div>
+    <script>
+        document.querySelector('.search-theme').addEventListener('input',e=>{
+            console.log(e.target.value);
+        })
+    </script>
     <div class="header-right">
         <span class="material-icons-outlined">notifications</span>
         <span class="material-icons-outlined">email</span>

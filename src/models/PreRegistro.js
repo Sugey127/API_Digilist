@@ -2,7 +2,6 @@ import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
 
 export const PreResgistro= sequelize.define('PreResgistro', { 
-    
     userNombre:{
         type: DataTypes.STRING,
         allowNull:false
@@ -25,14 +24,16 @@ export const PreResgistro= sequelize.define('PreResgistro', {
         type: DataTypes.STRING,
         allowNull: false 
     },
-    role:{ 
-        type: DataTypes.ENUM('cliente', 'administrador'), 
-        allowNull:false
-    },
+   
     fechaRegistroUsuario:{
         type:DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
+    },
+    codigo: {
+        unique: true,
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     timestamps: false

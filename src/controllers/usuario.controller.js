@@ -18,7 +18,7 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         console.log(req.body);
-        const usuario = await Usuario.findOne({ include: { model: Avatares }, where: { [Op.and]: [{ password }, { email }] } }); // * consulta conbinada
+        const usuario = await Usuario.findOne({ include: { model: Avatares }, where: { [Op.and]: [{ password }, { email }] } });
         const token = generateToken(usuario.dataValues);
         res.cookie('token', token, {
             maxAge: 2 * 24 * 60 * 60 * 1000,
@@ -42,6 +42,31 @@ export const registro = async (req, res) => {
             console.log(fotoPerfil);
 
             req.body.AvatareId = fotoPerfil.dataValues.id;
+            req.body.StatusId = 1;
+            req.body.role = "administrador";
+            const usuario = await Usuario.create(req.body, { transaction: t });
+            const token = generateToken(usuario.dataValues);
+            res.status(201).json({ token, usuario });
+        });
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+//POST
+export const registroCliente = async (req, res) => {
+    try {
+        sequelize.transaction(async t => {
+            const fotoPerfil = await Avatares.create({
+                url: 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg',
+                publicId: 'usuarios/digilist_default_avatar_ns5j6g'
+            }, { transaction: t })
+
+            console.log(fotoPerfil);
+
+            req.body.AvatareId = fotoPerfil.dataValues.id;
+            req.body.StatusId = 1;
+            req.body.role = "cliente";
             const usuario = await Usuario.create(req.body, { transaction: t });
             const token = generateToken(usuario.dataValues);
             res.status(201).json({ token, usuario });
@@ -153,7 +178,7 @@ export const subirAvatar = async (req, res, next) => {
         cloudinary.uploader.upload_stream({ folder: 'usuarios' }, async (err, result) => {
             if (err) { console.log(err); res.status(408).json(err) }
             const avatar = await Avatares.findByPk(user.Avatares.id);
-            if(avatar.dataValues.url !== 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg') {
+            if (avatar.dataValues.url !== 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg') {
                 await cloudinary.uploader.destroy(avatar.publicId); //eliminacion de la imagen
                 avatar.url = result.url;
                 avatar.publicId = result.public_id;
@@ -173,7 +198,7 @@ export const eliminarAvatar = async (req, res, next) => {
         cloudinary.uploader.upload_stream({ folder: 'usuarios' }, async (err, result) => {
             if (err) { console.log(err); res.status(408).json(err) }
             const avatar = await Avatares.findByPk(user.Avatares.id);
-            if(avatar.dataValues.url !== 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg') {
+            if (avatar.dataValues.url !== 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg') {
                 await cloudinary.uploader.destroy(avatar.publicId); //eliminacion de la imagen
                 avatar.url = 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg'
                 avatar.publicId = 'usuarios/digilist_default_avatar_ns5j6g';
@@ -207,17 +232,24 @@ export const subirImagenFondo = async (req, res, next) => {
     }
 }
 
-export const cambiarContrasena = async (req, res) => {
+export const recuperarContrasena = async (req, res) => {
     try {
         const recordaPass = await RecordarPassword.findOne({ where: { codigo: req.params.codigo } });
         if (!recordaPass?.dataValues?.codigo) {
             res.status(401).json(err);
         } else {
-            const Usuario = await Usuario.update({ password: bcrypt.hashSync(cambiarContrasena.dataValues.password, SALT) }, {
-                where: { email: recordaPass.dataValues.email }
-            });
+            // const usuario = await Usuario.update({ password: /*bcrypt.hashSync(cambiarContrasena.dataValues.password, SALT)*/ recordaPass.dataValues.password }, {
+            //     where: { email: recordaPass.dataValues.email }
+            // });
+
+            const usuario = await Usuario.findOne({ where: { email: recordaPass.dataValues.email } });
+            usuario.password = recordaPass.dataValues.password;
+            await usuario.save();
+
+
+            console.log('viendo si encontro al usuario', usuario);
             await recordaPass.destroy({ where: { codigo: req.params.codigo } });
-            res.status(200).render('cambiarContrasena', { Usuario });
+            res.status(200).render('cambiarPass', { usuario });
         }
     } catch (err) {
         console.log(err);
