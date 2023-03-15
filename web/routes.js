@@ -132,7 +132,8 @@ webRouter.get('/web-registro-proveedor', async (req, res) => {
 
 webRouter.get('/usuarios', async (req, res) => {
     try {
-        res.render('dashboard/usuarios');
+     const usuario = await Usuario.findAll();
+        res.render('dashboard/usuarios',{usuario});
     } catch (err) {
         res.render('404');
     }
