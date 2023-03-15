@@ -94,7 +94,7 @@
           </select>
 
         <div class="d-grid gap-2">
-          <button class="btn btn-dark" type="button">Agregar</button>
+          <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
           <button class="btn btn-dark" type="button">Editar</button>
           <button class="btn btn-dark" type="button">Eliminar</button>
         </div>
@@ -113,17 +113,16 @@
             </tr>
           </thead>
           <tbody>
-            <% autopartes.forEach(autoparte=> {
-
+            <% autopartes.forEach(autoparte=> { %>
             <tr>
-              <th><%=autoparte.nombreAutoparte%></th>
+              <td><%=autoparte.nombreAutoparte%></td>
               <td><%=autoparte.descripcion%></td>
               <td><%=autoparte.stock%></td>
               <td><%=autoparte.precio%></td>
               <td><%=autoparte.code_autoparte%></td>
               <td><%=autoparte.descuento%></td>
             </tr>    
-            }) %>
+          <% }) %>
 
           </tbody>
         </table>
@@ -131,7 +130,7 @@
     </main>
   </div>
   <!-- Scripts -->
-  <script>
+  <script defer>
     const [nom, des, stk, prec, code, desc] = document.querySelectorAll('.form-control');
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {

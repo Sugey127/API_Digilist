@@ -33,7 +33,7 @@
             <span class="text-primary font-weight-bold">83</span>
           </div>
 
-          <div class="card">
+          <div class="card form-container">
             <div class="card-inner">
               <p class="text-primary">Ordenes de venta</p>
               <span class="material-icons-outlined text-green">shopping_cart</span>
@@ -50,7 +50,7 @@
           </div>
         </div>
 
-      <div class="cards">
+      <div class="cards form-container">
         <label for="inputPassword5" class="form-label">Codigo venta</label>
         <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
         <div id="passwordHelpBlock" class="form-text">
@@ -61,7 +61,7 @@
         </div>
 
         <div class="d-grid gap-2">
-          <button class="btn btn-dark" type="button">Agregar</button>
+          <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
           <button class="btn btn-dark" type="button">Editar</button>
           <button class="btn btn-dark" type="button">Eliminar</button>
         </div>
@@ -71,38 +71,34 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Id</th>
               <th scope="col">Codigo</th>
               <th scope="col">Fecha venta</th>
-              <th scope="col">Email usuario</th>
-              <th scope="col">Estatus</th>
 
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2"></td>
-              <td></td>
-            </tr>
+            <% venta.forEach(venta =>  { %>
+              <tr>
+                <td><%= venta.code_venta%></td>
+                <td><%= venta.fechaVenta%></td>
+                
+              </tr>
+              <% }) %>
           </tbody>
         </table>
       </div>
     </main>
   </div>
   <!-- Scripts -->
+  <script defer>
+    const [code, venta] = document.querySelectorAll('.form-control');
+    document.querySelector('.form-container').addEventListener('input', e => {
+      if (e.target.className === 'form-control') {
+        
+        document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-venta?code_venta=${code.value}&fechaVenta=${venta.value}`
+      }
+    });
+  </script>
   <!-- ApexCharts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
   <!-- Custom JS -->

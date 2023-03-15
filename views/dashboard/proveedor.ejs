@@ -72,11 +72,6 @@
               <input type="email" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
               <div id="passwordHelpBlock" class="form-text">
               </div>
-              <!-- <label for="inputPassword5" class="form-label">Status</label>
-              <input type="range" max="2" min="1" id="inputPassword5" class="form-control"
-                aria-describedby="passwordHelpBlock">
-              <div id="passwordHelpBlock" class="form-text">
-              </div> -->
 
               <div class="d-grid gap-2">
                 <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
@@ -98,7 +93,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% proveedores.forEach(proveedor => { %>
+                  <% proveedores.forEach(proveedor =>  { %>
                     <tr>
                       <td><%= proveedor.nombreProveedor %></td>
                       <td><%= proveedor.direccionProveedor%></td>

@@ -50,7 +50,7 @@
           </div>
         </div>
 
-      <div class="cards">
+      <div class="cards form-container">
         <label for="inputPassword5" class="form-label">Cantidad</label>
         <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
         <div id="passwordHelpBlock" class="form-text">
@@ -61,7 +61,7 @@
         </div>
 
         <div class="d-grid gap-2">
-          <button class="btn btn-dark" type="button">Agregar</button>
+          <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
           <button class="btn btn-dark" type="button">Editar</button>
           <button class="btn btn-dark" type="button">Eliminar</button>
         </div>
@@ -73,35 +73,34 @@
             <tr>
               <th scope="col">Cantidad</th>
               <th scope="col">Precio</th>
-              <th scope="col">Codigo producto</th>
-              <th scope="col">Codigo venta</th>
-              <th scope="col">Estatus</th>
+<!--               <th scope="col">Codigo producto</th>
+              <th scope="col">Codigo venta</th> -->
+
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2"></td>
-              <td></td>
-            </tr>
+            <% detalleventa.forEach(venta => { %>
+              <tr>
+              <td><%=venta.cantidadVenta%></td>
+              <td><%=venta.precioVenta%></td>
+              <td>z<%=venta.unique%></td>
+              </tr>
+            <% }) %>
           </tbody>
         </table>
       </div>
     </main>
   </div>
   <!-- Scripts -->
+  <script defer>
+    const [cant, prec, uniq] = document.querySelectorAll('.form-control');
+    document.querySelector('.form-container').addEventListener('input', e => {
+      if(e.target.className === 'form-control') {
+        document.querySelectorAll('.btn')[0].href=
+        `http://apidigilist-production.up.railway.app/digilist/web-registro-detalleventa?cantidadVenta=${cant.value}&precioVenta=${prec.value}&unique=${uniq.value}`
+      }
+    });
+  </script>
   <!-- ApexCharts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
   <!-- Custom JS -->
