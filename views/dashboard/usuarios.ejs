@@ -67,6 +67,10 @@
             <input type="email" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
             </div>
+            <label for="inputPassword5" class="form-label">Contraseña</label>
+            <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+            <div id="passwordHelpBlock" class="form-text">
+            </div>
     
             <div class="d-grid gap-2">
               <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
@@ -83,6 +87,7 @@
                   <th scope="col">Apellido</th>
                   <th scope="col">Telefono</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Contrseña</th>
                 </tr>
               </thead>
               <tbody>
@@ -103,12 +108,12 @@
       </div>
       <!-- Scripts -->
       <script defer> 
-        const [nomU, apeU, tel, email] = document.querySelectorAll('.form-control');
+        const [nomU, apeU, tel, email, passw] = document.querySelectorAll('.form-control');
         document.querySelector('.form-container').addEventListener('input', e => {
           if(e.target.className === 'form-control') {
 
             document.querySelectorAll('.btn')[0].href=
-            `http://apidigilist-production.up.railway.app/digilist/web-registro-usuarios?userNombre=${nomU.value}&usuarioApellido=${apeU.value}&telefono=${tel.value}&email=${email.value}`
+            `http://apidigilist-production.up.railway.app/digilist/web-registro-usuarios?userNombre=${nomU.value}&usuarioApellido=${apeU.value}&telefono=${tel.value}&email=${email.value}&email=${passw.value}`
           }
         });
       </script>
