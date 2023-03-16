@@ -87,19 +87,19 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Codigo</th>
-                  <th scope="col">Marca</th>
                   <th scope="col">Año</th>
+                  <th scope="col">Marca</th>
                   <th scope="col">Modelo</th>
+                  <th scope="col">Codigo automovil</th>
                 </tr>
               </thead>
               <tbody>
                 <% automoviles.forEach(automovil => { %>
                   <tr>
-                  <td><%=automovil.codeAuto%></td>
-                  <td><%=automovil.marca%></td>
                   <td><%=automovil.year%></td>
+                  <td><%=automovil.marca%></td>
                   <td><%=automovl.modelo%></td>
+                  <td><%=automovil.codeAuto%></td>
                   </tr>
                 <% }) %>
               </tbody>
@@ -109,11 +109,11 @@
       </div>
       <!-- Scripts -->
       <script defer>
-        const [code] = document.querySelectorAll('.form-control');
+        const [year,mar,mod,code] = document.querySelectorAll('.form-control');
         document.querySelector('.form-container').addEventListener('input', e => {
           if(e.target.className === 'form-control') {
             
-            document.querySelectorAll('.btn')[0].href= `http://apidigilist-production.up.railway.app/digilist/web-registro-automovil?codeAuto=${code.value}` 
+            document.querySelectorAll('.btn')[0].href= `http://apidigilist-production.up.railway.app/digilist/web-registro-automovil?YearYear=${year.value}&MarcaMarca=${mar.value}&ModeloModelo=${mod.value}&codeAuto=${code.value}` 
           }
         });
       </script>
