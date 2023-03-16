@@ -22,6 +22,6 @@ usuarioRouter.get('/recuperarContrasena/:codigo', usuarioController.recuperarCon
 usuarioRouter.put('/subir-avatar', authentification, subirImagen.single('perfil'), usuarioController.subirAvatar);
 usuarioRouter.put('/eliminar-avatar', authentification, usuarioController.eliminarAvatar);
 usuarioRouter.post('/pre-registroCliente', validaCamposUsuarioActualizar, validateReutilizable, emailAuth);
-usuarioRouter.post('/pre-registroAdmin', validaCamposUsuario, validateReutilizable, emailAuth);
+usuarioRouter.post('/pre-registroAdmin',authorization, validaCamposUsuario, validateReutilizable, emailAuth);
 //usuarioRouter.post('/cambiar-imagen-fondo', authentification, subirImagen.single('fondo'), usuarioController.rendiImagenFondo);
 export default usuarioRouter;

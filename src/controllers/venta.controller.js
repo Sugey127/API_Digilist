@@ -66,7 +66,7 @@ export const getOne = async (req, res) => {
 
 export const getAllActivo = async (req, res) => {
     try {
-        const { StatusId } = req.body;
+        req.body.StatusId = 1;
         const venta = await Venta.findAll({ where:{ StatusId : 1 } });
         res.status(201).json(venta);
 
@@ -79,7 +79,7 @@ export const getAllActivo = async (req, res) => {
 
 export const getAllInactivo = async (req, res) => {
     try {
-        const { StatusId } = req.body;
+        req.body.StatusId = 2;
         const venta = await Venta.findAll({ where:{ StatusId : 2 } });
         res.status(201).json(venta);
 

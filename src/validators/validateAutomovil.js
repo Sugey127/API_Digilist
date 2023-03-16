@@ -2,8 +2,8 @@ import { check } from "express-validator";
 
 export const validadorAutomovil =[
     check('codeAuto')
-        .not().isEmpty().withMessage('El campo codigo auto es requerido [Las 2 primeras letras de marca + los cuatro numeros del año + las cuatro ultimas letras de modelo]') .isLength({ min: 8, max: 10 })
-        .withMessage('El codigo auto debe tener minimo 8 maximo 10 caracteres'),
+        .not().isEmpty().withMessage('El campo codigo auto es requerido [Las 2 primeras letras de marca + los cuatro numeros del año + el modelo]') .isLength({ min: 8, max: 15 })
+        .withMessage('El codigo auto debe tener minimo 8 maximo 15 caracteres'),
     check('ModeloModelo')
         .not().isEmpty().withMessage('El campo modelo es requerido') .isLength({ min: 2 })
         .withMessage('El modelo debe tener al menos 2 caracteres'),
@@ -18,8 +18,8 @@ export const validadorAutomovil =[
 
 export const validadorAutomovilActualizar =[
     check('codeAuto')
-    .not().isEmpty().withMessage('El campo codigo auto es requerido [Las 2 primeras letras de marca + los cuatro numeros del año + las cuatro ultimas letras de modelo]') .isLength({ min: 8, max: 10 })
-    .withMessage('El codigo auto debe tener minimo 8, maximo 10 caracteres'),
+    .not().isEmpty().withMessage('El campo codigo auto es requerido [Las 2 primeras letras de marca + los cuatro numeros del año + el modelo]') .isLength({ min: 8, max: 15 })
+    .withMessage('El codigo auto debe tener minimo 8, maximo 15 caracteres'),
     check('StatusId')
         .not().isEmpty().withMessage('El campo StatusId es requerido').isIn([1, 2]).withMessage('El campo StatusId solo puede ser 1 o 2')
 

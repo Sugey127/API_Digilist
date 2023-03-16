@@ -42,7 +42,7 @@ body {
   
   .grid-container {
     display: grid;
-    grid-template-columns: 260px 1fr 1fr 1fr;
+    grid-template-columns: 210px 1fr 1fr 1fr;
     grid-template-rows: 0.2fr 3fr;
     grid-template-areas:
       "sidebar header header header"
@@ -74,6 +74,7 @@ body {
   #sidebar {
     grid-area: sidebar;
     height: 100%;
+    width: 210px;
     background-color: rgb(243, 158, 30);
     color: #fff;
     overflow-y: auto;

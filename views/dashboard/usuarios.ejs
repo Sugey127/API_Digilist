@@ -87,19 +87,18 @@
                   <th scope="col">Apellido</th>
                   <th scope="col">Telefono</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Contrseña</th>
+                  
                 </tr>
               </thead>
               <tbody>
-                <% usuarios.forEach(usuario => 
-                { 
+                <% usuarios.forEach(usuario =>  { %>
                   <tr>
                   <th><%=usuario.userNombre%></th>
                   <td><%=usuario.usuarioApellido%></td>
                   <td><%=usuario.telefono%></td>
                   <td><%=usuario.email%></td>
                   </tr>
-                 })%>
+             <% })%>
 
               </tbody>
             </table>

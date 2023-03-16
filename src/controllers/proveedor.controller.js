@@ -73,7 +73,7 @@ export const getOne = async (req, res) => {
 
 export const getAllActivo = async (req, res) => {
     try {
-        const { StatusId } = req.body;
+        req.body.StatusId = 1;
         const proveedor = await Proveedor.findAll({ where:{ StatusId : 1 } });
         res.status(201).json(proveedor);
 
@@ -86,7 +86,7 @@ export const getAllActivo = async (req, res) => {
 
 export const getAllInactivo = async (req, res) => {
     try {
-        const { StatusId } = req.body;
+        req.body.StatusId = 2;
         const proveedor = await Proveedor.findAll({ where:{ StatusId : 2 } });
         res.status(201).json(proveedor);
 

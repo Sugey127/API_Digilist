@@ -61,7 +61,7 @@ export const getOne = async (req, res) => {
 
 export const getAllActivo = async (req, res) => {
     try {
-        const { StatusId } = req.body;
+        req.body.StatusId = 1;
         const year = await Years.findAll({ where:{ StatusId : 1 } });
         res.status(201).json(year);
 
@@ -74,7 +74,7 @@ export const getAllActivo = async (req, res) => {
 
 export const getAllInactivo = async (req, res) => {
     try {
-        const { StatusId } = req.body;
+        req.body.StatusId = 2;
         const year = await Years.findAll({ where:{ StatusId : 2 } });
         res.status(201).json(year);
 

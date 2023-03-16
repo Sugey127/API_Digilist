@@ -50,7 +50,11 @@ webRouter.get('/dashboard', async (req, res) => {
 
 webRouter.get('/automovil', async (req, res) => {
     try {
-        res.render('dashboard/automovil');
+        const automoviles = await Automovil.findAll();
+        const anios = await Years.findAll() ;
+        const marcas = await Marca.findAll();
+        const modelos = await Modelo.findAll();
+        res.render('dashboard/automovil', {automoviles,anios,marcas, modelos});
     } catch (err) {
         res.render('404');
     }
@@ -70,7 +74,8 @@ webRouter.get('/web-registro-automovil', async (req, res) => {
 
 webRouter.get('/productos', async (req, res) => {
     try {
-        res.render('dashboard/productos');
+        const autopartes = await Autopartes.findAll();
+        res.render('dashboard/productos',{autopartes});
     } catch (err) {
         res.render('404');
     }
@@ -132,8 +137,8 @@ webRouter.get('/web-registro-proveedor', async (req, res) => {
 
 webRouter.get('/usuarios', async (req, res) => {
     try {
-     const usuario = await Usuario.findAll();
-        res.render('dashboard/usuarios',{usuario});
+     const usuarios = await Usuario.findAll();
+        res.render('dashboard/usuarios',{usuarios});
     } catch (err) {
         res.render('404');
     }
@@ -152,7 +157,10 @@ webRouter.get('/web-registro-usuarios', async(req, res) => {
 
 webRouter.get('/entradas', async (req, res) => {
     try {
-        res.render('dashboard/entradas');
+        const entradas = await Entradas.findAll();
+        const codesA= await Automovil.findAll();
+        const rfc=await Proveedor.findAll();
+        res.render('dashboard/entradas',{entradas, codesA,rfc});
     } catch (err) {
         res.render('404');
     }
@@ -171,7 +179,8 @@ webRouter.get('/web-registro-entradas', async(req, res) => {
 
 webRouter.get('/envios', async (req, res) => {
     try {
-        res.render('dashboard/envios');
+        const envios= await Envio.findAll();
+        res.render('dashboard/envios', {envios});
     } catch (err) {
         res.render('404');
     }

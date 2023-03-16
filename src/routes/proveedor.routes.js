@@ -11,7 +11,7 @@ proveedorRouter.put('/actualizar', validadorProveedorActualizar,validateReutiliz
 //proveedorRouter.delete('/eliminar',authentification,authorization, proveedorController.drop); 
 proveedorRouter.get('/buscarUno',authentification,authorization, proveedorController.getOne); 
 proveedorRouter.get('/buscarTodos', proveedorController.getAll); 
-proveedorRouter.get('/buscarActivo',authentification,authorization, proveedorController.getAllActivo);
-proveedorRouter.get('/buscarInactivo',authentification,authorization, proveedorController.getAllInactivo);
+proveedorRouter.get('/buscarActivo', proveedorController.getAllActivo);
+proveedorRouter.get('/buscarInactivo', proveedorController.getAllInactivo);
 
 export default proveedorRouter;

@@ -62,15 +62,22 @@
             <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
             </div>
-            <label for="inputPassword5" class="form-label">Entrega</label>
+            <label for="inputPassword5" class="form-label">Fecha de Entrega</label>
             <input type="tel" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
             </div>
             <label for="inputPassword5" class="form-label">Estado Paquete</label>
-            <input type="email" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+            <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
+              <option value="preparacion">Preparación</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="entregado">Entregado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+            <label for="inputPassword5" class="form-label">Email Usuario</label>
+            <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
             </div>
-            <label for="inputPassword5" class="form-label">Registro</label>
+            <label for="inputPassword5" class="form-label">Folio del Redecibo</label>
             <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
             </div>
@@ -86,11 +93,14 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Codigo</th>
+                  <th scope="col">Codigo Envio</th>
                   <th scope="col">Direccion</th>
                   <th scope="col">Descripcion</th>
-                  <th scope="col">Entrega</th>
+                  <th scope="col">Fecha de Entrega</th>
                   <th scope="col">Estado Paquete</th>
+                  <th scope="col">Fecha de compra</th>
+                  <th scope="col">Email Usuario</th>
+                  <th scope="col">Folio del Redecibo</th>
                 </tr>
               </thead>
               <tbody>
@@ -98,9 +108,12 @@
                     <tr>
                     <td><%=envio.codEnvio%></td>
                     <td><%=envio.direccion%></td>
-                    <td><%=envio.fechaEntrega%></td>
                     <td><%=envio.descripcion%></td>
+                    <td><%=envio.fechaEntrega%></td>
                     <td><%=envio.EstadoPaquete%></td>
+                    <td><%=envio.FechaCompra%></td>
+                    <td><%=envio.UsuarioEmail%></td>
+                    <td><%=envio.ReciboFolio%></td>
                     </tr>
                   <% }) %>
               </tbody>
@@ -110,11 +123,11 @@
       </div>
       <!-- Scripts -->
       <script defer>
-      const [code, dir, des, entrega, estado] = document.querySelectorAll('.form-control');
+      const [code, dir, des, entrega, estado,email,folio] = document.querySelectorAll('.form-control');
       document.querySelector('.form-container').addEventListener('input', e => {
         if (e.target.className === 'form-control') {
           
-          document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-envio?codEnvio=${code.value}&direccion=${dir.value}&descripcion=${des.value}&fechaEntrega=${entrega.value}&EstadoPaquete=${estado.value}`
+          document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-envio?codEnvio=${code.value}&direccion=${dir.value}&descripcion=${des.value}&fechaEntrega=${entrega.value}&EstadoPaquete=${estado.value}&UsuarioEmail=${email.value}&ReciboFolio=${folio.value}`
         }
       });        
       </script>
