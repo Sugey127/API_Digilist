@@ -76,7 +76,7 @@
               <div class="d-grid gap-2">
                 <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
                 <button class="btn btn-dark" type="button">Editar</button>
-                <button class="btn btn-dark" type="button">Eliminar</button>
+                
               </div>
             </div>
 
@@ -89,6 +89,7 @@
                     <th scope="col">RFC</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Email</th>
+                    <th scope="col"></th>
                     
                   </tr>
                 </thead>
@@ -99,8 +100,8 @@
                       <td><%= proveedor.direccionProveedor%></td>
                       <td><%= proveedor.RfcProveedor%></td>
                       <td><%= proveedor.telefonoProveedor%></td>
-                      <td><%= proveedor.emailProveedor%></td>
-                      
+                      <td><%= proveedor.emailProveedor%></td>  
+                      <td><a href="http://localhost:4000/digilist/web-eliminar-proveedor?RfcProveedor=<%=proveedor.RfcProveedor %>" class="btn btn-dark" >Eliminar</a></td>
                     </tr>
                     <% }) %>
                 </tbody>
