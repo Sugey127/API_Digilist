@@ -50,10 +50,10 @@ webRouter.get('/dashboard', async (req, res) => {
 
 webRouter.get('/automovil', async (req, res) => {
     try {
-        const automoviles = await Automovil.findAll();
-        const anios = await Years.findAll();
-        const marcas = await Marca.findAll();
-        const modelos = await Modelo.findAll();
+        const automoviles = await Automovil.findAll({where:{StatusId:1}});
+        const anios = await Years.findAll({where:{StatusId:1}});
+        const marcas = await Marca.findAll({where:{StatusId:1}});
+        const modelos = await Modelo.findAll({where:{StatusId:1}});
         res.render('dashboard/automovil', { automoviles, anios, marcas, modelos });
     } catch (err) {
         res.render('404');
@@ -66,6 +66,22 @@ webRouter.get('/web-registro-automovil', async (req, res) => {
         req.query.StatusId = 1;
         await Automovil.create(req.query);
         res.redirect('https://apidigilist-production.up.railway.app/digilist/automovil')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
+//consumo put
+
+webRouter.get('/web-eliminar-automovil', async (req, res) => {
+    try {
+        console.log(req.query);
+        console.log('HOLA COMO ESTA', req.query.codeAuto);
+        const automovill = await Automovil.update({ StatusId: 2 }, { where: { codeAuto: req.query.codeAuto } });
+        
+        res.redirect('http://apidigilist-production.up.railway.app/digilist/automovil');
+
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);

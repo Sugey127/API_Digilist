@@ -91,6 +91,7 @@
                   <th scope="col">Marca</th>
                   <th scope="col">Modelo</th>
                   <th scope="col">Codigo automovil</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -100,6 +101,7 @@
                   <td><%=automovil.MarcaMarca	%></td>
                   <td><%=automovil.ModeloModelo%></td>
                   <td><%=automovil.codeAuto%></td>
+                  <td><a href="http://apidigilist-production.up.railway.app/digilist/web-eliminar-automovil?codeAuto=<%=automovil.codeAuto %>" class="btn btn-dark" >Eliminar</a></td>
                   </tr>
                 <% }) %>
               </tbody>
