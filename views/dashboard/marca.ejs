@@ -68,12 +68,14 @@
           <thead>
             <tr> 
               <th scope="col">Marca</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <% marcas.forEach(marc => { %>
               <tr>
                 <td><%= marc.marca %></td>
+                <td><a href="http://apidigilist-production.up.railway.app/digilist/web-eliminar-marca?marca=<%=marc.marca %>" class="btn btn-dark" >Eliminar</a></td>
               </tr>
               <% }) %>
           </tbody>

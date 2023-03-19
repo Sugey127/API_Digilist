@@ -11,6 +11,7 @@ import { Entradas } from "../src/models/entradas.js";
 import { Envio } from "../src/models/envio.js";
 import { Recibo } from "../src/models/recibo.js";
 import { Venta } from "../src/models/venta.js";
+import { where } from "sequelize";
 
 
 export const webRouter = Router();
@@ -90,8 +91,9 @@ webRouter.get('/web-eliminar-automovil', async (req, res) => {
 
 webRouter.get('/productos', async (req, res) => {
     try {
-        const autopartes = await Autopartes.findAll();
-        res.render('dashboard/productos', { autopartes });
+        const autopartes = await Autopartes.findAll({where:{StatusId:1}});
+        const codeEn = await Entradas.findAll({where:{StatusId:1}});
+        res.render('dashboard/productos', { autopartes , codeEn});
     } catch (err) {
         res.render('404');
     }
@@ -103,6 +105,21 @@ webRouter.get('/web-registro-productos', async (req, res) => {
         req.query.StatusId = 1;
         await Autopartes.create(req.query);
         res.redirect('https://apidigilist-production.up.railway.app/digilist/productos')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
+//consumo put
+webRouter.get('/web-eliminar-productos', async (req, res) => {
+    try {
+        console.log(req.query);
+        console.log('HOLA COMO ESTA', req.query.RfcProveedor);
+        const autopartes = await Autopartes.update({ StatusId: 2 }, { where: { code_autoparte: req.query.code_autoparte } });
+        
+        res.redirect('http://apidigilist-production.up.railway.app/digilist/productos');
+
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -152,7 +169,6 @@ webRouter.get('/web-registro-proveedor', async (req, res) => {
 });
 
 //consumo put
-
 webRouter.get('/web-eliminar-proveedor', async (req, res) => {
     try {
         console.log(req.query);
@@ -169,7 +185,7 @@ webRouter.get('/web-eliminar-proveedor', async (req, res) => {
 
 webRouter.get('/usuarios', async (req, res) => {
     try {
-        const usuarios = await Usuario.findAll({where:{role:"administrador"}});
+        const usuarios = await Usuario.findAll({where:{[Op.and]:[{role:"administrador"},{StatusId:1}]}});
         res.render('dashboard/usuarios', { usuarios });
     } catch (err) {
         res.render('404');
@@ -187,11 +203,25 @@ webRouter.get('/web-registro-usuarios', async (req, res) => {
     }
 });
 
+//consumo put
+webRouter.get('/web-eliminar-usuarios', async (req, res) => {
+    try {
+       
+        const usuario = await Usuario.update({ StatusId: 2 }, { where: { email: req.query.email } });
+        
+        res.redirect('http://apidigilist-production.up.railway.app/digilist/usuarios');
+
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
 webRouter.get('/entradas', async (req, res) => {
     try {
-        const entradas = await Entradas.findAll();
-        const codesA = await Automovil.findAll();
-        const rfc = await Proveedor.findAll();
+        const entradas = await Entradas.findAll({where:{StatusId:1}});
+        const codesA = await Automovil.findAll({where:{StatusId:1}});
+        const rfc = await Proveedor.findAll({where:{StatusId:1}});
         res.render('dashboard/entradas', { entradas, codesA, rfc });
     } catch (err) {
         res.render('404');
@@ -209,9 +239,23 @@ webRouter.get('/web-registro-entradas', async (req, res) => {
     }
 });
 
+//consumo put
+webRouter.get('/web-eliminar-entradas', async (req, res) => {
+    try {
+       
+        const entrada = await Envio.update({ StatusId: 2 }, { where: { code_entrada: req.query.code_entrada } });
+        
+        res.redirect('http://apidigilist-production.up.railway.app/digilist/entradas');
+
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
 webRouter.get('/envios', async (req, res) => {
     try {
-        const envios = await Envio.findAll();
+        const envios = await Envio.findAll({where:{StatusId:1}});
         res.render('dashboard/envios', { envios });
     } catch (err) {
         res.render('404');
@@ -225,6 +269,20 @@ webRouter.get('/web-registro-envios', async (req, res) => {
         await Envio.create(req.query);
         res.redirect('https://apidigilist-production.up.railway.app/digilist/envios')
     } catch (err) {
+        res.status(403).json(err);
+    }
+});
+
+//consumo put
+webRouter.get('/web-eliminar-envios', async (req, res) => {
+    try {
+       
+        const envio = await Envio.update({ StatusId: 2 }, { where: { codEnvio: req.query.codEnvio } });
+        
+        res.redirect('http://apidigilist-production.up.railway.app/digilist/envios');
+
+    } catch (err) {
+        // res.render('404');
         res.status(403).json(err);
     }
 });
@@ -251,9 +309,9 @@ webRouter.get('/web-registro-detalleventa', async (req, res) => {
 
 webRouter.get('/modelo', async (req, res) => {
     try {
-        const modelos = await Modelo.findAll();
-        const anios = await Years.findAll();
-        const marcas = await Marca.findAll();
+        const modelos = await Modelo.findAll({where:{StatusId:1}});
+        const anios = await Years.findAll({where:{StatusId:1}});
+        const marcas = await Marca.findAll({where:{StatusId:1}});
         res.render('dashboard/modelo', { modelos, anios, marcas });
     } catch (err) {
         res.render('404');
@@ -273,9 +331,24 @@ webRouter.get('/web-registro-modelo', async (req, res) => {
     }
 });
 
+//consumo put
+webRouter.get('/web-eliminar-modelo', async (req, res) => {
+    try {
+        console.log(req.query);
+        console.log('HOLA COMO ESTA', req.query.RfcProveedor);
+        const modelod = await Modelo.update({ StatusId: 2 }, { where: { modelo: req.query.modelo } });
+        
+        res.redirect('http://apidigilist-production.up.railway.app/digilist/modelo');
+
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
 webRouter.get('/anio', async (req, res) => {
     try {
-        const anios = await Years.findAll();
+        const anios = await Years.findAll({where:{StatusId:1}});
         res.render('dashboard/anio', { anios });
     } catch (err) {
         res.render('404');
@@ -295,9 +368,24 @@ webRouter.get('/web-registro-anio', async (req, res) => {
     }
 });
 
+//consumo put
+webRouter.get('/web-eliminar-anio', async (req, res) => {
+    try {
+        console.log(req.query);
+        console.log('HOLA COMO ESTA', req.query.RfcProveedor);
+        const anio = await Years.update({ StatusId: 2 }, { where: { year: req.query.year } });
+        
+        res.redirect('https://apidigilist-production.up.railway.app/digilist/anio');
+
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
 webRouter.get('/marca', async (req, res) => {
     try {
-        const marcas = await Marca.findAll();
+        const marcas = await Marca.findAll({where:{StatusId:1}});
         res.render('dashboard/marca', { marcas });
     } catch (err) {
         res.render('404');
@@ -311,6 +399,21 @@ webRouter.get('/web-registro-marca', async (req, res) => {
         req.query.StatusId = 1;
         await Marca.create(req.query);
         res.redirect('https://apidigilist-production.up.railway.app/digilist/marca')
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
+
+//consumo put
+webRouter.get('/web-eliminar-marca', async (req, res) => {
+    try {
+        console.log(req.query);
+        console.log('HOLA COMO ESTA', req.query.RfcProveedor);
+        const marca = await Marca.update({ StatusId: 2 }, { where: { marca: req.query.marca } });
+        
+        res.redirect('http://apidigilist-production.up.railway.app/digilist/marca');
+
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);

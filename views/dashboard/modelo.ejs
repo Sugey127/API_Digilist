@@ -74,7 +74,7 @@
         <div class="d-grid gap-2">
           <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
           <button class="btn btn-dark" type="button">Editar</button>
-          <button class="btn btn-dark" type="button">Eliminar</button>
+          
         </div>
       </div>
 
@@ -85,6 +85,7 @@
               <th scope="col">Modelo</th>
               <th scope="col">Año</th>
               <th scope="col">Marca</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -93,6 +94,7 @@
                 <td><%= modelo.modelo %></td>
                 <td><%= modelo.YearYear%></td>
                 <td><%= modelo.MarcaMarca%></td>
+                <td><a href="http://apidigilist-production.up.railway.app/digilist/web-eliminar-modelo?modelo=<%=modelo.modelo %>" class="btn btn-dark" >Eliminar</a></td>
               </tr>
               <% }) %>
           </tbody>

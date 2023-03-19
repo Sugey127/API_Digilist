@@ -101,6 +101,7 @@
                   <th scope="col">Fecha de compra</th>
                   <th scope="col">Email Usuario</th>
                   <th scope="col">Folio del Recibo</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -114,6 +115,7 @@
                     <td><%=envio.fechaRegistroEnvio%></td>
                     <td><%=envio.UsuarioEmail%></td>
                     <td><%=envio.ReciboFolio%></td>
+                    <td><a href="https://apidigilist-production.up.railway.app/digilist/web-eliminar-envios?codEnvio=<%=envio.codEnvio %>" class="btn btn-dark" >Eliminar</a></td>
                     </tr>
                   <% }) %>
               </tbody>

@@ -69,12 +69,14 @@
           <thead>
             <tr>
               <th scope="col">Año</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <% anios.forEach(anio => { %>
               <tr>
                 <td><%= anio.year %></td>
+                <td><a href="https://apidigilist-production.up.railway.app/digilist/web-eliminar-anio?year=<%=anio.year %>" class="btn btn-dark" >Eliminar</a></td>
               </tr>
               <% }) %>
           </tbody>

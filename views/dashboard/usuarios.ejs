@@ -87,7 +87,7 @@
                   <th scope="col">Apellido</th>
                   <th scope="col">Telefono</th>
                   <th scope="col">Email</th>
-                  
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -97,6 +97,7 @@
                   <td><%=usuario.usuarioApellido%></td>
                   <td><%=usuario.telefono%></td>
                   <td><%=usuario.email%></td>
+                  <td><a href="https://apidigilist-production.up.railway.app/digilist/web-eliminar-usuarios?email=<%=usuario.email %>" class="btn btn-dark" >Eliminar</a></td>
                   </tr>
              <% })%>
 
