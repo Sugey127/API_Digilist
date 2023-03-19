@@ -1,19 +1,34 @@
 body {
     height: 100vh;
-    display: flex;
+    display: flex; 
     align-items: center;
-    /* background: url(../img/fondo3.jpg); */
+    background: url(/logo/auto.jfif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de la capa obscura (negro con transparencia de 0.5) */
+    z-index: -1;  /* Colocamos el formulario delante del pseudo-elemento */
 }
 .contenedor-form {
-    background: linear-gradient(to right, rgb(243, 158, 30), rgba(240, 239, 250, 0.89)), url(/img/image2.jpg);
+    /* background: linear-gradient(to right, rgb(243, 158, 30), rgba(240, 239, 250, 0.89)); */
+    background-color: #222120;
     max-width: 500px;
     width: 100%;
     margin: auto;
     background-size: cover;
     background-position: center center;
-    box-shadow: 0 0 10px #000;
+    box-shadow: 0 0 10px #fff;
     padding: 50px; 
-
+    border-radius: 35px;
+    z-index: 1; /* Colocamos el formulario delante del pseudo-elemento */
 }
 .contenedor-form .header {
     margin-bottom: 50px;
@@ -64,6 +79,7 @@ body {
 }
 .contenedor-form .btn {
     width: 100%;
+    height: 40px;
     background-color: #171717;
     color: #fff;
     border: none;
@@ -71,7 +87,7 @@ body {
     text-transform: uppercase;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 10px;
-    margin: 30px 0px;
+    margin: 25px 0px;
 }
 hr {
     margin-bottom: 10px;
@@ -83,3 +99,7 @@ hr {
     color: #fff;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+.mi-boton:hover {
+    background-color: #ae7d11;
+  }
