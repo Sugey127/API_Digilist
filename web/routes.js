@@ -14,6 +14,7 @@ import { Venta } from "../src/models/venta.js";
 import { where } from "sequelize";
 
 
+
 export const webRouter = Router();
 
 webRouter.get('/register', async (req, res) => {
@@ -32,7 +33,18 @@ webRouter.get('/login', async (req, res) => {
     }
 });
 
-
+webRouter.get('/login-verificar', async (req, res) => {
+    try {
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        const user =await Usuario.findOne({ where: { email: req.query.email } });
+       console.log(req.query);
+        res.redirect('http://localhost:4000/digilist/dashboard'); // Redirige al usuario al dashboard
+     
+    } catch (err) {
+        // res.render('404');
+        res.status(403).json(err);
+    }
+});
 
 webRouter.get('/home', async (req, res) => {
 

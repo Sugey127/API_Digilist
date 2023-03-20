@@ -15,7 +15,7 @@
 
 <body>
     <div class="contenedor-form">
-        <form method="POST" action="/login">
+        <form action="/login-verificar">
             <div class="header">
                 <h2>Iniciar sesion</h2>
             </div>
@@ -38,7 +38,16 @@
             <a href="../usuario/recuperar_contraseña.html" class="forgot-password">Olvido el password?</a>
         </form>
     </div>
-
+<!-- Scripts -->
+<script defer>
+    const [email,password] = document.querySelectorAll('.login');
+    document.querySelector('.contenedor-form').addEventListener('input', e => {
+      if(e.target.className === 'login') {
+        
+        document.querySelectorAll('.btn')[0].href= `http://localhost:4000/digilist/login-verificar?email=${email.value}&password=${password.value}` 
+      }
+    });
+</script>
      
 </body>
 
