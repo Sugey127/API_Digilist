@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link  href="/css/sesiones.css" rel="stylesheet"> 
+    <!-- Icono -->
+    <link rel="icon" type="image/x-icon"  href="/logo/logo.jpg">
+    <title>Iniciar sesion</title>
+    <script defer src="/js/login.js"></script>
+
+</head>
+
+<body>
+    <div class="contenedor-form">
+        <form action="/login-verificar">
+            <div class="header">
+                <h2>Iniciar sesion</h2>
+            </div>
+            <div class="fila">
+                <label for="">Email</label>
+                <input type="text" required class="login">
+            </div>
+            <div class="fila">
+                <label for="">Password</label>
+                <input type="password" required class="login">
+            </div>
+            <!-- <div class="fila">
+                <input type="checkbox" class="check">
+                <span>Mantener Sesión</span>
+            </div> -->
+            <a href="" class="btn" type="submit">Entrar</a>
+           
+            <!-- <input type="submit" value="Entrar" class="btn ">  -->
+            <hr>
+            <a href="../usuario/recuperar_contraseña.html" class="forgot-password">Olvido el password?</a>
+        </form>
+    </div>
+<!-- Scripts -->
+<script defer>
+    const [email,password] = document.querySelectorAll('.login');
+    document.querySelector('.contenedor-form').addEventListener('input', e => {
+      if(e.target.className === 'login') {
+        
+        document.querySelectorAll('.btn')[0].href= `http://localhost:4000/digilist/login-verificar?email=${email.value}&password=${password.value}` 
+      }
+    });
+</script>
+     
+</body>
+
+</html>

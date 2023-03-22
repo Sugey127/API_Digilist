@@ -1,0 +1,38 @@
+[
+    {
+        "nombreAutoparte": "SOY UNA LLANTA",
+        "stock": 12,
+        "precio": 12,
+        "code_entrada": "llanau1994a8",
+        "ProveedorRfcProveedor": "Kali1234567890",
+        "ModeloModelo": "A8",
+        "MarcaMarca": "Audi",
+        "YearYear": 1994, 
+        "AutomovilCodeAuto":"au1994a8",
+        "StatusId": 1
+      },
+      {
+        "nombreAutoparte": "UNA TETERA",
+        "stock": 12,
+        "precio": 12,
+        "code_entrada": "teteau1994a8",
+        "ProveedorRfcProveedor": "Kali1234567890",
+        "ModeloModelo": "A8",
+        "MarcaMarca": "Audi",
+        "YearYear": 1994, 
+        "AutomovilCodeAuto":"au1994a8",
+        "StatusId": 1
+      },
+      {
+        "nombreAutoparte": "UNA",
+        "stock": 12,
+        "precio": 12,
+        "code_entrada": "unaau1994a8",
+        "ProveedorRfcProveedor": "Kali1234567890",
+        "ModeloModelo": "A8",
+        "MarcaMarca": "Audi",
+        "YearYear": 1994,
+        "AutomovilCodeAuto":"au1994a8", 
+        "StatusId": 1
+      }
+]

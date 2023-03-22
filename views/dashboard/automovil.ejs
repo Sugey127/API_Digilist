@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../components/head')%>
+<body>
+      <div class="grid-container">
+        <!-- Header -->
+        <%- include('../components/header') %>
+        <!-- End Header -->
+        <!-- Sidebar -->
+        <%- include('../components/sidebar') %>
+        <!-- End Sidebar -->
+        <main class="main-container">
+            <div class="main-title">
+              <p class="font-weight-bold">Panel administrativo de Automovil</p>
+            </div>
+    
+            <div class="main-cards">
+    
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">El campo codigo auto es requerido [Las 2 primeras letras de marca + los cuatro numeros del año + el modelo]</p>
+                </div>
+              </div>
+    
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Ordenes de compra</p>
+                  <span class="material-icons-outlined text-orange">add_shopping_cart</span>
+                </div>
+                <span class="text-primary font-weight-bold">83</span>
+              </div>
+    
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Ordenes de venta</p>
+                  <span class="material-icons-outlined text-green">shopping_cart</span>
+                </div>
+                <span class="text-primary font-weight-bold">79</span>
+              </div>
+    
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">INVENTORY ALERTS</p>
+                  <span class="material-icons-outlined text-red">notification_important</span>
+                </div>
+                <span class="text-primary font-weight-bold">56</span>
+              </div>
+            </div>
+    
+            <div class="cards form-container">
+              <label for="">Año</label>
+              <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
+                <% anios.forEach((anio) => { %>
+                    <option value="<%= anio.year %>"><%= anio.year %></option>
+                  <% }) %>
+              </select>
+      
+              <label for="">Marca</label>
+              <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
+                
+                <% marcas.forEach((marc) => { %>
+                    
+                    <option value="<%= marc.marca %>"><%= marc.marca %></option>
+                  <% }) %>
+              </select>
+
+              <label for="">Modelo</label>
+              <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
+                <% modelos.forEach((model)=> { %>
+                  
+                  <option value="<%= model.modelo %>"><%=model.modelo %></option>
+               <% }) %>
+              </select>
+      
+              <label for="inputPassword5" class="form-label">Codigo automovil</label>
+              <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+    
+            <div class="d-grid gap-2">
+              <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
+            </div>
+          </div>
+    
+          <div class="cards">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Año</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Modelo</th>
+                  <th scope="col">Codigo automovil</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% automoviles.forEach(automovil => { %>
+                  <tr>
+                  <td><%=automovil.YearYear%></td>
+                  <td><%=automovil.MarcaMarca	%></td>
+                  <td><%=automovil.ModeloModelo%></td>
+                  <td><%=automovil.codeAuto%></td>
+                  <td><a href="https://apidigilist-production.up.railway.app/digilist/web-eliminar-automovil?codeAuto=<%=automovil.codeAuto %>" class="btn btn-dark" >Eliminar</a></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+      <!-- Scripts -->
+      <script defer>
+        const [year,mar,mod,code] = document.querySelectorAll('.form-control');
+        document.querySelector('.form-container').addEventListener('input', e => {
+          if(e.target.className === 'form-control') {
+            
+            document.querySelectorAll('.btn')[0].href= `http://apidigilist-production.up.railway.app/digilist/web-registro-automovil?YearYear=${year.value}&MarcaMarca=${mar.value}&ModeloModelo=${mod.value}&codeAuto=${code.value}` 
+          }
+        });
+      </script>
+      <!-- ApexCharts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+      <!-- Custom JS -->
+      <script src="../../public/js/sidebar.js"></script>
+</body>
+</html>

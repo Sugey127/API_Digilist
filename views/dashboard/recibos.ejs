@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../components/head')%>
+<body>
+      <div class="grid-container">
+        <!-- Header -->
+        <%- include('../components/header') %>
+        <!-- End Header -->
+        <!-- Sidebar -->
+        <%- include('../components/sidebar') %>
+        <!-- End Sidebar -->
+        <!-- main -->
+        <main class="main-container">
+            <div class="main-title">
+              <p class="font-weight-bold">Panel administrativo de Recibo</p>
+            </div>
+    
+            <div class="main-cards">
+    
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Productos</p>
+                  <span class="material-icons-outlined text-blue">inventory_2</span>
+                </div>
+                <span class="text-primary font-weight-bold">249</span>
+              </div>
+    
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Ordenes de compra</p>
+                  <span class="material-icons-outlined text-orange">add_shopping_cart</span>
+                </div>
+                <span class="text-primary font-weight-bold">83</span>
+              </div>
+    
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Ordenes de venta</p>
+                  <span class="material-icons-outlined text-green">shopping_cart</span>
+                </div>
+                <span class="text-primary font-weight-bold">79</span>
+              </div>
+    
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">INVENTORY ALERTS</p>
+                  <span class="material-icons-outlined text-red">notification_important</span>
+                </div>
+                <span class="text-primary font-weight-bold">56</span>
+              </div>
+            </div>
+    
+          <div class="cards form-container">
+            <label for="inputPassword5" class="form-label">Folio</label>
+            <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+            <div id="passwordHelpBlock" class="form-text">
+            </div>
+            <label for="inputPassword5" class="form-label">Cantidad</label>
+            <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+            <div id="passwordHelpBlock" class="form-text">
+            </div>
+            <label for="inputPassword5" class="form-label">Fecha Recibo</label>
+            <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+            <div id="passwordHelpBlock" class="form-text">
+            </div>
+    
+            <div class="d-grid gap-2">
+              <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
+              <button class="btn btn-dark" type="button">Editar</button>
+              <button class="btn btn-dark" type="button">Eliminar</button>
+            </div>
+          </div>
+    
+          <div class="cards">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Folio</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Fecha recibo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% recibos.forEach(recibo =>  { %>
+                  <tr>
+                    <td><%= recibo.Folio %></td>
+                    <td><%= recibo.cantidad%></td>
+                    <td><%= recibo.fechaRecibo%></td>
+
+                  </tr>
+                  <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+      <!-- Scripts -->
+      <script defer>
+      const [fol, cant, reci] = document.querySelectorAll('.form-control');
+      document.querySelector('.form-container').addEventListener('input', e => {
+        if (e.target.className === 'form-control') {
+          
+          document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-recibos?Folio=${fol.value}&cantidad=${cant.value}&fechaRecibo=${reci.value}`
+        }
+      });       
+      </script>
+      <!-- ApexCharts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+      <!-- Custom JS -->
+      <script src="../../public/js/sidebar.js"></script>
+</body>
+</html>

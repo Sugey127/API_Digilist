@@ -1,0 +1,27 @@
+import { Router } from "express";
+import * as usuarioController from "../controllers/usuario.controller.js";
+import { authentification, authorization } from "../middlewares/auth.js";
+import { validaCamposUsuario, validaCamposUsuarioActualizar, validateCambioContraseña, validateLogin } from "../validators/validateUsuario.js";
+import { validateReutilizable } from "../validators/validateReutilizable.js";
+import { subirImagen } from "../middlewares/subirImagen.js";
+import { emailAuth, forgotPassword, verifyCode } from "../middlewares/emailAuth.js";
+const usuarioRouter = Router();
+
+usuarioRouter.post('/registro/:codigo', verifyCode, usuarioController.registro);
+usuarioRouter.post('/registroCliente/:codigo', verifyCode, usuarioController.registroCliente);
+usuarioRouter.put('/actualizar', authentification, validaCamposUsuarioActualizar, validateReutilizable, authentification, usuarioController.put);
+usuarioRouter.put('/cambiarPass', authentification, validateCambioContraseña, validateReutilizable, usuarioController.cambiarPass);
+//usuarioRouter.delete('/eliminar', authentification, authorization, usuarioController.drop);
+usuarioRouter.get('/buscarUno', authentification, usuarioController.getOne);
+usuarioRouter.get('/buscarTodos', authentification, usuarioController.getAll);
+usuarioRouter.post('/login', validateLogin, validateReutilizable, usuarioController.login);
+usuarioRouter.get('/buscarActivo', authentification, usuarioController.getAllActivo);
+usuarioRouter.get('/buscarInactivo', authentification, usuarioController.getAllInactivo);
+usuarioRouter.post('/olvidarContrasena', forgotPassword);
+usuarioRouter.get('/recuperarContrasena/:codigo', usuarioController.recuperarContrasena);
+usuarioRouter.put('/subir-avatar', authentification, subirImagen.single('perfil'), usuarioController.subirAvatar);
+usuarioRouter.put('/eliminar-avatar', authentification, usuarioController.eliminarAvatar);
+usuarioRouter.post('/pre-registroCliente', validaCamposUsuarioActualizar, validateReutilizable, emailAuth);
+usuarioRouter.post('/pre-registroAdmin',authorization, validaCamposUsuario, validateReutilizable, emailAuth);
+//usuarioRouter.post('/cambiar-imagen-fondo', authentification, subirImagen.single('fondo'), usuarioController.rendiImagenFondo);
+export default usuarioRouter;

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sesion.css">
+    <title>Registro</title>
+</head>
+
+<body>
+    <%- include('components/nabvar') %>
+    <div class="contenedor-form">
+        <form action="../html/inicio_sesion.html">
+            <div class="header">
+                <h2>Crear cuenta</h2>
+                <a href="../html/inicio_sesion.html">Iniciar sesion</a>
+                <a href="../html/registro.html" class="selected">Crear cuenta</a>
+            </div>
+            <div class="fila">
+                <label for="">Nombre de usuario</label>
+                <input type="text" required>
+            </div>
+            <div class="fila">
+                <label for="">Correo electronico</label>
+                <input type="email" required>
+            </div>
+            <div class="fila">
+                <label for="">Password</label>
+                <input type="password" required>
+            </div>
+            <div class="fila">
+                <input type="checkbox" class="check">
+                <span>Mantener Sesión</span>
+            </div>
+            <input type="submit" value="Crear" class="btn">
+            <hr>
+        </form>
+    </div>
+</body>
+
+</html>

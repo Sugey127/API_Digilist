@@ -1,0 +1,26 @@
+[
+    {
+        "nombreProveedor": "Kali",
+        "direccionProveedor": "calle89 #468p x 23 y 45 col. centro",
+        "RfcProveedor":"Kali1234567890",
+        "telefonoProveedor": "999-999-9990",
+        "emailProveedor": "Kali@gmail.com",
+        "StatusId": 1
+    },
+    {
+        "nombreProveedor": "Luxe",
+        "direccionProveedor": "calle79 #485p x 22 y 24 col. Heroes",
+        "RfcProveedor":"Luxe1234567890",
+        "telefonoProveedor": "999-192-9394",
+        "emailProveedor": "Luxe@gmail.com",
+        "StatusId": 1
+    },
+    {
+        "nombreProveedor": "Nori",
+        "direccionProveedor": "calle 56 #234p x 12 y 14 col. centro",
+        "RfcProveedor":"Nori1234567890",
+        "telefonoProveedor": "999-991-9293",
+        "emailProveedor": "Nori@gmail.com",
+        "StatusId": 1
+    }
+]

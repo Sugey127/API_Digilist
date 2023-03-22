@@ -1,0 +1,30 @@
+[
+    {
+        "ModeloModelo": "A6",
+        "YearYear": 2018,
+        "MarcaMarca": "Audi",
+        "codeAuto":"au2018a6",
+        "StatusId":1
+    },
+    {
+        "ModeloModelo": "A3 Sedan",
+        "YearYear": 2013,
+        "MarcaMarca": "Audi",
+        "codeAuto":"au2013a3se",
+        "StatusId":1
+    },
+    {
+        "ModeloModelo": "A8",
+        "YearYear": 1994,
+        "MarcaMarca": "Audi",
+        "codeAuto":"au1994a8",
+        "StatusId":1
+    },
+    {
+        "ModeloModelo": "Q2",
+        "YearYear": 2016,
+        "MarcaMarca": "Audi",
+        "codeAuto":"au2016q2",
+        "StatusId":1
+    }
+]
