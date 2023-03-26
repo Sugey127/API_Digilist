@@ -43,7 +43,7 @@ webRouter.get('/login-verificar', async (req, res) => {
             console.log('no valido');
             throw new Error('Esta cuenta no existe');
         } else {
-            const data = await fetch('http://localhost:4000/usuario/login', {
+            const data = await fetch('https://digilist.fly.dev/usuario/login', {
                 method: 'post',  
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ webRouter.get('/login-verificar', async (req, res) => {
                 maxAge: 2 * 24 * 60 * 60 * 1000, httpOnly: true
             });
 
-            res.redirect('http://localhost:4000/digilist/dashboard');
+            res.redirect('https://digilist.fly.dev/digilist/dashboard');
         }
     } catch (err) {
         res.render('401');
@@ -97,7 +97,7 @@ webRouter.get('/web-registro-automovil', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Automovil.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/automovil')
+        res.redirect('https://digilist.fly.dev/digilist/automovil')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -112,7 +112,7 @@ webRouter.get('/web-eliminar-automovil', async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.codeAuto);
         const automovill = await Automovil.update({ StatusId: 2 }, { where: { codeAuto: req.query.codeAuto } });
 
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/automovil');
+        res.redirect('https://digilist.fly.dev/digilist/automovil');
 
     } catch (err) {
         // res.render('404');
@@ -135,7 +135,7 @@ webRouter.get('/web-registro-productos', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Autopartes.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/productos')
+        res.redirect('https://digilist.fly.dev/digilist/productos')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -149,7 +149,7 @@ webRouter.get('/web-eliminar-productos', async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const autopartes = await Autopartes.update({ StatusId: 2 }, { where: { code_autoparte: req.query.code_autoparte } });
 
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/productos');
+        res.redirect('https://digilist.fly.dev/digilist/productos');
 
     } catch (err) {
         // res.render('404');
@@ -170,7 +170,7 @@ webRouter.get('/web-registro-recibos', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Recibo.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/recibos')
+        res.redirect('https://digilist.fly.dev/digilist/recibos')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -192,7 +192,7 @@ webRouter.get('/web-registro-proveedor', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Proveedor.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/proveedor')
+        res.redirect('https://digilist.fly.dev/digilist/proveedor')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -206,7 +206,7 @@ webRouter.get('/web-eliminar-proveedor', async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const preoveedor = await Proveedor.update({ StatusId: 2 }, { where: { RfcProveedor: req.query.RfcProveedor } });
 
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/proveedor');
+        res.redirect('https://digilist.fly.dev/digilist/proveedor');
 
     } catch (err) {
         // res.render('404');
@@ -228,7 +228,7 @@ webRouter.get('/web-registro-usuarios', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Usuario.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/usuarios')
+        res.redirect('https://digilist.fly.dev/digilist/usuarios')
     } catch (err) {
         res.status(403).json(err);
     }
@@ -237,7 +237,7 @@ webRouter.get('/web-registro-usuarios', async (req, res) => {
 webRouter.get('/web-eliminar-usuarios', async (req, res) => {
     try {
         const usuario = await Usuario.update({ StatusId: 2 }, { where: { email: req.query.email } });
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/usuarios');
+        res.redirect('https://digilist.fly.dev/digilist/usuarios');
     } catch (err) {
         //res.render('404');
         res.status(403).json(err);
@@ -260,7 +260,7 @@ webRouter.get('/web-registro-entradas', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Entradas.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/entradas')
+        res.redirect('https://digilist.fly.dev/digilist/entradas')
     } catch (err) {
         res.status(403).json(err);
     }
@@ -294,7 +294,7 @@ webRouter.get('/web-registro-envios', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Envio.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/envios')
+        res.redirect('https://digilist.fly.dev/digilist/envios')
     } catch (err) {
         res.status(403).json(err);
     }
@@ -327,7 +327,7 @@ webRouter.get('/web-registro-detalleventa', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await DetalleVenta.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/detalleventa')
+        res.redirect('https://digilist.fly.dev/digilist/detalleventa')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -351,7 +351,7 @@ webRouter.get('/web-registro-modelo', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Modelo.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/modelo')
+        res.redirect('https://digilist.fly.dev/digilist/modelo')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -388,7 +388,7 @@ webRouter.get('/web-registro-anio', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Years.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/anio')
+        res.redirect('https://digilist.fly.dev/digilist/anio')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -402,7 +402,7 @@ webRouter.get('/web-eliminar-anio', async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const anio = await Years.update({ StatusId: 2 }, { where: { year: req.query.year } });
 
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/anio');
+        res.redirect('https://digilist.fly.dev/digilist/anio');
 
     } catch (err) {
         // res.render('404');
@@ -425,7 +425,7 @@ webRouter.get('/web-registro-marca', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Marca.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/marca')
+        res.redirect('https://digilist.fly.dev/digilist/marca')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -460,7 +460,7 @@ webRouter.get('/web-registro-venta', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Venta.create(req.query);
-        res.redirect('https://apidigilist-production.up.railway.app/digilist/venta')
+        res.redirect('https://digilist.fly.dev/digilist/venta')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -470,7 +470,7 @@ webRouter.get('/web-registro-venta', async (req, res) => {
 webRouter.get('/dashboard-productos', async (req, res) => {
     try {
         const token = req.cookies.token;
-        const productos = fetch('https://apidigilist-production.up.railway.app/autopartes/buscarTodos', {
+        const productos = fetch('https://digilist.fly.dev/autopartes/buscarTodos', {
             method: 'get',
             headers: {
                 Authorization: token

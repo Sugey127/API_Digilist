@@ -75,7 +75,7 @@
             <% marcas.forEach(marc => { %>
               <tr>
                 <td><%= marc.marca %></td>
-                <td><a href="http://apidigilist-production.up.railway.app/digilist/web-eliminar-marca?marca=<%=marc.marca %>" class="btn btn-dark" >Eliminar</a></td>
+                <td><a href="http://digilist.fly.dev/digilist/web-eliminar-marca?marca=<%=marc.marca %>" class="btn btn-dark" >Eliminar</a></td>
               </tr>
               <% }) %>
           </tbody>
@@ -89,7 +89,7 @@
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
         
-        document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-marca?marca=${mar.value}`
+        document.querySelectorAll('.btn')[0].href = `http://digilist.fly.dev/digilist/web-registro-marca?marca=${mar.value}`
       }
     });
   </script>

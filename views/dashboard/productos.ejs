@@ -94,9 +94,9 @@
               <th scope="col">Descripcion</th>
               <th scope="col">Stock</th>
               <th scope="col">Precio</th>
+              <th scope="col">Codigo entrada</th>
               <th scope="col">Codigo autoparte</th>
               <th scope="col">Descuento</th>
-              <th scope="col">Codigo Entrada</th>
               <th scope="col"></th>
 
             </tr>
@@ -108,9 +108,9 @@
               <td><%=autoparte.description%></td>
               <td><%=autoparte.stock%></td>
               <td><%=autoparte.precio%></td>
+              <td><%=autoparte.EntradaCodeEntrada%></td>
               <td><%=autoparte.code_autoparte%></td>
               <td><%=autoparte.descuento%></td>
-              <td><%=autoparte.EntradaCodeEntrada%></td>
               <td><a href="http://localhost:4000/digilist/web-eliminar-productos?code_autoparte=<%=autoparte.code_autoparte %>" class="btn btn-dark" >Eliminar</a></td>
             </tr>    
           <% }) %>
@@ -122,11 +122,11 @@
   </div>
   <!-- Scripts -->
   <script defer>
-    const [nom, des, stk, prec, codeA, desc, codeE] = document.querySelectorAll('.form-control');
+    const [nom, des, stk, prec,codeE, codeA, desc, ] = document.querySelectorAll('.form-control');
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
           
-        document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-productos?nombreAutoparte=${nom.value}&description=${des.value}&stock=${stk.value}&precio=${prec.value}&code_autoparte=${codeA.value}&descuento=${desc.value}&EntradaCodeEntrada=${codeE.value}`
+        document.querySelectorAll('.btn')[0].href = `https://digilist.fly.dev/digilist/web-registro-productos?nombreAutoparte=${nom.value}&description=${des.value}&stock=${stk.value}&precio=${prec.value}&EntradaCodeEntrada=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
       }
     });
   </script>

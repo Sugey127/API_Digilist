@@ -20,6 +20,7 @@ import automovilRouter from './routes/automovil.routes.js';
 import path from 'path';
 import { webRouter } from '../web/routes.js';
 import cookieParser from 'cookie-parser';
+import paymentRouter from './routes/payment.routes.js';
 
 dotevn.config({ path: './.env' });
 
@@ -43,6 +44,7 @@ app.use('/autopartes', autoparteRouter);
 app.use('/proveedores', proveedorRouter);
 app.use('/ventas', ventaRouter);
 app.use('/envios', envioRouter);
+app.use('/pagos', paymentRouter);
 app.use('/detalleVenta', detalleVentaRouter);
 app.use('/year', yearsRouter);
 app.use('/automovil', automovilRouter);

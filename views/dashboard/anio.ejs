@@ -76,13 +76,13 @@
             <% anios.forEach(anio => { %>
               <tr>
                 <td><%= anio.year %></td>
-                <td><a href="https://apidigilist-production.up.railway.app/digilist/web-eliminar-anio?year=<%=anio.year %>" class="btn btn-dark" >Eliminar</a></td>
+                <td><a href="https://digilist.fly.dev/digilist/web-eliminar-anio?year=<%=anio.year %>" class="btn btn-dark" >Eliminar</a></td>
               </tr>
               <% }) %>
           </tbody>
         </table>
       </div>
-    </main>
+    </main> 
   </div>
   <!-- Scripts -->
   <script defer>
@@ -90,7 +90,7 @@
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
         
-        document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-anio?year=${anio.value}`
+        document.querySelectorAll('.btn')[0].href = `https://digilist.fly.dev/digilist/web-registro-anio?year=${anio.value}`
       }
     });
   </script>

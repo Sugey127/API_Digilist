@@ -115,7 +115,7 @@
                     <td><%=envio.fechaRegistroEnvio%></td>
                     <td><%=envio.UsuarioEmail%></td>
                     <td><%=envio.ReciboFolio%></td>
-                    <td><a href="https://apidigilist-production.up.railway.app/digilist/web-eliminar-envios?codEnvio=<%=envio.codEnvio %>" class="btn btn-dark" >Eliminar</a></td>
+                    <td><a href="https://digilist.fly.dev/digilist/web-eliminar-envios?codEnvio=<%=envio.codEnvio %>" class="btn btn-dark" >Eliminar</a></td>
                     </tr>
                   <% }) %>
               </tbody>
@@ -129,7 +129,7 @@
       document.querySelector('.form-container').addEventListener('input', e => {
         if (e.target.className === 'form-control') {
           
-          document.querySelectorAll('.btn')[0].href = `http://apidigilist-production.up.railway.app/digilist/web-registro-envio?codEnvio=${code.value}&direccion=${dir.value}&descripcion=${des.value}&fechaEntrega=${entrega.value}&EstadoPaquete=${estado.value}&UsuarioEmail=${email.value}&ReciboFolio=${folio.value}`
+          document.querySelectorAll('.btn')[0].href = `https://digilist.fly.dev/digilist/web-registro-envio?codEnvio=${code.value}&direccion=${dir.value}&descripcion=${des.value}&fechaEntrega=${entrega.value}&EstadoPaquete=${estado.value}&UsuarioEmail=${email.value}&ReciboFolio=${folio.value}`
         }
       });        
       </script>

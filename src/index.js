@@ -23,7 +23,7 @@ import { RecordarPassword } from "./models/RecordarPass.js";
 
 async function proyect() {
     try {
-        //await sequelize.sync({ force: true });    
+        // await sequelize.sync({ force: true });    
         app.listen(PORT, () => {
             console.log(`server listen on: ${PORT}`);
         });

@@ -4,7 +4,7 @@ const [v1, v2] = inputs;
 
 document.forms[0].addEventListener('submit', e => {
     e.preventDefault();
-    fetch('https://apidigilist-production.up.railway.app/usuario/login', {
+    fetch('https://digilist.fly.dev/usuario/login', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'

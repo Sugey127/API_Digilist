@@ -94,7 +94,7 @@
                 <td><%= modelo.modelo %></td>
                 <td><%= modelo.YearYear%></td>
                 <td><%= modelo.MarcaMarca%></td>
-                <td><a href="http://apidigilist-production.up.railway.app/digilist/web-eliminar-modelo?modelo=<%=modelo.modelo %>" class="btn btn-dark" >Eliminar</a></td>
+                <td><a href="https://digilist.fly.dev/digilist/web-eliminar-modelo?modelo=<%=modelo.modelo %>" class="btn btn-dark" >Eliminar</a></td>
               </tr>
               <% }) %>
           </tbody>
@@ -108,7 +108,7 @@
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
         console.log(e.target.value);
-        document.querySelectorAll('.btn')[0].href = `https://apidigilist-production.up.railway.app/digilist/web-registro-modelo?YearYear=${anio.value}&MarcaMarca=${mar.value}&modelo=${mol.value}`
+        document.querySelectorAll('.btn')[0].href = `https://digilist.fly.dev/digilist/web-registro-modelo?YearYear=${anio.value}&MarcaMarca=${mar.value}&modelo=${mol.value}`
         console.log(document.querySelectorAll('.btn')).href;
       }
     });
