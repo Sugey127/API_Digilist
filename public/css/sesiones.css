@@ -62,7 +62,7 @@ body {
     margin-top: 15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.contenedor-form .btn {
+.btn .buttonbtn {
     width: 100%;
     background-color: #171717;
     color: #fff;
@@ -73,7 +73,7 @@ body {
     border-radius: 10px;
     margin: 15px;
 }
-.btn a {
+.btn .buttonbtn a {
     text-decoration: none;
     text-transform: lowercase;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
