@@ -21,10 +21,17 @@ import path from 'path';
 import { webRouter } from '../web/routes.js';
 import cookieParser from 'cookie-parser';
 import paymentRouter from './routes/payment.routes.js';
-
+import carritoRouter from './routes/carrito.routes.js';
+import session from "express-session";
 dotevn.config({ path: './.env' });
 
 const app = express();
+
+app.use(session({
+    secret: 'secreto',
+    resave: false,
+    saveUninitialized: true,
+  }));
 
 app.set('view engine', 'ejs');
 app.use(cookieParser());
@@ -49,6 +56,7 @@ app.use('/detalleVenta', detalleVentaRouter);
 app.use('/year', yearsRouter);
 app.use('/automovil', automovilRouter);
 app.use('/digilist', webRouter);
+app.use('/carrito', carritoRouter);
 //app.use(express.static(dirección de la carpeta publica'));
 export default app;
 
