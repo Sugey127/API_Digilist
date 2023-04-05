@@ -1,6 +1,5 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
-import { Automovil } from "./automovil.js";
 
 export const Years = sequelize.define('Years',{
     id: {
@@ -14,14 +13,3 @@ export const Years = sequelize.define('Years',{
     }
 }, { timestamps: false });
 
-Years.hasMany(Automovil, {
-    foreignKey:{
-        allowNull:false
-    }
-})
-
-Automovil.belongsTo(Years, {
-    foreignKey:{
-        allowNull:false
-    }
-});

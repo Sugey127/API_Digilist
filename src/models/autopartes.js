@@ -1,6 +1,7 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
 import { Entradas } from "./entradas.js";
+import { Modelo } from "./modelo.js";
 
 export const Autopartes = sequelize.define('Autopartes', {
     nombreAutoparte: {
@@ -11,7 +12,7 @@ export const Autopartes = sequelize.define('Autopartes', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    stock: {
+    stockInventario: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -35,15 +36,27 @@ export const Autopartes = sequelize.define('Autopartes', {
 }, {
     timestamps: false
 });
+Autopartes
 
-
-Entradas.hasMany(Autopartes, {
+Autopartes.hasMany(Entradas, {
     foreignKey: {
         allowNull: false
     }
 })
 
-Autopartes.belongsTo(Entradas, {
+Entradas.belongsTo(Autopartes, {
+    foreignKey: {
+        allowNull: false
+    }
+});
+
+Modelo.hasMany(Autopartes, {
+    foreignKey: {
+        allowNull: false
+    }
+})
+
+Autopartes.belongsTo(Modelo, {
     foreignKey: {
         allowNull: false
     }

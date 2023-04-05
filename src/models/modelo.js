@@ -1,7 +1,6 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
 import { Years } from "./years.js";
-import { Automovil } from "./automovil.js";
 
 export const Modelo = sequelize.define('Modelo', {
     id: {
@@ -12,7 +11,15 @@ export const Modelo = sequelize.define('Modelo', {
     modelo: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    codeAuto: {
+        type: DataTypes.STRING,
         primaryKey: true
+    },
+    fechaRegistroAuto: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
     }
 }, { timestamps: false })
 
@@ -29,15 +36,3 @@ Years.hasMany(Modelo, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 })
-
-Modelo.hasMany(Automovil, {
-    foreignKey:{
-        allowNull:false
-    }
-})
-
-Automovil.belongsTo(Modelo, {
-    foreignKey:{
-        allowNull:false
-    }
-});

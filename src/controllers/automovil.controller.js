@@ -1,35 +1,35 @@
-import { Op } from "sequelize";
-import { Automovil } from "../models/automovil.js";
+// import { Op } from "sequelize";
+// import { Automovil } from "../models/automovil.js";
 
 
-//POST
-export const post = async (req, res) => {
-    const { ModeloModelo, YearYear, MarcaMarca, codeAuto, StatusId } = req.body;
-    try {
-        const nuevaAutomovil = await Automovil.create({
-            ModeloModelo, YearYear, MarcaMarca,codeAuto,StatusId
-        });
-        res.status(201).json(nuevaAutomovil);
+// //POST
+// export const post = async (req, res) => {
+//     const { ModeloModelo, YearYear, MarcaMarca, codeAuto, StatusId } = req.body;
+//     try {
+//         const nuevaAutomovil = await Automovil.create({
+//             ModeloModelo, YearYear, MarcaMarca,codeAuto,StatusId
+//         });
+//         res.status(201).json(nuevaAutomovil);
 
-    } catch (err) {
-        res.status(500).json(err);
-    }
-}
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// }
 
-//PUT
+// //PUT
 
-export const put = async (req, res) => {
-    const { codeAuto,StatusId} = req.body;
-    try {
+// export const put = async (req, res) => {
+//     const { codeAuto,StatusId} = req.body;
+//     try {
 
-        const actualizarAutomovil = await Automovil.findOne({ where: { codeAuto } })
-        actualizarAutomovil.StatusId = StatusId;
-        await actualizarAutomovil.save();
-        res.status(201).json(actualizarAutomovil);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-}
+//         const actualizarAutomovil = await Automovil.findOne({ where: { codeAuto } })
+//         actualizarAutomovil.StatusId = StatusId;
+//         await actualizarAutomovil.save();
+//         res.status(201).json(actualizarAutomovil);
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// }
 
 
 //DELETE
@@ -48,55 +48,55 @@ export const put = async (req, res) => {
 
 //GET
 
-export const getOne = async (req, res) => {
-    const { codeAuto } = req.body;
-    try {
-        const nuevoAutomovil = await Automovil.findOne({ where: { codeAuto } });
-        res.status(201).json(nuevoAutomovil);
+// export const getOne = async (req, res) => {
+//     const { codeAuto } = req.body;
+//     try {
+//         const nuevoAutomovil = await Automovil.findOne({ where: { codeAuto } });
+//         res.status(201).json(nuevoAutomovil);
 
-    } catch (err) {
-        res.status(500).json(err);
-    }
-}
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// }
 
-//GETS Status Activo
+// //GETS Status Activo
 
-export const getAllActivo = async (req, res) => {
-    try {
-        req.body.StatusId = 1;
-        const year = await Automovil.findAll({ where:{ StatusId : 1 } });
-        res.status(201).json(year);
+// export const getAllActivo = async (req, res) => {
+//     try {
+//         req.body.StatusId = 1;
+//         const year = await Automovil.findAll({ where:{ StatusId : 1 } });
+//         res.status(201).json(year);
 
-    } catch (err) {
-        res.status(500).json(err.message);
-    }
-}
+//     } catch (err) {
+//         res.status(500).json(err.message);
+//     }
+// }
 
-//GETS Status Inactivo
+// //GETS Status Inactivo
 
-export const getAllInactivo = async (req, res) => {
-    try {
-        req.body.StatusId = 2;
-        const year = await Automovil.findAll({ where:{ StatusId : 2 } });
-        res.status(201).json(year);
+// export const getAllInactivo = async (req, res) => {
+//     try {
+//         req.body.StatusId = 2;
+//         const year = await Automovil.findAll({ where:{ StatusId : 2 } });
+//         res.status(201).json(year);
 
-    } catch (err) {
-        res.status(500).json(err.message);
-    }
-}
+//     } catch (err) {
+//         res.status(500).json(err.message);
+//     }
+// }
 
 
 
-//GETS
+// //GETS
 
-export const getAll = async (req, res) => {
-    try {
-        const entradas = await Automovil.findAll();
-        res.status(201).json(entradas);
+// export const getAll = async (req, res) => {
+//     try {
+//         const entradas = await Automovil.findAll();
+//         res.status(201).json(entradas);
 
-    } catch (err) {
-        res.status(500).json(err);
-    }
-}
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// }
 
 

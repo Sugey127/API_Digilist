@@ -1,5 +1,8 @@
 import { Autopartes } from "../models/autopartes.js";
 import session from "express-session";
+import { CarritoCompra } from "../models/carritoCompras.js";
+import jwt from "jsonwebtoken";
+import { JWT_KEY } from "../utils/env.js";
 
 class carritoController {
     mostrarCarro(req, res) {
@@ -16,6 +19,8 @@ class carritoController {
     }
     agregarProductos(req, res) {
         try {
+
+            const user = jwt.verify(req.headers.authorization || req.cookies.token, JWT_KEY);
             const carrito = req.session.carrito || [];
             const { code_autoparte } = req.params;
 
@@ -38,7 +43,16 @@ class carritoController {
                             data.precio_total = data.precio * data.cantidad;
                             carrito[pos] = data;
                         }
+
                         req.session.carrito = carrito;
+
+                        // guarando en bd
+
+                        // CarritoCompra.create({
+                        //     productos: JSON.stringify(carrito),
+                        //     UsuarioEmail: user.email
+                        // }).then(data => console.log(data));
+                        CarritoCompra.update(JSON.stringify(carrito), { where: { UsuarioEmail: user.email } }).then(data => data);
                         res.status(200).json(req.session.carrito);
                     } else {
                         res.status(404).json('No se ha encontrado la autoparte');
@@ -51,7 +65,6 @@ class carritoController {
             res.status(500).json({ error: err.message });
         }
     }
-
 
     quitarItem(req, res) {
         var carrito = req.session.carrito;

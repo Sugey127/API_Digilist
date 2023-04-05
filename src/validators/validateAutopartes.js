@@ -4,7 +4,7 @@ export const validadorAutoparte =[
     check('description')
         .not().isEmpty().withMessage('El campo description es requerido').isLength({ min: 10 })
         .withMessage('La descripción debe tener al menos 10 caracteres'),
-    check('stock')
+    check('stockInventario')
         .not().isEmpty().withMessage('El campo stock es requerido').isInt({ min: 0 })
         .withMessage('El stock debe ser un número entero positivo'),
     check('precio')
@@ -20,7 +20,7 @@ export const validadorAutoparteActualizar =[
     check('description')
         .not().isEmpty().withMessage('El campo description es requerido').isLength({ min: 10 })
         .withMessage('La descripción debe tener al menos 10 caracteres'),
-    check('stock')
+    check('stockInventario')
         .not().isEmpty().withMessage('El campo stock es requerido').isInt({ min: 0 })
         .withMessage('El stock debe ser un número entero positivo'),
     check('precio')

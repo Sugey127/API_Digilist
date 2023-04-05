@@ -11,7 +11,7 @@ export const validadorEntrada =[
         .withMessage('El precio debe ser un número decimal positivo'),
     check('code_entrada')
         .not().isEmpty().withMessage('El campo code_entrada es requerido'),
-    check('AutomovilCodeAuto')
+    check('ModeloCodeAuto')
         .not().isEmpty().withMessage('El campo AutomovilCodeAuto es requerido'),
     check('ProveedorRfcProveedor')
         .not().isEmpty().withMessage('El campo ProveedorRfcProveedor es requerido'),

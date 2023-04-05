@@ -3,7 +3,6 @@ import { Marca } from "../src/models/marca.js";
 import { Modelo } from "../src/models/modelo.js";
 import { Proveedor } from "../src/models/proveedor.js";
 import { Years } from "../src/models/years.js";
-import { Automovil } from "../src/models/automovil.js";
 import { Autopartes } from "../src/models/autopartes.js";
 import { Usuario } from "../src/models/usuario.js";
 import { DetalleVenta } from "../src/models/detalleVenta.js";
@@ -12,7 +11,7 @@ import { Envio } from "../src/models/envio.js";
 import { Recibo } from "../src/models/recibo.js";
 import { Venta } from "../src/models/venta.js";
 import { Op } from "sequelize";
-
+import fetch from 'node-fetch'
 
 
 export const webRouter = Router();
@@ -37,14 +36,14 @@ webRouter.get('/login-verificar', async (req, res) => {
     try {
         const { email, password } = req.query;
         console.log(email, password);
-        const usuarioValido = await Usuario.findOne({ where: { [Op.and]: [{password}, {email}] } });
+        const usuarioValido = await Usuario.findOne({ where: { [Op.and]: [{ password }, { email }] } });
         console.log(usuarioValido);
         if (!usuarioValido) {
             console.log('no valido');
             throw new Error('Esta cuenta no existe');
         } else {
             const data = await fetch('https://digilist.fly.dev/usuario/login', {
-                method: 'post',  
+                method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
                 }, body: JSON.stringify({
@@ -80,45 +79,45 @@ webRouter.get('/dashboard', async (req, res) => {
     }
 });
 
-webRouter.get('/automovil', async (req, res) => {
-    try {
-        const automoviles = await Automovil.findAll({ where: { StatusId: 1 } });
-        const anios = await Years.findAll({ where: { StatusId: 1 } });
-        const marcas = await Marca.findAll({ where: { StatusId: 1 } });
-        const modelos = await Modelo.findAll({ where: { StatusId: 1 } });
-        res.render('dashboard/automovil', { automoviles, anios, marcas, modelos });
-    } catch (err) {
-        res.render('404');
-    }
-});
+// webRouter.get('/automovil', async (req, res) => {
+//     try {
+//         const automoviles = await Automovil.findAll({ where: { StatusId: 1 } });
+//         const anios = await Years.findAll({ where: { StatusId: 1 } });
+//         const marcas = await Marca.findAll({ where: { StatusId: 1 } });
+//         const modelos = await Modelo.findAll({ where: { StatusId: 1 } });
+//         res.render('dashboard/automovil', { automoviles, anios, marcas, modelos });
+//     } catch (err) {
+//         res.render('404');
+//     }
+// });
 
-webRouter.get('/web-registro-automovil', async (req, res) => {
-    try {
-        console.log(req.query);
-        req.query.StatusId = 1;
-        await Automovil.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/automovil')
-    } catch (err) {
-        // res.render('404');
-        res.status(403).json(err);
-    }
-});
+// webRouter.get('/web-registro-automovil', async (req, res) => {
+//     try {
+//         console.log(req.query);
+//         req.query.StatusId = 1;
+//         await Automovil.create(req.query);
+//         res.redirect('https://digilist.fly.dev/digilist/automovil')
+//     } catch (err) {
+//         // res.render('404');
+//         res.status(403).json(err);
+//     }
+// });
 
 //consumo put
 
-webRouter.get('/web-eliminar-automovil', async (req, res) => {
-    try {
-        console.log(req.query);
-        console.log('HOLA COMO ESTA', req.query.codeAuto);
-        const automovill = await Automovil.update({ StatusId: 2 }, { where: { codeAuto: req.query.codeAuto } });
+// webRouter.get('/web-eliminar-automovil', async (req, res) => {
+//     try {
+//         console.log(req.query);
+//         console.log('HOLA COMO ESTA', req.query.codeAuto);
+//         const automovill = await Automovil.update({ StatusId: 2 }, { where: { codeAuto: req.query.codeAuto } });
 
-        res.redirect('https://digilist.fly.dev/digilist/automovil');
+//         res.redirect('https://digilist.fly.dev/digilist/automovil');
 
-    } catch (err) {
-        // res.render('404');
-        res.status(403).json(err);
-    }
-});
+//     } catch (err) {
+//         // res.render('404');
+//         res.status(403).json(err);
+//     }
+// });
 
 webRouter.get('/productos', async (req, res) => {
     try {
@@ -225,12 +224,51 @@ webRouter.get('/usuarios', async (req, res) => {
 
 webRouter.get('/web-registro-usuarios', async (req, res) => {
     try {
-        console.log(req.query);
         req.query.StatusId = 1;
-        await Usuario.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/usuarios')
+        req.query.role = 'administrador'
+        console.log(JSON.stringify(req.query));
+        const respuesta = await fetch('https://digilist.fly.dev/usuario/pre-registroAdmin', {
+            method: 'post',
+            headers: {
+                Authorization: req.cookies.token,
+                'Content-Type': 'application/json'
+            }, body: JSON.stringify(req.query)
+        });
+        console.log(respuesta.ok)
+        // console.log(data)
+        // const token = data[0];
+        
+        // res.cookie('token', token, {
+        //     maxAge: 2 * 24 * 60 * 60 * 1000, httpOnly: true
+        // });
+
+        if(respuesta.ok) {
+            res.redirect('https://digilist.fly.dev/digilist/usuarios')    
+        } else {
+            res.status(500).render('500');
+        }
+    
     } catch (err) {
-        res.status(403).json(err);
+        console.log(err);
+        res.status(500).render('500')
+    }
+});
+
+webRouter.get('/web-VerificarCode-usuario', async (req, res) => {
+    try {
+        const { code } = req.query;
+        console.log(req.query);
+        const response = await fetch(`https://digilist.fly.dev/usuario/registro/${code}`, {
+            method: 'post'
+        });
+        console.log(response)
+        if(response.ok) {
+            res.redirect('https://digilist.fly.dev/digilist/usuarios');
+        } else {
+            res.status(500).render('500');
+        }
+    } catch (err) {
+        res.status(500).render('500');
     }
 });
 

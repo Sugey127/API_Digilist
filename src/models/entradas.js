@@ -1,13 +1,14 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
 import { Proveedor } from "./proveedor.js";
-import { Automovil } from "./automovil.js";
+import { Modelo } from "./modelo.js";
 
 export const Entradas = sequelize.define('Entradas', {
     idEntradas: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV1,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     },
     nombreAutoparte: {
         type: DataTypes.STRING,
@@ -21,10 +22,6 @@ export const Entradas = sequelize.define('Entradas', {
         type: DataTypes.DECIMAL,
         allowNull: false
     },
-    code_entrada: {
-        type: DataTypes.STRING,
-        primaryKey: true
-    },
     fechaEntrada:{
         type:DataTypes.DATEONLY,
         allowNull: false,
@@ -35,13 +32,13 @@ export const Entradas = sequelize.define('Entradas', {
 });
 
 
-Automovil.hasMany(Entradas, {
+Modelo.hasMany(Entradas, {
     foreignKey:{
         allowNull:false
     }
 })
 
-Entradas.belongsTo(Automovil, {
+Entradas.belongsTo(Modelo, {
     foreignKey:{
         allowNull:false
     }

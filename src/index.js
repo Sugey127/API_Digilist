@@ -19,11 +19,11 @@ import { PORT } from "./utils/env.js";
 import { ImagenesAutopartes } from "./models/imagenesAutopartes.js";
 import { PreResgistro } from "./models/PreRegistro.js";
 import { RecordarPassword } from "./models/RecordarPass.js";
-
+import { CarritoCompra } from "./models/carritoCompras.js";
 
 async function proyect() {
     try {
-        // await sequelize.sync({ force: true });    
+        //await sequelize.sync({ force: true });
         app.listen(PORT, () => {
             console.log(`server listen on: ${PORT}`);
         });

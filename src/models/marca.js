@@ -1,6 +1,5 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
-import { Automovil } from "./automovil.js"; 
 import { Modelo } from "./modelo.js"; 
 
 export const Marca= sequelize.define('Marca',{
@@ -16,17 +15,6 @@ export const Marca= sequelize.define('Marca',{
     }
 }, { timestamps: false })
 
-Marca.hasMany(Automovil, {
-    foreignKey:{
-        allowNull:false
-    }
-})
-
-Automovil.belongsTo(Marca, {
-    foreignKey:{
-        allowNull:false
-    }
-});
 
 Marca.hasMany(Modelo, {
     foreignKey:{

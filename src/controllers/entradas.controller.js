@@ -3,14 +3,26 @@ import { Entradas } from "../models/entradas.js";
 import { Marca } from "../models/marca.js";
 import { Modelo } from "../models/modelo.js";
 import { Proveedor } from "../models/proveedor.js";
+import { Autopartes } from "../models/autopartes.js";
 
 //POST
 export const post = async (req, res) => {
-    const { nombreAutoparte, stock, precio, code_entrada,AutomovilCodeAuto,ProveedorRfcProveedor,StatusId } = req.body;
+    const { nombreAutoparte, stock, precio, AutoparteCodeAutoparte,ModeloCodeAuto,ProveedorRfcProveedor,StatusId } = req.body;
     try {
         const nuevaEntrada = await Entradas.create({
-            nombreAutoparte, stock, precio, code_entrada,AutomovilCodeAuto,ProveedorRfcProveedor,StatusId
+            nombreAutoparte, stock, precio,AutoparteCodeAutoparte,ModeloCodeAuto,ProveedorRfcProveedor,StatusId
         });
+
+        // Actualizar el inventario del producto correspondiente
+        const producto = await Autopartes.findByPk(nuevaEntrada.AutoparteCodeAutoparte);
+        if (producto) {
+            const cantidadActual = producto.stockInventario;
+            const cantidadNueva = cantidadActual + nuevaEntrada.stock;
+            await producto.update({ stockInventario: cantidadNueva });
+          } else {
+            console.error(`El producto con ID ${nuevaEntrada.AutoparteCodeAutoparte} no existe.`);
+          }
+
         res.status(201).json(nuevaEntrada);
  
     } catch (err) {
@@ -21,9 +33,9 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { nombreAutoparte, stock, precio, code_entrada ,StatusId} = req.body;
+    const { nombreAutoparte, stock, precio, idEntradas ,StatusId} = req.body;
     try {
-        const actualizarEntrada = await Entradas.findOne( { where: { code_entrada } })
+        const actualizarEntrada = await Entradas.findOne( { where: { idEntradas } })
         actualizarEntrada.nombreAutoparte = nombreAutoparte;
         actualizarEntrada.stock = stock;
         actualizarEntrada.precio = precio;
@@ -53,9 +65,9 @@ export const put = async (req, res) => {
 //GET
 
 export const getOne = async (req, res) => {
-    const { code_entrada } = req.body;
+    const { idEntradas } = req.body;
     try {
-        const nuevoEntrada = await Entradas.findOne( { where:{ code_entrada } });
+        const nuevoEntrada = await Entradas.findOne( { where:{ idEntradas } });
         res.status(201).json(nuevoEntrada);
 
     } catch (err) {
