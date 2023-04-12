@@ -68,10 +68,10 @@
             </div>
             <label for="inputPassword5" class="form-label">Estado Paquete</label>
             <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
-              <option value="preparacion">Preparación</option>
-              <option value="pendiente">Pendiente</option>
-              <option value="entregado">Entregado</option>
-              <option value="cancelado">Cancelado</option>
+              <option value="Preparacion">Preparación</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Entregado">Entregado</option>
+              <option value="Cancelado">Cancelado</option>
             </select>
             <label for="inputPassword5" class="form-label">Email Usuario</label>
             <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
@@ -84,8 +84,6 @@
     
             <div class="d-grid gap-2">
               <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
-              <button class="btn btn-dark" type="button">Editar</button>
-              <button class="btn btn-dark" type="button">Eliminar</button>
             </div>
           </div>
     
@@ -109,7 +107,7 @@
                     <tr>
                     <td><%=envio.codEnvio%></td>
                     <td><%=envio.direccion%></td>
-                    <td><%=envio.descripcion%></td>
+                    <td><%=envio.description%></td>
                     <td><%=envio.fechaEntrega%></td>
                     <td><%=envio.EstadoPaquete%></td>
                     <td><%=envio.fechaRegistroEnvio%></td>
@@ -129,7 +127,7 @@
       document.querySelector('.form-container').addEventListener('input', e => {
         if (e.target.className === 'form-control') {
           
-          document.querySelectorAll('.btn')[0].href = `https://digilist.fly.dev/digilist/web-registro-envio?codEnvio=${code.value}&direccion=${dir.value}&descripcion=${des.value}&fechaEntrega=${entrega.value}&EstadoPaquete=${estado.value}&UsuarioEmail=${email.value}&ReciboFolio=${folio.value}`
+          document.querySelectorAll('.btn')[0].href = `http://localhost:4000/digilist/web-registro-envios?codEnvio=${code.value}&direccion=${dir.value}&description=${des.value}&fechaEntrega=${entrega.value}&EstadoPaquete=${estado.value}&UsuarioEmail=${email.value}&ReciboFolio=${folio.value}`
         }
       });        
       </script>

@@ -3,6 +3,7 @@ import { validateRole } from '../validators/validateRole.js'
 export const authorization = (req, res, next) => {
     try {
         const token = req.headers.authorization;
+        console.log(token);
         validateRole(token, "administrador", "role", "no eres admin");
         next();
     } catch (err) {
@@ -13,6 +14,7 @@ export const authorization = (req, res, next) => {
 export const authentification = (req, res, next) => {
     try {
         const token = req.headers.authorization;
+        console.log(token);
         validateRole(token, 'administrador', "role", "no eres admin");
         next();
     } catch (err) {

@@ -6,9 +6,10 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
 
 const detalleVentaRouter = Router();
 
-detalleVentaRouter.post('/registro',validadorDetalleVenta,validateReutilizable,authentification, detalleVentaController.post); 
+detalleVentaRouter.post('/registro',validadorDetalleVenta,validateReutilizable,authentification, detalleVentaController.AgregarCarrito); 
 detalleVentaRouter.put('/actualizar',validadorDetalleVentaActualizar,validateReutilizable,authentification, detalleVentaController.put); 
-//detalleVentaRouter.delete('/eliminar',authentification,authorization, detalleVentaController.drop); 
+detalleVentaRouter.delete('/eliminar',authentification,authorization, detalleVentaController.eliminarProductoCarritoTodo); 
+detalleVentaRouter.put('/eliminar-unoPorUno',authentification,authorization, detalleVentaController.eliminarProductoCarritoUno); 
 detalleVentaRouter.get('/buscarUno',authentification,authorization, detalleVentaController.getOne); 
 detalleVentaRouter.get('/buscarTodos',authentification,authorization, detalleVentaController.getAll); 
 detalleVentaRouter.get('/buscarActivo',authentification,authorization, detalleVentaController.getAllActivo);

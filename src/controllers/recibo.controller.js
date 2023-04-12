@@ -5,10 +5,10 @@ import { Venta } from "../models/venta.js";
 
 //POST
 export const post = async (req, res) => {
-    const { Folio,cantidad, VentumCodeVenta } = req.body;
+    const { Folio,cantidad, VentumIdVenta } = req.body;
     try {
         const nuevoRecibo = await Recibo.create({
-            Folio, cantidad, VentumCodeVenta
+            Folio, cantidad, VentumIdVenta
         });
         res.status(201).json(nuevoRecibo);
 

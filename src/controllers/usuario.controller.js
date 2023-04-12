@@ -37,10 +37,8 @@ export const registro = async (req, res) => {
             const fotoPerfil = await Avatares.create({
                 url: 'https://res.cloudinary.com/dyfnd46fn/image/upload/v1678336446/usuarios/digilist_default_avatar_ns5j6g.jpg',
                 publicId: 'usuarios/digilist_default_avatar_ns5j6g'
-            }, { transaction: t })
-
+            }, { transaction: t });
             console.log(fotoPerfil);
-
             req.body.AvatareId = fotoPerfil.dataValues.id;
             req.body.StatusId = 1;
             req.body.role = "administrador";

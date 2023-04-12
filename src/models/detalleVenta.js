@@ -12,6 +12,10 @@ export const DetalleVenta = sequelize.define('DetalleVenta', {
     precioVenta: {
         type: DataTypes.DECIMAL,
         allowNull: false
+    },
+    precioTotal: {
+        type:DataTypes.DECIMAL,
+        allowNull:false
     }
 }, {
     unique: {

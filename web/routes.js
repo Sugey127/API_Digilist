@@ -122,7 +122,7 @@ webRouter.get('/dashboard', async (req, res) => {
 webRouter.get('/productos', async (req, res) => {
     try {
         const autopartes = await Autopartes.findAll({ where: { StatusId: 1 } });
-        const codeEn = await Entradas.findAll({ where: { StatusId: 1 } });
+        const codeEn = await Modelo.findAll({ where: { StatusId: 1 } });
         res.render('dashboard/productos', { autopartes, codeEn });
     } catch (err) {
         res.render('404');
@@ -237,17 +237,17 @@ webRouter.get('/web-registro-usuarios', async (req, res) => {
         console.log(respuesta.ok)
         // console.log(data)
         // const token = data[0];
-        
+
         // res.cookie('token', token, {
         //     maxAge: 2 * 24 * 60 * 60 * 1000, httpOnly: true
         // });
 
-        if(respuesta.ok) {
-            res.redirect('https://digilist.fly.dev/digilist/usuarios')    
+        if (respuesta.ok) {
+            res.redirect('https://digilist.fly.dev/digilist/usuarios')
         } else {
             res.status(500).render('500');
         }
-    
+
     } catch (err) {
         console.log(err);
         res.status(500).render('500')
@@ -262,7 +262,7 @@ webRouter.get('/web-VerificarCode-usuario', async (req, res) => {
             method: 'post'
         });
         console.log(response)
-        if(response.ok) {
+        if (response.ok) {
             res.redirect('https://digilist.fly.dev/digilist/usuarios');
         } else {
             res.status(500).render('500');
@@ -285,9 +285,10 @@ webRouter.get('/web-eliminar-usuarios', async (req, res) => {
 webRouter.get('/entradas', async (req, res) => {
     try {
         const entradas = await Entradas.findAll({ where: { StatusId: 1 } });
-        const codesA = await Automovil.findAll({ where: { StatusId: 1 } });
+        const codesA = await Modelo.findAll({ where: { StatusId: 1 } });
         const rfc = await Proveedor.findAll({ where: { StatusId: 1 } });
-        res.render('dashboard/entradas', { entradas, codesA, rfc });
+        const autoparte = await Autopartes.findAll({ where: { StatusId: 1 } });
+        res.render('dashboard/entradas', { entradas, codesA, rfc, autoparte });
     } catch (err) {
         res.render('404');
     }
@@ -295,10 +296,25 @@ webRouter.get('/entradas', async (req, res) => {
 
 webRouter.get('/web-registro-entradas', async (req, res) => {
     try {
-        console.log(req.query);
-        req.query.StatusId = 1;
-        await Entradas.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/entradas')
+        console.log('hello query', req.query);
+        // req.query.StatusId = 1;
+        // console.log('query actualizada', req.query)
+        const { nombreAutoparte, stock, ModeloCodeAuto, ProveedorRfcProveedor, AutoparteCodeAutoparte, precio } = req.query;
+        const response = await fetch('https://digilist.fly.dev/entradas/registro', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            }, body: JSON.stringify({ nombreAutoparte, stock, ModeloCodeAuto, ProveedorRfcProveedor, AutoparteCodeAutoparte, precio })
+        });
+
+        console.log('viendo que tiene el objeto response', await response.json());
+        if (response.ok) {
+            res.redirect('https://digilist.fly.dev/digilist/entradas');
+        }
+        else {
+            res.status(500).render('500');
+        }
+        //await Entradas.create(req.query);
     } catch (err) {
         res.status(403).json(err);
     }
@@ -307,11 +323,8 @@ webRouter.get('/web-registro-entradas', async (req, res) => {
 //consumo put
 webRouter.get('/web-eliminar-entradas', async (req, res) => {
     try {
-
-        const entrada = await Envio.update({ StatusId: 2 }, { where: { code_entrada: req.query.code_entrada } });
-
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/entradas');
-
+        const entrada = await Envio.update({ StatusId: 2 }, { where: { idEntradas: req.query.idEntradas } });
+        res.redirect('http://digilist.fly.dev/digilist/entradas');
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -328,8 +341,9 @@ webRouter.get('/envios', async (req, res) => {
 });
 
 webRouter.get('/web-registro-envios', async (req, res) => {
+    console.log('eyyyyyyyyeeeeeeeeeeeyyyy',req.query);
     try {
-        console.log(req.query);
+        
         req.query.StatusId = 1;
         await Envio.create(req.query);
         res.redirect('https://digilist.fly.dev/digilist/envios')
@@ -344,7 +358,7 @@ webRouter.get('/web-eliminar-envios', async (req, res) => {
 
         const envio = await Envio.update({ StatusId: 2 }, { where: { codEnvio: req.query.codEnvio } });
 
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/envios');
+        res.redirect('https://digilist.fly.dev/digilist/envios');
 
     } catch (err) {
         // res.render('404');
@@ -403,7 +417,7 @@ webRouter.get('/web-eliminar-modelo', async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const modelod = await Modelo.update({ StatusId: 2 }, { where: { modelo: req.query.modelo } });
 
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/modelo');
+        res.redirect('http://digilist.fly.dev/digilist/modelo');
 
     } catch (err) {
         // res.render('404');
@@ -477,7 +491,7 @@ webRouter.get('/web-eliminar-marca', async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const marca = await Marca.update({ StatusId: 2 }, { where: { marca: req.query.marca } });
 
-        res.redirect('http://apidigilist-production.up.railway.app/digilist/marca');
+        res.redirect('http://digilist.fly.dev/digilist/marca');
 
     } catch (err) {
         // res.render('404');

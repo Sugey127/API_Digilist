@@ -4,12 +4,12 @@ import { Venta } from "../models/venta.js";
 
 //POST
 export const post = async (req, res) => {
-    const { UsuarioEmail, code_venta, StatusId } = req.body;
+    const { UsuarioEmail, StatusId } = req.body;
     
     try {
         
         const nuevaVenta = await Venta.create({
-             UsuarioEmail, code_venta, StatusId
+             UsuarioEmail, StatusId
         });   
         console.log(req.body);
         res.status(201).json(nuevaVenta);
@@ -23,9 +23,9 @@ export const post = async (req, res) => {
 //PUT
 
 export const put = async (req, res) => {
-    const { StatusId, code_venta } = req.body;
+    const { StatusId, idVenta } = req.body;
     try {
-        const actualizarVenta = await Venta.findOne( { where: { [Op.and]: [{code_venta}, {fechaVenta}] } })
+        const actualizarVenta = await Venta.findOne( { where: { [Op.and]: [{idVenta}, {fechaVenta}] } })
         actualizarVenta.StatusId = StatusId;
         await actualizarVenta.save();
         res.status(201).json(actualizarVenta);
@@ -38,9 +38,9 @@ export const put = async (req, res) => {
 //DELETE
 
 // export const drop = async (req, res) => {
-//     const {code_venta} = req.body;
+//     const {idVenta} = req.body;
 //     try {
-//         const eliminarVenta = Venta.destroy({ where: { code_venta } });
+//         const eliminarVenta = Venta.destroy({ where: { idVenta } });
 //         res.status(201).json('SE ELIMINO CON EXITO LA VENTA');
 
 //     } catch (err) {
@@ -52,9 +52,9 @@ export const put = async (req, res) => {
 //GET
 
 export const getOne = async (req, res) => {
-    const { code_venta} = req.body;
+    const { idVenta} = req.body;
     try {
-        const venta = await Venta.findOne( { where: {code_venta } });
+        const venta = await Venta.findOne( { where: {idVenta } });
         res.status(201).json(venta);
 
     } catch (err) {
@@ -92,9 +92,9 @@ export const getAllInactivo = async (req, res) => {
 //GETS
 
 /* export const getAllCoditional = async (req, res) => {
-    const { fechaVenta, code_venta} = req.body;
+    const { fechaVenta, idVenta} = req.body;
     try {
-        const ventas = await Venta.findAll( { where: { [Op.or]: [{code_venta}, {fechaVenta} ] } });
+        const ventas = await Venta.findAll( { where: { [Op.or]: [{idVenta}, {fechaVenta} ] } });
         res.status(201).json(ventas);
 
     } catch (err) {

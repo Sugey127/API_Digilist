@@ -71,10 +71,13 @@
         <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
         <div id="passwordHelpBlock" class="form-text">
 
+        <label for="inputPassword5" class="form-label">Code Automovil</label>
+        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+  
+
         <div class="d-grid gap-2">
-          <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
-          <button class="btn btn-dark" type="button">Editar</button>
-          
+          <a href="" class="btn btn-dark agregar" type="submit">Agregar</a> 
         </div>
       </div>
 
@@ -85,6 +88,7 @@
               <th scope="col">Modelo</th>
               <th scope="col">Año</th>
               <th scope="col">Marca</th>
+              <th scope="col">Code Automovil</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -94,6 +98,7 @@
                 <td><%= modelo.modelo %></td>
                 <td><%= modelo.YearYear%></td>
                 <td><%= modelo.MarcaMarca%></td>
+                <td><%= modelo.codeAuto%></td>
                 <td><a href="https://digilist.fly.dev/digilist/web-eliminar-modelo?modelo=<%=modelo.modelo %>" class="btn btn-dark" >Eliminar</a></td>
               </tr>
               <% }) %>
@@ -104,11 +109,11 @@
   </div>
   <!-- Scripts -->
   <script defer>
-    const [ anio, mar, mol] = document.querySelectorAll('.form-control');
+    const [ anio, mar, mol, cod ] = document.querySelectorAll('.form-control');
     document.querySelector('.form-container').addEventListener('input', e => {
       if (e.target.className === 'form-control') {
         console.log(e.target.value);
-        document.querySelectorAll('.btn')[0].href = `https://digilist.fly.dev/digilist/web-registro-modelo?YearYear=${anio.value}&MarcaMarca=${mar.value}&modelo=${mol.value}`
+        document.querySelectorAll('.btn')[0].href = `https://digilist.fly.dev/digilist/web-registro-modelo?YearYear=${anio.value}&MarcaMarca=${mar.value}&modelo=${mol.value}&codeAuto=${mar.cod}`
         console.log(document.querySelectorAll('.btn')).href;
       }
     });
