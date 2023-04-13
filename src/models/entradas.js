@@ -55,3 +55,8 @@ Entradas.belongsTo(Proveedor, {
         allowNull:false
     }
 });
+Entradas.belongsTo(Proveedor, {
+    foreignKey:{
+        allowNull:false
+    }
+});

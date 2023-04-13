@@ -15,3 +15,4 @@ entradasRouter.get('/buscarActivo', authentification, authorization, entradasCon
 entradasRouter.get('/buscarInactivo', authentification, authorization, entradasController.getAllInactivo);
 
 export default entradasRouter; 
+export default entradasRouter; 

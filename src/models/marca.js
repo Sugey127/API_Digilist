@@ -27,3 +27,8 @@ Modelo.belongsTo(Marca, {
         allowNull:false
     }
 });
+Modelo.belongsTo(Marca, {
+    foreignKey:{
+        allowNull:false
+    }
+});

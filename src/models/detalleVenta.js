@@ -32,3 +32,6 @@ Autopartes.belongsToMany(Venta, {
 Venta.belongsToMany(Autopartes, {
     through: DetalleVenta,
 });
+Venta.belongsToMany(Autopartes, {
+    through: DetalleVenta,
+});

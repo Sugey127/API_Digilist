@@ -16,3 +16,4 @@ modeloRouter.get('/buscarMarca/:MarcaMarca',modeloController.getMarca);
 modeloRouter.get('/buscarYear/:YearYear',modeloController.getYear);
 
 export default modeloRouter;
+export default modeloRouter;
