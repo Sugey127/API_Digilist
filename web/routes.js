@@ -56,7 +56,7 @@ webRouter.get('/login-verificar', async (req, res) => {
                 maxAge: 2 * 24 * 60 * 60 * 1000, httpOnly: true
             });
 
-            res.redirect('https://digilist.fly.dev/digilist/dashboard');
+            res.redirect('http://localhost:4000/digilist/dashboard');
         }
     } catch (err) {
         res.render('401');
@@ -72,9 +72,15 @@ webRouter.get('/home', async (req, res) => {
     }
 });
 
-webRouter.get('/dashboard', async (req, res) => {
+webRouter.get('/dashboard',authorization, async (req, res) => {
     try {
-        res.render('dashboard/main');
+        const token=req.cookies.get('token');
+        console.log('ay Jesuuuuuuuuussss',token);
+        // if (token===null) {
+        //     return res.redirect('http://localhost:4000/digilist/login');
+        // }else{
+            res.render('dashboard/main');
+        //}
     } catch (err) {
         res.render('404');
     }
@@ -120,7 +126,7 @@ webRouter.get('/dashboard', async (req, res) => {
 //     }
 // });
 
-webRouter.get('/productos', async (req, res) => {
+webRouter.get('/productos',authorization, async (req, res) => {
     try {
         const autopartes = await Autopartes.findAll({ where: { StatusId: 1 } });
         const codeEn = await Modelo.findAll({ where: { StatusId: 1 } });
@@ -130,7 +136,7 @@ webRouter.get('/productos', async (req, res) => {
     }
 });
 
-webRouter.get('/web-registro-productos', async (req, res) => {
+webRouter.get('/web-registro-productos',authorization, async (req, res) => {
     try {
         console.log(req.query);
         req.query.StatusId = 1;
@@ -143,7 +149,7 @@ webRouter.get('/web-registro-productos', async (req, res) => {
 });
 
 //consumo put
-webRouter.get('/web-eliminar-productos', async (req, res) => {
+webRouter.get('/web-eliminar-productos',authorization, async (req, res) => {
     try {
         console.log(req.query);
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
@@ -174,7 +180,7 @@ webRouter.get('/web-registro-recibos', async (req, res) => {
         res.status(403).json(err);
     }
 });
-webRouter.get('/proveedor', async (req, res) => {
+webRouter.get('/proveedor',authorization, async (req, res) => {
     try {
         const proveedores = await Proveedor.findAll({ where: { StatusId: 1 } });
         res.render('dashboard/proveedor', { proveedores });
@@ -185,7 +191,7 @@ webRouter.get('/proveedor', async (req, res) => {
 
 //consumo post
 
-webRouter.get('/web-registro-proveedor', async (req, res) => {
+webRouter.get('/web-registro-proveedor',authorization, async (req, res) => {
     try {
         console.log(req.query);
         req.query.StatusId = 1;
@@ -198,7 +204,7 @@ webRouter.get('/web-registro-proveedor', async (req, res) => {
 });
 
 //consumo put
-webRouter.get('/web-eliminar-proveedor', async (req, res) => {
+webRouter.get('/web-eliminar-proveedor',authorization, async (req, res) => {
     try {
         console.log(req.query);
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
@@ -212,7 +218,7 @@ webRouter.get('/web-eliminar-proveedor', async (req, res) => {
     }
 });
 
-webRouter.get('/usuarios', async (req, res) => {
+webRouter.get('/usuarios',authorization, async (req, res) => {
     try {
         const usuarios = await Usuario.findAll({ where: { [Op.and]: [{ role: "administrador" }, { StatusId: 1 }] } });
         res.render('dashboard/usuarios', { usuarios });
@@ -221,7 +227,7 @@ webRouter.get('/usuarios', async (req, res) => {
     }
 });
 
-webRouter.get('/web-registro-usuarios', async (req, res) => {
+webRouter.get('/web-registro-usuarios',authorization, async (req, res) => {
     try {
         req.query.StatusId = 1;
         req.query.role = 'administrador'
@@ -253,7 +259,7 @@ webRouter.get('/web-registro-usuarios', async (req, res) => {
     }
 });
 
-webRouter.get('/web-VerificarCode-usuario', async (req, res) => {
+webRouter.get('/web-VerificarCode-usuario',authorization, async (req, res) => {
     try {
         const { code } = req.query;
         console.log(req.query);
@@ -271,7 +277,7 @@ webRouter.get('/web-VerificarCode-usuario', async (req, res) => {
     }
 });
 
-webRouter.get('/web-eliminar-usuarios', async (req, res) => {
+webRouter.get('/web-eliminar-usuarios',authorization, async (req, res) => {
     try {
         const usuario = await Usuario.update({ StatusId: 2 }, { where: { email: req.query.email } });
         res.redirect('https://digilist.fly.dev/digilist/usuarios');
@@ -281,7 +287,7 @@ webRouter.get('/web-eliminar-usuarios', async (req, res) => {
     }
 });
 
-webRouter.get('/entradas', async (req, res) => {
+webRouter.get('/entradas',authorization, async (req, res) => {
     try {
         const entradas = await Entradas.findAll({ where: { StatusId: 1 } });
         const codesA = await Modelo.findAll({ where: { StatusId: 1 } });
@@ -293,7 +299,7 @@ webRouter.get('/entradas', async (req, res) => {
     }
 });
 
-webRouter.get('/web-registro-entradas', async (req, res) => {
+webRouter.get('/web-registro-entradas',authorization, async (req, res) => {
     try {
         console.log('hello query', req.query);
         // req.query.StatusId = 1;
@@ -320,7 +326,7 @@ webRouter.get('/web-registro-entradas', async (req, res) => {
 });
 
 //consumo put
-webRouter.get('/web-eliminar-entradas', async (req, res) => {
+webRouter.get('/web-eliminar-entradas',authorization, async (req, res) => {
     try {
         const entrada = await Envio.update({ StatusId: 2 }, { where: { idEntradas: req.query.idEntradas } });
         res.redirect('http://digilist.fly.dev/digilist/entradas');
@@ -330,7 +336,7 @@ webRouter.get('/web-eliminar-entradas', async (req, res) => {
     }
 });
 
-webRouter.get('/envios', async (req, res) => {
+webRouter.get('/envios',authorization, async (req, res) => {
     try {
         const envios = await Envio.findAll({ where: { StatusId: 1 } });
         res.render('dashboard/envios', { envios });
@@ -339,7 +345,7 @@ webRouter.get('/envios', async (req, res) => {
     }
 });
 
-webRouter.get('/web-registro-envios', async (req, res) => {
+webRouter.get('/web-registro-envios',authorization, async (req, res) => {
     console.log('eyyyyyyyyeeeeeeeeeeeyyyy',req.query);
     try {
         
@@ -352,7 +358,7 @@ webRouter.get('/web-registro-envios', async (req, res) => {
 });
 
 //consumo put
-webRouter.get('/web-eliminar-envios', async (req, res) => {
+webRouter.get('/web-eliminar-envios',authorization, async (req, res) => {
     try {
 
         const envio = await Envio.update({ StatusId: 2 }, { where: { codEnvio: req.query.codEnvio } });
@@ -385,7 +391,7 @@ webRouter.get('/web-registro-detalleventa', async (req, res) => {
     }
 });
 
-webRouter.get('/modelo', async (req, res) => {
+webRouter.get('/modelo',authorization, async (req, res) => {
     try {
         const modelos = await Modelo.findAll({ where: { StatusId: 1 } });
         const anios = await Years.findAll({ where: { StatusId: 1 } });
@@ -397,7 +403,7 @@ webRouter.get('/modelo', async (req, res) => {
 });
 
 //consumo post
-webRouter.get('/web-registro-modelo', async (req, res) => {
+webRouter.get('/web-registro-modelo',authorization, async (req, res) => {
     try {
         console.log(req.query);
         req.query.StatusId = 1;
@@ -410,7 +416,7 @@ webRouter.get('/web-registro-modelo', async (req, res) => {
 });
 
 //consumo put
-webRouter.get('/web-eliminar-modelo', async (req, res) => {
+webRouter.get('/web-eliminar-modelo',authorization, async (req, res) => {
     try {
         console.log(req.query);
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
@@ -424,7 +430,7 @@ webRouter.get('/web-eliminar-modelo', async (req, res) => {
     }
 });
 
-webRouter.get('/anio', async (req, res) => {
+webRouter.get('/anio',authorization, async (req, res) => {
     try {
         const anios = await Years.findAll({ where: { StatusId: 1 } });
         res.render('dashboard/anio', { anios });
@@ -434,7 +440,7 @@ webRouter.get('/anio', async (req, res) => {
 });
 
 //consumo post
-webRouter.get('/web-registro-anio', async (req, res) => {
+webRouter.get('/web-registro-anio',authorization, async (req, res) => {
     try {
         console.log(req.query);
         req.query.StatusId = 1;
@@ -447,7 +453,7 @@ webRouter.get('/web-registro-anio', async (req, res) => {
 });
 
 //consumo put
-webRouter.get('/web-eliminar-anio', async (req, res) => {
+webRouter.get('/web-eliminar-anio',authorization, async (req, res) => {
     try {
         console.log(req.query);
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
@@ -461,7 +467,7 @@ webRouter.get('/web-eliminar-anio', async (req, res) => {
     }
 });
 
-webRouter.get('/marca', async (req, res) => {
+webRouter.get('/marca',authorization, async (req, res) => {
     try {
         const marcas = await Marca.findAll({ where: { StatusId: 1 } });
         res.render('dashboard/marca', { marcas });
@@ -471,7 +477,7 @@ webRouter.get('/marca', async (req, res) => {
 });
 
 //consumo post
-webRouter.get('/web-registro-marca', async (req, res) => {
+webRouter.get('/web-registro-marca',authorization, async (req, res) => {
     try {
         console.log(req.query);
         req.query.StatusId = 1;
@@ -484,7 +490,7 @@ webRouter.get('/web-registro-marca', async (req, res) => {
 });
 
 //consumo put
-webRouter.get('/web-eliminar-marca', async (req, res) => {
+webRouter.get('/web-eliminar-marca',authorization, async (req, res) => {
     try {
         console.log(req.query);
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
@@ -518,7 +524,7 @@ webRouter.get('/web-registro-venta', async (req, res) => {
     }
 });
 
-webRouter.get('/dashboard-productos', async (req, res) => {
+webRouter.get('/dashboard-productos',authorization, async (req, res) => {
     try {
         const token = req.cookies.token;
         const productos = fetch('https://digilist.fly.dev/autopartes/buscarTodos', {
