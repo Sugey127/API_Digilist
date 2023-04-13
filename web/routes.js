@@ -12,6 +12,7 @@ import { Recibo } from "../src/models/recibo.js";
 import { Venta } from "../src/models/venta.js";
 import { Op } from "sequelize";
 import fetch from 'node-fetch'
+import { authorization } from "../src/middlewares/auth.js";
 
 
 export const webRouter = Router();
@@ -147,9 +148,7 @@ webRouter.get('/web-eliminar-productos', async (req, res) => {
         console.log(req.query);
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const autopartes = await Autopartes.update({ StatusId: 2 }, { where: { code_autoparte: req.query.code_autoparte } });
-
         res.redirect('https://digilist.fly.dev/digilist/productos');
-
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
