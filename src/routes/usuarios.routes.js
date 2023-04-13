@@ -7,7 +7,7 @@ import { subirImagen } from "../middlewares/subirImagen.js";
 import { emailAuth, forgotPassword, verifyCode } from "../middlewares/emailAuth.js";
 const usuarioRouter = Router();
 
-usuarioRouter.post('/registro/:codigo', verifyCode, usuarioController.registro);
+usuarioRouter.post('/registro/:codigo',authorization, verifyCode, usuarioController.registro);
 usuarioRouter.post('/registroCliente/:codigo', verifyCode, usuarioController.registroCliente);
 usuarioRouter.put('/actualizar', authentification, validaCamposUsuarioActualizar, validateReutilizable, authentification, usuarioController.put);
 usuarioRouter.put('/cambiarPass', authentification, validateCambioContraseña, validateReutilizable, usuarioController.cambiarPass);

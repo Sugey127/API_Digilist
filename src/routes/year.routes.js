@@ -5,8 +5,8 @@ import { validadorYear, validadorYearActualizar } from "../validators/validateYe
 import { validateReutilizable } from "../validators/validateReutilizable.js";  
 export const yearsRouter = Router();
 
-yearsRouter.post('/registro',validadorYear,validateReutilizable, yearsController.post); 
-yearsRouter.put('/actualizar',validadorYearActualizar,validateReutilizable, yearsController.put);  
+yearsRouter.post('/registro',authorization,validadorYear,validateReutilizable, yearsController.post); 
+yearsRouter.put('/actualizar',authorization,validadorYearActualizar,validateReutilizable, yearsController.put);  
 yearsRouter.get('/buscarUno', yearsController.getOne); 
 yearsRouter.get('/buscarTodos', yearsController.getAll); 
 yearsRouter.get('/buscarActivo', yearsController.getAllActivo);

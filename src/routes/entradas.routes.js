@@ -6,8 +6,8 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
 
 const entradasRouter = Router();
 
-entradasRouter.post('/registro', validadorEntrada, validateReutilizable, entradasController.post);
-entradasRouter.put('/actualizar', validadorEntradaActualizar, validateReutilizable, authentification, authorization, entradasController.put);
+entradasRouter.post('/registro',authorization, validadorEntrada, validateReutilizable, entradasController.post);
+entradasRouter.put('/actualizar',authorization, validadorEntradaActualizar, validateReutilizable, authentification, authorization, entradasController.put);
 //entradasRouter.delete('/eliminar', authentification, authorization, entradasController.drop);
 entradasRouter.get('/buscarUno', authentification, entradasController.getOne);
 entradasRouter.get('/buscarTodos', authentification, entradasController.getAll);
@@ -15,4 +15,4 @@ entradasRouter.get('/buscarActivo', authentification, authorization, entradasCon
 entradasRouter.get('/buscarInactivo', authentification, authorization, entradasController.getAllInactivo);
 
 export default entradasRouter; 
-export default entradasRouter; 
+ 

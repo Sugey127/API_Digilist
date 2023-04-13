@@ -7,8 +7,8 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
  
 const marcaRouter = Router();
 
-marcaRouter.post('/registro',validadorMarca,validateReutilizable, marcaController.post); 
-marcaRouter.put('/actualizar',validadorMarcaActualizar,validateReutilizable, marcaController.put);  
+marcaRouter.post('/registro',authorization,validadorMarca,validateReutilizable, marcaController.post); 
+marcaRouter.put('/actualizar',authorization,validadorMarcaActualizar,validateReutilizable, marcaController.put);  
 marcaRouter.get('/buscarUno', marcaController.getOne); 
 marcaRouter.get('/buscarTodos', marcaController.getAll); 
 marcaRouter.get('/buscarActivo', marcaController.getAllActivo);
