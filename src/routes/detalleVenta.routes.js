@@ -4,12 +4,6 @@ import { authentification, authorization } from "../middlewares/auth.js";
 import { validadorDetalleVenta, validadorDetalleVentaActualizar } from "../validators/validateDetalleVenta.js";
 import { validateReutilizable } from "../validators/validateReutilizable.js";
 
-const detalleVentaRouter = Router();
-import { Router } from "express";
-import * as detalleVentaController from "../controllers/detalleVenta.controller.js";
-import { authentification, authorization } from "../middlewares/auth.js";
-import { validadorDetalleVenta, validadorDetalleVentaActualizar } from "../validators/validateDetalleVenta.js";
-import { validateReutilizable } from "../validators/validateReutilizable.js";
 
 const detalleVentaRouter = Router();
 

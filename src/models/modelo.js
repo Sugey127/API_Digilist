@@ -37,8 +37,3 @@ Years.hasMany(Modelo, {
     onUpdate: 'CASCADE'
 })
 
-Automovil.belongsTo(Modelo, {
-    foreignKey:{
-        allowNull:false
-    }
-});

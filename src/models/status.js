@@ -11,10 +11,8 @@ import { Entradas } from "./entradas.js";
 import { DetalleVenta } from "./detalleVenta.js";
 import { Comentario } from "./comentario.js";
 import { Years } from "./years.js";
-<<<<<<< HEAD
-=======
-import { Automovil } from "./automovil.js";
->>>>>>> origin/main
+
+
 
 export const Status = sequelize.define('Status', {
     id: {
@@ -183,18 +181,4 @@ Years.belongsTo(Status, {
         allowNull:false
     }
 });
-<<<<<<< HEAD
-=======
 
-Status.hasMany(Automovil, {
-    foreignKey:{
-        allowNull:false
-    }
-})
-
-Automovil.belongsTo(Status, {
-    foreignKey:{
-        allowNull:false
-    }
-});
->>>>>>> origin/main
