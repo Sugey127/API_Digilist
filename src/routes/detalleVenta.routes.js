@@ -11,7 +11,7 @@ detalleVentaRouter.post('/registro',validadorDetalleVenta,validateReutilizable,a
 detalleVentaRouter.put('/actualizar',validadorDetalleVentaActualizar,validateReutilizable,authentification, detalleVentaController.put); 
 detalleVentaRouter.delete('/eliminar',authentification,authorization, detalleVentaController.eliminarProductoCarritoTodo); 
 detalleVentaRouter.put('/eliminar-unoPorUno',authentification,authorization, detalleVentaController.eliminarProductoCarritoUno); 
-detalleVentaRouter.get('/buscarUno',authentification,authorization, detalleVentaController.getOne); 
+detalleVentaRouter.get('/buscarUno', detalleVentaController.getOne); 
 detalleVentaRouter.get('/buscarTodos',authentification,authorization, detalleVentaController.getAll); 
 detalleVentaRouter.get('/buscarActivo',authentification,authorization, detalleVentaController.getAllActivo);
 detalleVentaRouter.get('/buscarInactivo',authentification,authorization, detalleVentaController.getAllInactivo);
