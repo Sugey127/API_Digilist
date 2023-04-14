@@ -54,6 +54,8 @@ app.use('/detalleVenta', detalleVentaRouter);
 app.use('/year', yearsRouter);
 app.use('/digilist', webRouter);
 app.use('/carrito', carritoRouter);
+
+app.use((req, res, next) => res.status(404).render('404'));
 //app.use(express.static(dirección de la carpeta publica'));
 export default app;
 

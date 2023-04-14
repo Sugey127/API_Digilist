@@ -44,7 +44,7 @@
     document.querySelector('.contenedor-form').addEventListener('input', e => {
       if(e.target.className === 'login') {
         
-        document.querySelectorAll('.btn')[0].href= `http://digilist.fly.dev/digilist/login-verificar?email=${email.value}&password=${password.value}` 
+        document.querySelectorAll('.btn')[0].href= `http://localhost:4000/digilist/login-verificar?email=${email.value}&password=${password.value}` 
       }
     });
 </script>
