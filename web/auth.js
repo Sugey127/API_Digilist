@@ -9,7 +9,7 @@ export const webAuth = async (req, res, next) => {
         console.log(req.cookies)
         const token = req.cookies?.token;
 
-        if (!token) { res.status(307).redirect('http://localhost:4000/digilist/login'); return }
+        if (!token) { res.status(307).redirect('https://digilist.fly.dev/digilist/login'); return }
 
         const usuario = jwt.verify(token, JWT_KEY);
 
