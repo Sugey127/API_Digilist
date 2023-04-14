@@ -43,7 +43,7 @@ webRouter.get('/login-verificar', async (req, res) => {
             console.log('no valido');
             throw new Error('Esta cuenta no existe');
         } else {
-            const data = await fetch('http://localhost:4000/usuario/login', {
+            const data = await fetch('https://digilist.fly.dev/usuario/login', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ webRouter.get('/login-verificar', async (req, res) => {
             res.cookie('token', token, {
                 maxAge: 2 * 24 * 60 * 60 * 1000, httpOnly: true
             });
-            res.redirect('http://localhost:4000/digilist/dashboard');
+            res.redirect('https://digilist.fly.dev/digilist/dashboard');
         }
     } catch (err) {
         res.render('401');
