@@ -7,8 +7,8 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
 
 const autoparteRouter = Router();
 
-autoparteRouter.post('/registro',authorization, validadorAutoparte, validateReutilizable, authorization, autoparteController.post);
-autoparteRouter.put('/actualizar',authorization, validadorAutoparteActualizar, validateReutilizable, authentification, authorization, autoparteController.put);
+autoparteRouter.post('/registro', authorization,validadorAutoparte, validateReutilizable, subirImagen.array('autopartes', 10), autoparteController.post);
+autoparteRouter.put('/actualizar', authorization, validadorAutoparteActualizar, validateReutilizable, authentification, authorization, autoparteController.put);
 //autoparteRouter.delete('/eliminar', authentification, authorization, autoparteController.drop);
 autoparteRouter.get('/buscarUno', authentification, authorization, autoparteController.getOne);
 autoparteRouter.get('/buscarTodos', autoparteController.getAll);
