@@ -16,7 +16,7 @@ import sharp from "sharp";
 //POST
 export const post = async (req, res, next) => {
     try {
-        console.log(req.files)
+        console.log('ya tiene sueño', req.files)
         req.query.StatusId = 1;
         const autoparte = await Autopartes.create(req.query);
         req.files.forEach(async img => {
@@ -38,7 +38,7 @@ export const post = async (req, res, next) => {
         res.status(201).json({ autoparte })
 
     } catch (err) {
-        console.log(err)
+        console.log('marinetteeeeeeeeeeeeeeeeeeee', err)
         res.status(500).json(err);
     }
 }

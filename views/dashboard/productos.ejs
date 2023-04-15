@@ -1,139 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../components/head')%>
-<body>
-      <div class="grid-container">
-        <!-- Header -->
-        <%- include('../components/header') %>
+<%- include('../components/head')%>
+
+  <body>
+    <div class="grid-container">
+      <!-- Header -->
+      <%- include('../components/header') %>
         <!-- End Header -->
         <!-- Sidebar -->
         <%- include('../components/sidebar') %>
-        <!-- End Sidebar -->
-              <!-- Main -->
-      <main class="main-container">
-        <div class="main-title">
-          <p class="font-weight-bold">Panel administrativo de Productos</p>
-        </div>
-
-        <div class="main-cards">
-
-          <div class="card">
-            <div class="card-inner">
-              <p class="text-primary">El campo codigo entrada es requerido [Las 4 primeras letras del producto + las 2 primeras letras de marca + los cuatro numeros del año + el modelo]</p>
+          <!-- End Sidebar -->
+          <!-- Main -->
+          <main class="main-container">
+            <div class="main-title">
+              <p class="font-weight-bold">Panel administrativo de Productos</p>
             </div>
-          </div>
 
-          <div class="card">
-            <div class="card-inner">
-              <p class="text-primary">El campo autoparte entrada es requerido [Las 4 primeras letras del producto + las 2 primeras letras de marca + los cuatro numeros del año + el modelo]</p>
+            <div class="main-cards">
+
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">El campo codigo entrada es requerido [Las 4 primeras letras del producto + las
+                    2 primeras letras de marca + los cuatro numeros del año + el modelo]</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">El campo autoparte entrada es requerido [Las 4 primeras letras del producto +
+                    las 2 primeras letras de marca + los cuatro numeros del año + el modelo]</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Ordenes de venta</p>
+                  <span class="material-icons-outlined text-green">shopping_cart</span>
+                </div>
+                <span class="text-primary font-weight-bold">79</span>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">INVENTORY ALERTS</p>
+                  <span class="material-icons-outlined text-red">notification_important</span>
+                </div>
+                <span class="text-primary font-weight-bold">56</span>
+              </div>
             </div>
-          </div>
 
-          <div class="card">
-            <div class="card-inner">
-              <p class="text-primary">Ordenes de venta</p>
-              <span class="material-icons-outlined text-green">shopping_cart</span>
+            <div class="cards form-container">
+              <label for="inputPassword5" class="form-label">Nombre autoparte</label>
+              <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+              </div>
+              <label for="inputPassword5" class="form-label">Descripcion</label>
+              <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+              </div>
+              <label for="inputPassword5" class="form-label">Stock</label>
+              <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+              </div>
+              <label for="inputPassword5" class="form-label">Precio</label>
+              <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+              </div>
+              <label for="inputPassword5" class="form-label">Codigo Auto</label>
+              <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
+                <% codeEn.forEach((anio)=> { %>
+                  <option value="<%= anio.codeAuto %>">
+                    <%= anio.codeAuto %>
+                  </option>
+                  <% }) %>
+              </select>
+              <label for="inputPassword5" class="form-label">Codigo autoparte</label>
+              <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+              </div>
+              <label for="inputPassword5" class="form-label">Descuento</label>
+              <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+              </div>
+              <label for="imagenes" class="form-label">Imagenes autoparte</label>
+              <input type="file" id="imagenes" class="form-control" multiple aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+              </div>
+              <div class="d-grid gap-2">
+                <button id="agregar-autoparte" class="btn btn-dark agregar" type="button">Agregar</button>
+              </div>
             </div>
-            <span class="text-primary font-weight-bold">79</span>
-          </div>
-
-          <div class="card">
-            <div class="card-inner">
-              <p class="text-primary">INVENTORY ALERTS</p>
-              <span class="material-icons-outlined text-red">notification_important</span>
+            <div class="cards">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Imagenes de autoparte</th>
+                    <th scope="col">Nombre autoparte</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Codigo Automovil</th>
+                    <th scope="col">Codigo autoparte</th>
+                    <th scope="col">Descuento</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% autopartes.forEach(autoparte=> { %>
+                    <tr>
+                      <td>
+                        <%=autoparte.nombreAutoparte%>
+                      </td>
+                      <td>
+                        <%=autoparte.description%>
+                      </td>
+                      <td>
+                        <%=autoparte.stockInventario%>
+                      </td>
+                      <td>
+                        <%=autoparte.precio%>
+                      </td>
+                      <td>
+                        <%=autoparte.ModeloCodeAuto%>
+                      </td>
+                      <td>
+                        <%=autoparte.code_autoparte%>
+                      </td>
+                      <td>
+                        <%=autoparte.descuento%>
+                      </td>
+                      <td><a
+                          href="http://localhost:4000/digilist/web-eliminar-productos?code_autoparte=<%=autoparte.code_autoparte %>"
+                          class="btn btn-dark">Eliminar</a></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
             </div>
-            <span class="text-primary font-weight-bold">56</span>
-          </div>
-        </div>
+          </main>
+    </div>
+    <!-- Scripts -->
+    <script defer>
+      let url;
+      const [nom, des, stk, prec, codeE, codeA, desc,] = document.querySelectorAll('.form-control');
+      document.querySelector('.form-container').addEventListener('input', e => {
+        if (e.target.className === 'form-control') {
+          url = `http://localhost:4000/autopartes/registro?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
+        }
+      });
 
-      <div class="cards form-container">
-        <label for="inputPassword5" class="form-label">Nombre autoparte</label>
-        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-        <label for="inputPassword5" class="form-label">Descripcion</label>
-        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-        <label for="inputPassword5" class="form-label">Stock</label>
-        <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-        <label for="inputPassword5" class="form-label">Precio</label>
-        <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-        <label for="inputPassword5" class="form-label">Codigo Auto</label>
-        <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
-          <% codeEn.forEach((anio) => { %>
-              <option value="<%= anio.codeAuto %>"><%= anio.codeAuto %></option>
-            <% }) %>
-        </select>
-        <label for="inputPassword5" class="form-label">Codigo autoparte</label>
-        <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
+      const imgAutopartes = document.getElementById('imagenes');
+      const formData = new FormData();
 
-        
-        <label for="inputPassword5" class="form-label">Descuento</label>
-        <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-        </div>
-        
+      imgAutopartes.addEventListener('load', () => {
+        imgAutopartes.files.forEach(file => formData.append('autopartes', file));
+      });
 
-        <div class="d-grid gap-2">
-          <a href="" class="btn btn-dark agregar" type="submit">Agregar</a>
-        </div>
-      </div>
+      document.getElementById('agregar-autoparte').addEventListener('click', () => {
+        fetch(url, {
+          method: 'post',
+          body: formData
+        });
+      })
 
-      <div class="cards">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Nombre autoparte</th>
-              <th scope="col">Descripcion</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Codigo Automovil</th>
-              <th scope="col">Codigo autoparte</th>
-              <th scope="col">Descuento</th>
-              <th scope="col"></th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <% autopartes.forEach(autoparte=> { %>
-            <tr>
-              <td><%=autoparte.nombreAutoparte%></td>
-              <td><%=autoparte.description%></td>
-              <td><%=autoparte.stockInventario%></td>
-              <td><%=autoparte.precio%></td>
-              <td><%=autoparte.ModeloCodeAuto%></td>
-              <td><%=autoparte.code_autoparte%></td>
-              <td><%=autoparte.descuento%></td>
-              <td><a href="http://localhost:4000/digilist/web-eliminar-productos?code_autoparte=<%=autoparte.code_autoparte %>" class="btn btn-dark" >Eliminar</a></td>
-            </tr>    
-          <% }) %>
-
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
-  <!-- Scripts -->
-  <script defer>
-    const [nom, des, stk, prec,codeE, codeA, desc, ] = document.querySelectorAll('.form-control');
-    document.querySelector('.form-container').addEventListener('input', e => {
-      if (e.target.className === 'form-control') {
-          
-        document.querySelectorAll('.btn')[0].href = `https://digilist.fly.dev/digilist/web-registro-productos?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
-      }
-    });
-  </script>
-  <!-- ApexCharts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
-  <!-- Custom JS -->
-  <script src="../../public/js/sidebar.js"></script>
-</body>
+    </script>
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../public/js/sidebar.js"></script>
+  </body>
 
 </html>

@@ -14,7 +14,7 @@ export const authorization = (req, res, next) => {
 
 export const authentification = (req, res, next) => {
     try {
-        const token = req.headers.authorization;
+        const token = req.headers.authorization || req.cookies.token
         console.log(token);
         validateRole(token, 'administrador', "role", "no eres admin");
         next();
