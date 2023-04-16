@@ -130,8 +130,8 @@
                         <%=autoparte.descuento%>
                       </td>
                       <td><a
-                          href="http://localhost:4000/digilist/web-eliminar-productos?code_autoparte=<%=autoparte.code_autoparte %>"
-                          class="btn btn-dark">Eliminar</a></td>
+                          href="https://digilist.fly.dev/digilist/web-eliminar-productos?code_autoparte=<%=autoparte.code_autoparte %>"
+                          ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
                     </tr>
                     <% }) %>
                 </tbody>
@@ -145,7 +145,7 @@
       // const [nom, des, stk, prec, codeE, codeA, desc,] = document.querySelectorAll('.form-control');
       // document.querySelector('.form-container').addEventListener('input', e => {
       //   if (e.target.className === 'form-control') {
-      //     url = `http://localhost:4000/autopartes/registro?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
+      //     url = `https://digilist.fly.dev/autopartes/registro?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
       //   }
       // });
 
@@ -166,7 +166,7 @@
 const [nom, des, stk, prec, codeE, codeA, desc,] = document.querySelectorAll('.form-control');
 document.querySelector('.form-container').addEventListener('input', e => {
   if (e.target.className === 'form-control') {
-    url = `http://localhost:4000/autopartes/registro?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
+    url = `https://digilist.fly.dev/autopartes/registro?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
   }
 });
 

@@ -31,20 +31,23 @@
                 <input type="checkbox" class="check">
                 <span>Mantener Sesión</span>
             </div> -->
-            <a href="" class="btn" type="submit">Entrar</a>
+           <div class="boton">
+            <a href="" class="lolis" type="submit">Entrar</a>
+           </div>         
            
-            <!-- <input type="submit" value="Entrar" class="btn ">  -->
+            <!-- <input type="submit" value="Entrar" class="boton ">  -->
             <hr>
             <a href="../usuario/recuperar_contraseña.html" class="forgot-password">Olvido el password?</a>
         </form>
     </div>
 <!-- Scripts -->
 <script defer>
+    const boton = document.querySelector('.boton');
     const [email,password] = document.querySelectorAll('.login');
     document.querySelector('.contenedor-form').addEventListener('input', e => {
       if(e.target.className === 'login') {
         
-        document.querySelectorAll('.btn')[0].href= `http://localhost:4000/digilist/login-verificar?email=${email.value}&password=${password.value}` 
+        boton.querySelector('a').href= `https://digilist.fly.dev/digilist/login-verificar?email=${email.value}&password=${password.value}` 
       }
     });
 </script>

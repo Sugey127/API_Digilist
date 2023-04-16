@@ -73,7 +73,7 @@
             <% marcas.forEach(marc => { %>
               <tr>
                 <td><%= marc.marca %></td>
-                <td><a href="http://digilist.fly.dev/digilist/web-eliminar-marca?marca=<%=marc.marca %>" class="btn btn-dark" >Eliminar</a></td>
+                <td><a href="http://digilist.fly.dev/digilist/web-eliminar-marca?marca=<%=marc.marca %>" ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
               </tr>
               <% }) %>
           </tbody>
