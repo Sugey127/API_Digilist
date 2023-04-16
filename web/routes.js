@@ -14,6 +14,9 @@ import { Op } from "sequelize";
 import fetch from 'node-fetch'
 import { webAuth } from "./auth.js";
 import sharp from "sharp";
+import { ImagenesAutopartes } from "../src/models/imagenesAutopartes.js";
+import { cloudinary } from "../src/middlewares/subirImagen.js";
+
 
 export const webRouter = Router();
 
@@ -137,34 +140,34 @@ webRouter.get('/productos', webAuth, async (req, res) => {
     }
 });
 
-webRouter.get('/web-registro-productos', webAuth, async (req, res) => {
+// webRouter.get('/web-registro-productos', webAuth, async (req, res,next) => {
     
-    try {
-        console.log(req.files)
-        req.query.StatusId = 1;
-        const autoparte = await Autopartes.create(req.query);
-        req.files.forEach(async img => {
-            console.log(img.buffer)
-            const buffer = await sharp(img.buffer).resize(250, 250).png({ quality: 100 }).toBuffer();
-            cloudinary.uploader.upload_stream({ folder: 'autopartes' }, async (err, result) => {
-                if (err) res.status(400).json('no se pudo subir la imagen')
-                else {
-                    console.log(result)
-                    await ImagenesAutopartes.create({
-                        url: result.url,
-                        publicId: result.public_id,
-                        AutoparteCodeAutoparte: autoparte.code_autoparte
-                    })
-                }
-            }).end(buffer)
-        })
+//     try {
+//         console.log(req.files)
+//         req.query.StatusId = 1;
+//         const autoparte = await Autopartes.create(req.query);
+//         req.files.forEach(async img => {
+//             console.log(img.buffer)
+//             const buffer = await sharp(img.buffer).resize(250, 250).png({ quality: 100 }).toBuffer();
+//             cloudinary.uploader.upload_stream({ folder: 'autopartes' }, async (err, result) => {
+//                 if (err) res.status(400).json('no se pudo subir la imagen')
+//                 else {
+//                     console.log(result)
+//                     await ImagenesAutopartes.create({
+//                         url: result.url,
+//                         publicId: result.public_id,
+//                         AutoparteCodeAutoparte: autoparte.code_autoparte
+//                     })
+//                 }
+//             }).end(buffer)
+//         })
 
-        res.status(303).redirect('http://localhost:4000/digilist/productos')
+//         res.status(303).redirect('http://localhost:4000/digilist/productos')
 
-    } catch (err) {
-        console.log(err)
-        res.status(500).json(err);
-    }
+//     } catch (err) {
+//         console.log(err)
+//         res.status(500).json(err);
+//     }
     
     // try {
 
@@ -176,7 +179,7 @@ webRouter.get('/web-registro-productos', webAuth, async (req, res) => {
     //     // res.render('404');
     //     res.status(403).json(err);
     // }
-});
+//});
 
 //consumo put
 webRouter.get('/web-eliminar-productos', webAuth, async (req, res) => {

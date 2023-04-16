@@ -87,7 +87,7 @@
               <div id="passwordHelpBlock" class="form-text">
               </div>
               <div class="d-grid gap-2">
-                <button id="agregar-autoparte" class="btn btn-dark agregar" type="button">Agregar</button>
+                <button id="agregar-autoparte" class="btn btn-dark agregar" type="button" onclick="location.reload()">Agregar</button>
               </div>
             </div>
             <div class="cards">
@@ -141,27 +141,48 @@
     </div>
     <!-- Scripts -->
     <script defer>
+      // let url;
+      // const [nom, des, stk, prec, codeE, codeA, desc,] = document.querySelectorAll('.form-control');
+      // document.querySelector('.form-container').addEventListener('input', e => {
+      //   if (e.target.className === 'form-control') {
+      //     url = `http://localhost:4000/autopartes/registro?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
+      //   }
+      // });
+
+      // const imgAutopartes = document.getElementById('imagenes');
+      // const formData = new FormData();
+
+      // imgAutopartes.addEventListener('load', () => {
+      //   imgAutopartes.files.forEach(file => formData.append('autopartes', file));
+      // });
+
+      // document.getElementById('agregar-autoparte').addEventListener('click', () => {
+      //   fetch(url, {
+      //     method: 'post',
+      //     body: formData
+      //   });
+      // })
       let url;
-      const [nom, des, stk, prec, codeE, codeA, desc,] = document.querySelectorAll('.form-control');
-      document.querySelector('.form-container').addEventListener('input', e => {
-        if (e.target.className === 'form-control') {
-          url = `http://localhost:4000/autopartes/registro?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
-        }
-      });
+const [nom, des, stk, prec, codeE, codeA, desc,] = document.querySelectorAll('.form-control');
+document.querySelector('.form-container').addEventListener('input', e => {
+  if (e.target.className === 'form-control') {
+    url = `http://localhost:4000/autopartes/registro?nombreAutoparte=${nom.value}&description=${des.value}&stockInventario=${stk.value}&precio=${prec.value}&ModeloCodeAuto=${codeE.value}&code_autoparte=${codeA.value}&descuento=${desc.value}`
+  }
+});
 
-      const imgAutopartes = document.getElementById('imagenes');
-      const formData = new FormData();
+const imgAutopartes = document.getElementById('imagenes');
+const formData = new FormData();
 
-      imgAutopartes.addEventListener('load', () => {
-        imgAutopartes.files.forEach(file => formData.append('autopartes', file));
-      });
+imgAutopartes.addEventListener('change', () => {
+  Array.from(imgAutopartes.files).forEach(file => formData.append('autopartes', file));
+});
 
-      document.getElementById('agregar-autoparte').addEventListener('click', () => {
-        fetch(url, {
-          method: 'post',
-          body: formData
-        });
-      })
+document.getElementById('agregar-autoparte').addEventListener('click', () => {
+  fetch(url, {
+    method: 'POST',
+    body: formData
+  });
+});
 
     </script>
     <!-- ApexCharts -->
