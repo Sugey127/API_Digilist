@@ -7,11 +7,11 @@ import { Autopartes } from "../models/autopartes.js";
 
 //POST
 export const post = async (req, res) => {
-
+console.log('si entro ');
     try {
         req.body.StatusId = 1
         const nuevaEntrada = await Entradas.create(req.body);
-        console.log('DEBUG 1');
+        console.log('tamarindo',nuevaEntrada)
         // Actualizar el inventario del producto correspondiente
         const producto = await Autopartes.findByPk(nuevaEntrada.AutoparteCodeAutoparte);
         console.log('DEBUG 1', producto);
@@ -22,7 +22,7 @@ export const post = async (req, res) => {
         } else {
             console.error(`El producto con ID ${nuevaEntrada.AutoparteCodeAutoparte} no existe.`);
         }
-        res.status(201).json(nuevaEntrada);
+        res.status(201).json({nuevaEntrada});
     } catch (err) {
         res.status(500).json(err);
         console.log('este es el error sugeyyyyyyyyyyyyyyyy', err);

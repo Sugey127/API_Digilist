@@ -46,7 +46,7 @@ webRouter.get('/login-verificar', async (req, res) => {
             console.log('no valido');
             throw new Error('Esta cuenta no existe');
         } else {
-            const data = await fetch('https://digilist.fly.dev/usuario/login', {
+            const data = await fetch('http://localhost:4000/usuario/login', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ webRouter.get('/login-verificar', async (req, res) => {
             res.cookie('token', token, {
                 maxAge: 2 * 24 * 60 * 60 * 1000, httpOnly: true
             });
-            res.redirect('https://digilist.fly.dev/digilist/dashboard');
+            res.redirect('http://localhost:4000/digilist/dashboard');
         }
     } catch (err) {
         res.render('401');
@@ -107,7 +107,7 @@ webRouter.get('/dashboard', webAuth, async (req, res) => {
 //         console.log(req.query);
 //         req.query.StatusId = 1;
 //         await Automovil.create(req.query);
-//         res.redirect('https://digilist.fly.dev/digilist/automovil')
+//         res.redirect('http://localhost:4000/digilist/automovil')
 //     } catch (err) {
 //         // res.render('404');
 //         res.status(403).json(err);
@@ -122,7 +122,7 @@ webRouter.get('/dashboard', webAuth, async (req, res) => {
 //         console.log('HOLA COMO ESTA', req.query.codeAuto);
 //         const automovill = await Automovil.update({ StatusId: 2 }, { where: { codeAuto: req.query.codeAuto } });
 
-//         res.redirect('https://digilist.fly.dev/digilist/automovil');
+//         res.redirect('http://localhost:4000/digilist/automovil');
 
 //     } catch (err) {
 //         // res.render('404');
@@ -162,7 +162,7 @@ webRouter.get('/productos', webAuth, async (req, res) => {
 //             }).end(buffer)
 //         })
 
-//         res.status(303).redirect('https://digilist.fly.dev/digilist/productos')
+//         res.status(303).redirect('http://localhost:4000/digilist/productos')
 
 //     } catch (err) {
 //         console.log(err)
@@ -174,7 +174,7 @@ webRouter.get('/productos', webAuth, async (req, res) => {
     //     console.log(req.query);
     //     req.query.StatusId = 1;
     //     await Autopartes.create(req.query);
-    //     res.redirect('https://digilist.fly.dev/digilist/productos')
+    //     res.redirect('http://localhost:4000/digilist/productos')
     // } catch (err) {
     //     // res.render('404');
     //     res.status(403).json(err);
@@ -187,7 +187,7 @@ webRouter.get('/web-eliminar-productos', webAuth, async (req, res) => {
         console.log(req.query);
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const autopartes = await Autopartes.update({ StatusId: 2 }, { where: { code_autoparte: req.query.code_autoparte } });
-        res.redirect('https://digilist.fly.dev/digilist/productos');
+        res.redirect('http://localhost:4000/digilist/productos');
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -207,7 +207,7 @@ webRouter.get('/web-registro-recibos', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Recibo.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/recibos')
+        res.redirect('http://localhost:4000/digilist/recibos')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -229,7 +229,7 @@ webRouter.get('/web-registro-proveedor', webAuth, async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Proveedor.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/proveedor')
+        res.redirect('http://localhost:4000/digilist/proveedor')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -243,7 +243,7 @@ webRouter.get('/web-eliminar-proveedor', webAuth, async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const preoveedor = await Proveedor.update({ StatusId: 2 }, { where: { RfcProveedor: req.query.RfcProveedor } });
 
-        res.redirect('https://digilist.fly.dev/digilist/proveedor');
+        res.redirect('http://localhost:4000/digilist/proveedor');
 
     } catch (err) {
         // res.render('404');
@@ -265,7 +265,7 @@ webRouter.get('/web-registro-usuarios', webAuth, async (req, res) => {
         req.query.StatusId = 1;
         req.query.role = 'administrador'
         console.log(JSON.stringify(req.query));
-        const respuesta = await fetch('https://digilist.fly.dev/usuario/pre-registroAdmin', {
+        const respuesta = await fetch('http://localhost:4000/usuario/pre-registroAdmin', {
             method: 'post',
             headers: {
                 Authorization: req.cookies.token,
@@ -281,7 +281,7 @@ webRouter.get('/web-registro-usuarios', webAuth, async (req, res) => {
         // });
 
         if (respuesta.ok) {
-            res.redirect('https://digilist.fly.dev/digilist/usuarios')
+            res.redirect('http://localhost:4000/digilist/usuarios')
         } else {
             res.status(500).render('500');
         }
@@ -296,12 +296,12 @@ webRouter.get('/web-VerificarCode-usuario', webAuth, async (req, res) => {
     try {
         const { code } = req.query;
         console.log(req.query);
-        const response = await fetch(`https://digilist.fly.dev/usuario/registro/${code}`, {
+        const response = await fetch(`http://localhost:4000/usuario/registro/${code}`, {
             method: 'post'
         });
         console.log(response)
         if (response.ok) {
-            res.redirect('https://digilist.fly.dev/digilist/usuarios');
+            res.redirect('http://localhost:4000/digilist/usuarios');
         } else {
             res.status(500).render('500');
         }
@@ -313,7 +313,7 @@ webRouter.get('/web-VerificarCode-usuario', webAuth, async (req, res) => {
 webRouter.get('/web-eliminar-usuarios', webAuth, async (req, res) => {
     try {
         const usuario = await Usuario.update({ StatusId: 2 }, { where: { email: req.query.email } });
-        res.redirect('https://digilist.fly.dev/digilist/usuarios');
+        res.redirect('http://localhost:4000/digilist/usuarios');
     } catch (err) {
         //res.render('404');
         res.status(403).json(err);
@@ -335,19 +335,22 @@ webRouter.get('/entradas', webAuth, async (req, res) => {
 webRouter.get('/web-registro-entradas', webAuth, async (req, res) => {
     try {
         console.log('hello query', req.query);
+        console.log('SOY UNA COKIEEEEEEEEEEE', req.cookies);
         // req.query.StatusId = 1;
         // console.log('query actualizada', req.query)
-        const { nombreAutoparte, stock, ModeloCodeAuto, ProveedorRfcProveedor, AutoparteCodeAutoparte, precio } = req.query;
-        const response = await fetch('https://digilist.fly.dev/entradas/registro', {
+        
+        const { nombreAutoparte, stock,AutoparteCodeAutoparte, ModeloCodeAuto, ProveedorRfcProveedor, precio } = req.query;
+        const response = await fetch('http://localhost:4000/entradas/registro', {
             method: 'post',
             headers: {
+                Authorization: req.cookies.token,
                 'Content-Type': 'application/json'
-            }, body: JSON.stringify({ nombreAutoparte, stock, ModeloCodeAuto, ProveedorRfcProveedor, AutoparteCodeAutoparte, precio })
+            }, body: JSON.stringify(req.query)
         });
 
         console.log('viendo que tiene el objeto response', await response.json());
         if (response.ok) {
-            res.redirect('https://digilist.fly.dev/digilist/entradas');
+            res.redirect('http://localhost:4000/digilist/entradas');
         }
         else {
             res.status(500).render('500');
@@ -362,7 +365,7 @@ webRouter.get('/web-registro-entradas', webAuth, async (req, res) => {
 webRouter.get('/web-eliminar-entradas', webAuth, async (req, res) => {
     try {
         const entrada = await Envio.update({ StatusId: 2 }, { where: { idEntradas: req.query.idEntradas } });
-        res.redirect('htts://digilist.fly.dev/digilist/entradas');
+        res.redirect('htt://localhost:4000/digilist/entradas');
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -384,7 +387,7 @@ webRouter.get('/web-registro-envios', webAuth, async (req, res) => {
 
         req.query.StatusId = 1;
         await Envio.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/envios')
+        res.redirect('http://localhost:4000/digilist/envios')
     } catch (err) {
         res.status(403).json(err);
     }
@@ -396,7 +399,7 @@ webRouter.get('/web-eliminar-envios', webAuth, async (req, res) => {
 
         const envio = await Envio.update({ StatusId: 2 }, { where: { codEnvio: req.query.codEnvio } });
 
-        res.redirect('https://digilist.fly.dev/digilist/envios');
+        res.redirect('http://localhost:4000/digilist/envios');
 
     } catch (err) {
         // res.render('404');
@@ -417,7 +420,7 @@ webRouter.get('/web-registro-detalleventa', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await DetalleVenta.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/detalleventa')
+        res.redirect('http://localhost:4000/digilist/detalleventa')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -441,7 +444,7 @@ webRouter.get('/web-registro-modelo', webAuth, async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Modelo.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/modelo')
+        res.redirect('http://localhost:4000/digilist/modelo')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -455,7 +458,7 @@ webRouter.get('/web-eliminar-modelo', webAuth, async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const modelod = await Modelo.update({ StatusId: 2 }, { where: { modelo: req.query.modelo } });
 
-        res.redirect('htts://digilist.fly.dev/digilist/modelo');
+        res.redirect('htt://localhost:4000/digilist/modelo');
 
     } catch (err) {
         // res.render('404');
@@ -478,7 +481,7 @@ webRouter.get('/web-registro-anio', webAuth, async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Years.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/anio')
+        res.redirect('http://localhost:4000/digilist/anio')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -492,7 +495,7 @@ webRouter.get('/web-eliminar-anio', webAuth, async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const anio = await Years.update({ StatusId: 2 }, { where: { year: req.query.year } });
 
-        res.redirect('https://digilist.fly.dev/digilist/anio');
+        res.redirect('http://localhost:4000/digilist/anio');
 
     } catch (err) {
         // res.render('404');
@@ -515,7 +518,7 @@ webRouter.get('/web-registro-marca', webAuth, async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Marca.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/marca')
+        res.redirect('http://localhost:4000/digilist/marca')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -529,7 +532,7 @@ webRouter.get('/web-eliminar-marca', webAuth, async (req, res) => {
         console.log('HOLA COMO ESTA', req.query.RfcProveedor);
         const marca = await Marca.update({ StatusId: 2 }, { where: { marca: req.query.marca } });
 
-        res.redirect('htts://digilist.fly.dev/digilist/marca');
+        res.redirect('htt://localhost:4000/digilist/marca');
 
     } catch (err) {
         // res.render('404');
@@ -550,7 +553,7 @@ webRouter.get('/web-registro-venta', async (req, res) => {
         console.log(req.query);
         req.query.StatusId = 1;
         await Venta.create(req.query);
-        res.redirect('https://digilist.fly.dev/digilist/venta')
+        res.redirect('http://localhost:4000/digilist/venta')
     } catch (err) {
         // res.render('404');
         res.status(403).json(err);
@@ -560,7 +563,7 @@ webRouter.get('/web-registro-venta', async (req, res) => {
 webRouter.get('/dashboard-productos', webAuth, async (req, res) => {
     try {
         const token = req.cookies.token;
-        const productos = fetch('https://digilist.fly.dev/autopartes/buscarTodos', {
+        const productos = fetch('http://localhost:4000/autopartes/buscarTodos', {
             method: 'get',
             headers: {
                 Authorization: token

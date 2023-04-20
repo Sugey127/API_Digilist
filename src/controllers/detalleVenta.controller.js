@@ -1,5 +1,8 @@
 import { Op, where } from "sequelize";
 import { DetalleVenta } from "../models/detalleVenta.js";
+import { Autopartes } from "../models/autopartes.js";
+import { Venta } from "../models/venta.js";
+import { ImagenesAutopartes } from "../models/imagenesAutopartes.js";
 
 
 
@@ -132,7 +135,7 @@ export const eliminarProductoCarritoUno = async (req, res) => {
                 cantidadVenta: nuevaCantidadVenta,
                 precioTotal: nuevoPrecioTotal
             },
-            { where: { [Op.and]: [{ VentumIdVenta }, { AutoparteCodeAutoparte }] } });
+                { where: { [Op.and]: [{ VentumIdVenta }, { AutoparteCodeAutoparte }] } });
             // manda el estatus
             res.status(200).json(carritoEliminarUno);
             if (nuevaCantidadVenta <= 0) {
@@ -140,7 +143,7 @@ export const eliminarProductoCarritoUno = async (req, res) => {
                 // manda el estatus
                 res.status(201).json('SE ELIMINO CON EXITO');
             }
-        }else {
+        } else {
             res.status(404).json('El producto no existe en el carrito.');
         }
     } catch (err) {
@@ -169,16 +172,22 @@ export const eliminarProductoCarritoTodo = async (req, res) => {
 
 export const getOne = async (req, res) => {
     req.query.StatusId = 1;
-    const { VentumIdVenta, StatusId } = req.query;
+    const { idVenta, StatusId } = req.query;
     try {
 
-        const nuevoDetalleVenta = await DetalleVenta.findOne({ where: { [Op.and]: [{ StatusId }, { VentumIdVenta }] } });
-
+        const nuevoDetalleVenta = await Venta.findAll({
+            where: { [Op.and]: [{ StatusId }, { idVenta }] },
+            include: {
+                model: Autopartes,
+                include: { model: ImagenesAutopartes }
+            }
+        });
+        console.log('ayuda diosssssssssssssssssssssssssssss')
         console.log(nuevoDetalleVenta);
 
-        if (!nuevoDetalleVenta?.VentumIdVenta) {
-            return res.status(404).json({ message: 'Está vacio el carrito' });
-        }
+        // if (!nuevoDetalleVenta?.VentumIdVenta) {
+        //     return res.status(404).json({ message: 'Está vacio el carrito' });
+        // }
 
         res.status(201).json(nuevoDetalleVenta);
 

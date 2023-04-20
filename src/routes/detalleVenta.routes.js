@@ -7,7 +7,7 @@ import { validateReutilizable } from "../validators/validateReutilizable.js";
 
 const detalleVentaRouter = Router();
 
-detalleVentaRouter.post('/registro',validadorDetalleVenta,validateReutilizable,authentification, detalleVentaController.AgregarCarrito); 
+detalleVentaRouter.post('/registro', detalleVentaController.AgregarCarrito); 
 detalleVentaRouter.put('/actualizar',validadorDetalleVentaActualizar,validateReutilizable,authentification, detalleVentaController.put); 
 detalleVentaRouter.delete('/eliminar',authentification,authorization, detalleVentaController.eliminarProductoCarritoTodo); 
 detalleVentaRouter.put('/eliminar-unoPorUno',authentification,authorization, detalleVentaController.eliminarProductoCarritoUno); 

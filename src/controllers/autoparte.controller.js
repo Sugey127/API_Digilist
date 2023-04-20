@@ -17,10 +17,10 @@ export const post = async (req, res, next) => {
         console.log('ya tengo sueño', req.files)
         req.query.StatusId = 1;
         const autoparte = await Autopartes.create(req.query);
-       
+
         req.files.forEach(async img => {
             console.log('YAREMI QUI ESSSSSSSSSSSSSSSSSSSSSSSSSSSSS', img.buffer);
-            
+
             const buffer = await sharp(img.buffer).resize(250, 250).png({ quality: 100 }).toBuffer();
             cloudinary.uploader.upload_stream({ folder: 'autopartes' }, async (err, result) => {
                 if (err) res.status(400).json('no se pudo subir la imagen')
@@ -118,10 +118,12 @@ export const getAllInactivo = async (req, res) => {
 export const getAll = async (req, res) => {
     try {
         const autopartes = await Autopartes.findAll({
+            where: { StatusId: 1 },
             include: {
                 model: ImagenesAutopartes,
                 attributes: { exclude: ['AutoparteCodeAutoparte', 'publicId'] }
             }
+
         });
 
         res.status(201).json({ autopartes });

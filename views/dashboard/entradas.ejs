@@ -54,7 +54,14 @@
             <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
             <div id="passwordHelpBlock" class="form-text">
             </div>
-            
+            <label for="inputPassword5" class="form-label">Codigo Autoparte</label>
+            <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
+          
+              <% autoparte.forEach((auto) => { %>
+                  
+                  <option value="<%= auto.code_autoparte %>"><%= auto.code_autoparte %></option>
+                <% }) %>
+            </select>
             
             <label for="inputPassword5" class="form-label">Codigo Modelo</label>
             <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
@@ -73,14 +80,7 @@
                   <option value="<%= code.RfcProveedor %>"><%= code.RfcProveedor %></option>
                 <% }) %>
             </select>
-            <label for="inputPassword5" class="form-label">Codigo Autoparte</label>
-            <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example">
-          
-              <% autoparte.forEach((auto) => { %>
-                  
-                  <option value="<%= auto.code_autoparte %>"><%= auto.code_autoparte %></option>
-                <% }) %>
-            </select>
+            
 
             <label for="inputPassword5" class="form-label">Precio</label>
             <input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
@@ -98,9 +98,9 @@
                 <tr>
                   <th scope="col">Producto</th>
                   <th scope="col">Stock</th>
+                  <th scope="col">Codigo Autoparte</th>
                   <th scope="col">Codigo Automovil</th>
                   <th scope="col">RFC proveedor</th>
-                  <th scope="col">Codigo Autoparte</th>
                   <th scope="col">Precio</th>
                   <th scope="col"></th>
                 </tr>
@@ -110,9 +110,9 @@
                   <tr>
                   <td><%=entrada.nombreAutoparte%></td>
                   <td><%=entrada.stock%></td>
+                  <td><%=entrada.AutoparteCodeAutoparte%></td>
                   <td><%= entrada.ModeloCodeAuto %></td>
                   <td><%= entrada.ProveedorRfcProveedor %></td>
-                  <td><%=entrada.AutoparteCodeAutoparte%></td>
                   <td><%=entrada.precio%></td>
                   <td><a href="https://digilist.fly.dev/digilist/web-eliminar-entradas?idEntradas=<%=entrada.idEntradas %>"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
                   </tr>
@@ -124,11 +124,11 @@
       </div>
       <!-- Scripts -->
       <script defer>
-        const [nom, stk,codeA,Rfc,codeE, prec] = document.querySelectorAll('.form-control');
+        const [nom, stk,codeE,codeA,Rfc, prec] = document.querySelectorAll('.form-control');
         document.querySelector('.form-container').addEventListener('input', e => {
           if(e.target.className === 'form-control') {
             
-            document.querySelectorAll('.btn')[0].href= `https://digilist.fly.dev/digilist/web-registro-entradas?nombreAutoparte=${nom.value}&stock=${stk.value}&ModeloCodeAuto=${codeA.value}&ProveedorRfcProveedor=${Rfc.value}&AutoparteCodeAutoparte=${codeE.value}&precio=${prec.value}` 
+            document.querySelectorAll('.btn')[0].href= `http://localhost:4000/digilist/web-registro-entradas?nombreAutoparte=${nom.value}&stock=${stk.value}&AutoparteCodeAutoparte=${codeE.value}&ModeloCodeAuto=${codeA.value}&ProveedorRfcProveedor=${Rfc.value}&precio=${prec.value}` 
           }
         });       
       </script>
