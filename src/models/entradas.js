@@ -1,7 +1,7 @@
 import { sequelize } from "../config/DB.js";
 import { DataTypes } from "sequelize";
 import { Proveedor } from "./proveedor.js";
-import { Modelo } from "./modelo.js";
+
 
 export const Entradas = sequelize.define('Entradas', {
     idEntradas: {
@@ -9,10 +9,6 @@ export const Entradas = sequelize.define('Entradas', {
         defaultValue: DataTypes.UUIDV1,
         allowNull: false,
         primaryKey: true
-    },
-    nombreAutoparte: {
-        type: DataTypes.STRING,
-        allowNull: false,
     },
     stock: {
         type: DataTypes.INTEGER,
@@ -31,30 +27,12 @@ export const Entradas = sequelize.define('Entradas', {
     timestamps: false
 });
 
-
-Modelo.hasMany(Entradas, {
-    foreignKey:{
-        allowNull:false
-    }
-})
-
-Entradas.belongsTo(Modelo, {
-    foreignKey:{
-        allowNull:false
-    }
-});
-
 Proveedor.hasMany(Entradas, {
     foreignKey:{
         allowNull:false
     }
 })
 
-Entradas.belongsTo(Proveedor, {
-    foreignKey:{
-        allowNull:false
-    }
-});
 Entradas.belongsTo(Proveedor, {
     foreignKey:{
         allowNull:false

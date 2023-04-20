@@ -23,7 +23,7 @@ import { CarritoCompra } from "./models/carritoCompras.js";
 
 async function proyect() {
     try {
-        //await DetalleVenta.sync({ force: true });
+        //await Entradas.sync({ alter: true });
         app.listen(PORT, () => {
             console.log(`server listen on: ${PORT}`);
         });
