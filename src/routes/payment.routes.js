@@ -3,7 +3,7 @@ import * as paymentControllador  from "../controllers/payment.controller.js";
 
 const paymentRouter= Router();
 
-paymentRouter.get("/crearOrden",paymentControllador.createOrden);
+paymentRouter.post("/crearOrden",paymentControllador.createOrden);
 paymentRouter.get("/capturarOrden",paymentControllador.captureOrden);
 paymentRouter.get("/cancelarOrden",paymentControllador.cancelOrden);
 

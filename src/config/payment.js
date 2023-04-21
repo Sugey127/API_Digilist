@@ -1,3 +1,7 @@
-export const PAYPLAY_API_CLIENTE='AUmpu9DLsU__uloqPdSdp3p3raGgarlZh3HgwIzmQ8B0vF3tn4r6jTscW9ByfnYyUnjb4_2BMjkptvAK';
-export const PAYPLAY_APY_SECRET='EAy73k5_2aAzm3mbLqIBnuebt6Mcjv7ITcOnMwDICiT9VEOy6mMO15ncS8Scn3RsHe5_FKs6fS8f55rI';
-export const PAYPLAY_API='https://api-m.sandbox.paypal.com';
+import { config } from "dotenv";
+
+config();
+
+export const PAYPLAY_API_CLIENTE=process.env.PAYPLAY_API_CLIENTE;
+export const PAYPLAY_APY_SECRET=process.env.PAYPLAY_APY_SECRET;
+export const PAYPLAY_API=process.env.PAYPLAY_API;
