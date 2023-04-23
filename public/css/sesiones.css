@@ -5,7 +5,7 @@ body {
     /* background: url(../img/fondo3.jpg); */
 }
 .contenedor-form {
-    background: linear-gradient(to right, rgb(243, 158, 30), rgba(240, 239, 250, 0.89)), url(/img/image2.jpg);
+    background: linear-gradient(to right, rgb(243, 158, 30), rgba(240, 239, 250, 0.89)), url(/public/logo/image2.jpg);
     max-width: 500px;
     width: 100%;
     margin: auto;
