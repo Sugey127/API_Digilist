@@ -137,11 +137,12 @@ export const getAll = async (req, res) => {
 export const busquedaFiltrado = async(req, res) => {
     try {
         const {MarcaMarca, YearYear , nombreAutoparte, modelo} = req.query;
+        const busquedaAutoparte = nombreAutoparte ? { nombreAutoparte: { [Op.iLike]: `%${nombreAutoparte}%` } } : {};
         const resultados = await Modelo.findAll({
            // where: { [Op.and]: [{nombreAutoparte},{ MarcaMarca }, { YearYear }] },
             include: {
                 model: Autopartes,
-                where:{nombreAutoparte},
+                where:busquedaAutoparte,
                 include: { model: ImagenesAutopartes }
                 
             },
