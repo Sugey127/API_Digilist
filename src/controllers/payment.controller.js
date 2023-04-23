@@ -5,7 +5,6 @@ import { Autopartes } from '../models/autopartes.js';
 import { Venta } from '../models/venta.js';
 import { Op } from 'sequelize';
 import { DetalleVenta } from '../models/detalleVenta.js';
-import { escapeXML } from 'ejs';
 
 export const createOrden = async (req, res) => {
     try {
