@@ -42,8 +42,8 @@ export const createOrden = async (req, res) => {
                 brand_name: "Digilist.refaccionaria@gmail.com",
                 landing_page: "LOGIN",
                 user_action: "PAY_NOW",
-                return_url: `http://localhost:4000/pagos/capturarOrden?idVenta=${idVenta}&UsuarioEmail=${carrito[0].UsuarioEmail}`,
-                cancel_url: `http://localhost:4000/pagos/cancelarOrden`
+                return_url: `https://digilist.fly.dev/pagos/capturarOrden?idVenta=${idVenta}&UsuarioEmail=${carrito[0].UsuarioEmail}`,
+                cancel_url: `https://digilist.fly.dev/pagos/cancelarOrden`
             }
         };
 
