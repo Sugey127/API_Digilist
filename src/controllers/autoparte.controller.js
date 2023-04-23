@@ -5,6 +5,7 @@ import { ImagenesAutopartes } from "../models/imagenesAutopartes.js";
 import { RenderizadorImagen } from "../utils/RenderizadorImagenes.js";
 import { cloudinary } from "../middlewares/subirImagen.js";
 import sharp from "sharp";
+import { Modelo } from "../models/modelo.js";
 
 //todo: tengo que hacer esto
 // ? deberia hacer esto?
@@ -130,6 +131,27 @@ export const getAll = async (req, res) => {
 
     } catch (err) {
         console.error(err);
+    }
+}
+
+export const busquedaFiltrado = async(req, res) => {
+    try {
+        const {MarcaMarca, YearYear , nombreAutoparte, modelo} = req.query;
+        const resultados = await Modelo.findAll({
+           // where: { [Op.and]: [{nombreAutoparte},{ MarcaMarca }, { YearYear }] },
+            include: {
+                model: Autopartes,
+                where:{nombreAutoparte},
+                include: { model: ImagenesAutopartes }
+                
+            },
+            where: { [Op.and]: [{ MarcaMarca }, { YearYear }, {modelo}] }
+        });
+        console.log('Esto tiene el resultado', resultados);
+        res.status(200).json({ resultados });
+        
+    } catch (error) {
+        res.status(500).json(error.message);
     }
 }
 

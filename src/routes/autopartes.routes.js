@@ -15,5 +15,7 @@ autoparteRouter.get('/buscarTodos', autoparteController.getAll);
 autoparteRouter.get('/buscarActivo', autoparteController.getAllActivo);
 autoparteRouter.get('/buscarInactivo', authentification, authorization, autoparteController.getAllInactivo);
 autoparteRouter.put('/agregarImagenes/:code', authentification, authorization, subirImagen.array('autopartes', 10), autoparteController.agregarImagenAutoparte);
+autoparteRouter.get('/busquedaFiltrado', autoparteController.busquedaFiltrado);
+
 
 export default autoparteRouter; 
