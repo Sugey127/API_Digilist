@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../components/head')%>
+
+  <body>
+    <div class="grid-container">
+      <!-- Header -->
+      <%- include('../components/header') %>
+        <!-- End Header -->
+        <!-- Sidebar -->
+        <%- include('../components/sidebar') %>
+          <!-- End Sidebar -->
+          <!-- Main -->
+          <main class="main-container">
+            <div class="main-title">
+              <p class="font-weight-bold">Panel administrativo de Productos</p>
+            </div>
+            <div class="cards">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre autoparte</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Codigo Automovil</th>
+                    <th scope="col">Codigo autoparte</th>
+                    <th scope="col">Descuento</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% autopartes.forEach(autoparte=> { %>
+                    <tr>
+                      <td>
+                        <%=autoparte.nombreAutoparte%>
+                      </td>
+                      <td>
+                        <%=autoparte.description%>
+                      </td>
+                      <td>
+                        <%=autoparte.stockInventario%>
+                      </td>
+                      <td>
+                        <%=autoparte.precio%>
+                      </td>
+                      <td>
+                        <%=autoparte.ModeloCodeAuto%>
+                      </td>
+                      <td>
+                        <%=autoparte.code_autoparte%>
+                      </td>
+                      <td>
+                        <%=autoparte.descuento%>
+                      </td>
+                      <td><a
+                          href="https://digilist.fly.dev/digilist/web-eliminar-productos?code_autoparte=<%=autoparte.code_autoparte %>"
+                          ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </main>
+    </div>
+    <script src="/js/sidebar.js"></script>
+  </body>
+
+</html>
