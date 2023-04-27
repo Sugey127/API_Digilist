@@ -159,6 +159,7 @@ body {
 
 .card {
   display: flex;
+  margin-bottom: 10px;
   flex-direction: column;
   justify-content: space-around;
   padding: 25px;
