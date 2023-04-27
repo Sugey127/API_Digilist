@@ -11,6 +11,8 @@
         <%- include('../components/sidebar') %>
           <!-- End Sidebar -->
 
+
+          <!-- MAIN -->
           <main class="main-container">
             <div class="main-title">
               <p class="font-weight-bold">Panel administrativo de Administrador</p>
@@ -18,6 +20,37 @@
 
             <div class="main-cards">
 
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Productos</p>
+                  <span class="material-icons-outlined text-blue">inventory_2</span>
+                </div>
+                <span class="text-primary font-weight-bold">249</span>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Ordenes de compra</p>
+                  <span class="material-icons-outlined text-orange">add_shopping_cart</span>
+                </div>
+                <span class="text-primary font-weight-bold">83</span>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">Ordenes de venta</p>
+                  <span class="material-icons-outlined text-green">shopping_cart</span>
+                </div>
+                <span class="text-primary font-weight-bold">79</span>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <p class="text-primary">INVENTORY ALERTS</p>
+                  <span class="material-icons-outlined text-red">notification_important</span>
+                </div>
+                <span class="text-primary font-weight-bold">56</span>
+              </div>
             </div>
 
             <div class="cards form-container">
@@ -104,9 +137,6 @@
             `https://digilist.fly.dev/digilist/web-registro-usuarios?userNombre=${nomU.value}&usuarioApellido=${apeU.value}&telefono=${tel.value}&email=${email.value}&password=${passw.value}`
         }
       });
-
-
-
       document.querySelector('.verificar-codigo').addEventListener('input', e => {
         document.querySelectorAll('.btn')[1].href =
           `https://digilist.fly.dev/digilist/web-VerificarCode-usuario?code=${e.target.value}`
