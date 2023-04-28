@@ -144,7 +144,6 @@ export const busquedaFiltrado = async(req, res) => {
                 model: Autopartes,
                 where:busquedaAutoparte,
                 include: { model: ImagenesAutopartes }
-                
             },
             where: { [Op.and]: [{ MarcaMarca }, { YearYear }, {modelo}] }
         });

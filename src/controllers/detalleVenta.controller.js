@@ -172,11 +172,11 @@ export const eliminarProductoCarritoTodo = async (req, res) => {
 
 export const getOne = async (req, res) => {
     req.query.StatusId = 1;
-    const { idVenta, StatusId } = req.query;
+    const { UsuarioEmail, StatusId } = req.query;
     try {
 
         const nuevoDetalleVenta = await Venta.findAll({
-            where: { [Op.and]: [{ StatusId }, { idVenta }] },
+            where: { [Op.and]: [{ StatusId }, { UsuarioEmail }] },
             include: {
                 model: Autopartes,
                 include: { model: ImagenesAutopartes }
